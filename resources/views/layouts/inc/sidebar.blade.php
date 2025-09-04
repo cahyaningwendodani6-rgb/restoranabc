@@ -36,22 +36,33 @@
 
         <li class="menu-item">
             <a href="" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users-group"></i>
-                Daftar Tamu
+                <!-- Bootstrap Icons CSS -->
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+                <!-- Ikon garis tiga -->
+                <i class="menu-icon tf-icons bi bi-list me-2"></i>
+                Menu
             </a>
         </li>
 
         <li class="menu-item">
             <a href="" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-apps-off"></i>
-                Karyawan
+                <i class="menu-icon tf-icons bi bi-clipboard-check-fill me-2"></i>
+                Pesanan
             </a>
-        </li>   
+        </li>
 
         <li class="menu-item">
             <a href="" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users"></i>
-                Admin
+                <i class="menu-icon tf-icons bi bi-currency-dollar me-2"></i>
+                Pembayaran
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="" class="menu-link">
+                <i class="menu-icon tf-icons bi bi-bar-chart-fill me-2"></i>
+                Laporan
             </a>
         </li>
     </ul>
