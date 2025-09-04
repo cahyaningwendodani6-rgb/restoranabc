@@ -24,7 +24,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="" class="menu-link">
+            <a href="{{ route('menu.index') }}" class="menu-link">
                 <!-- Bootstrap Icons CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 

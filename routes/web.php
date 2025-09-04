@@ -18,4 +18,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'index'])->name('ubah-profil');
     Route::post('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'update'])->name('ubah-profil.update');
+
+    Route::resource('menu', App\Http\Controllers\MenuController::class);
 });
