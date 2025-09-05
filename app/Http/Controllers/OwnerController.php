@@ -18,7 +18,8 @@ class OwnerController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required |email|unique:users,email,'. Auth::user()->id,
-            'passwod' => 'confirmed|min:8|nullable'
+            'password' => 'confirmed|min:8|nullable',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,|max:2048'
         ]);
 
         $user = Auth::user();
@@ -28,7 +29,15 @@ class OwnerController extends Controller
         if ($request->password) {
             $user->password = bcrypt($request->password);
 
+        } 
+
+        if ($request->hasFile('profile_photo')) {
+            $fileName = time() . '.' . $request->profile_photo->Extension();
+            $request->profile_photo->move(public_path('uploads/profile'), $fileName);
+            
+            $user->profile_photo = 'uploads/profile/' . $fileName;
         }
+
         $user->save();
 
         return redirect()->route('ubah-profil')->with('success', 'Profil Berhasil Diubah');

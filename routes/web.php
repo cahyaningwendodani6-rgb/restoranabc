@@ -25,4 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/menu', App\Http\Controllers\MenuController::class);
 
     Route::resource('/pesanan', App\Http\Controllers\PesananController::class)->only('index', 'show', 'destroy');
+
+    Route::get('/owner/profile', [App\Http\Controllers\OwnerController::class, 'editProfile'])->name('owner.profile');
+    Route::put('/owner/profile', [App\Http\Controllers\OwnerController::class, 'updateProfile'])->name('owner.update');
 });

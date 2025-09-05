@@ -11,7 +11,10 @@
                     <p class="card-text">Halaman Untuk Mengubah Owner</p>
 
                     <form action="{{ route('ubah-profil.update') }}" method="POST">
+                    <form action="{{ route('owner.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
+                        
                         <div class="form-group mb-3">
                             <label for="name" class="form-label">Nama</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
