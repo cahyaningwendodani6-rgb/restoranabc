@@ -35,7 +35,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="" class="menu-link">
+            <a href="{{ route('pesanan.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bi bi-clipboard-check-fill me-2"></i>
                 Pesanan
             </a>

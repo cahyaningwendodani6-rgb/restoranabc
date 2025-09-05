@@ -10,20 +10,29 @@ class FormPesananController extends Controller
 {
     public function index()
     {
-        return view('pages.formpesanan.index');
+        $menu = Menu::orderBy('id', 'asc')->get();
+        $pesanan = Pesanan::orderBy('id', 'asc')->get();
+        return view('pages.formpesanan.index', compact('menu', 'pesanan'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'nama'              => 'required',
-            'telp'              => 'nullable',
+            'telp'              => 'required',
             'email'             => 'nullable|email',
-            'alamat'            => 'nullable',
-            'pesanan'           => 'required',
+            'alamat'            => 'required',
+            'menu_id'           => 'required|exists:menu,id',
             'metode_pembayaran' => 'required',
             'catatan'           => 'nullable',
             'total_harga'       => 'required|numeric',
+        ], [
+            'nama.required' => 'Nama harus diisi',
+            'telp.required' => 'Nomor telepon harus diisi',
+            'alamat.required' => 'Alamat harus diisi',
+            'menu_id.required' => 'Menu harus dipilih',
+            'total_harga.required' => 'Total harga harus diisi',
+
         ]);
 
         Pesanan::create($request->all());

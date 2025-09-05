@@ -130,29 +130,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="pesanan" class="form-label">Pesanan</label>
-                                    <select id="pesanan" name="pesanan"
-                                        class="form-select @error('pesanan') is-invalid @enderror">
+                                    <label for="menu_id" class="form-label">Pesanan</label>
+                                    <select id="menu_id" name="menu_id" class="form-control">
                                         <option value="">-- Pilih Menu --</option>
-                                        <option value="Nasi Goreng"
-                                            {{ old('pesanan') == 'Nasi Goreng' ? 'selected' : '' }}>
-                                            Nasi Goreng
-                                        </option>
-                                        <option value="Ayam Bakar"
-                                            {{ old('pesanan') == 'Ayam Bakar' ? 'selected' : '' }}>Ayam
-                                            Bakar</option>
-                                        <option value="Mie Ayam" {{ old('pesanan') == 'Mie Ayam' ? 'selected' : '' }}>
-                                            Mie Ayam
-                                        </option>
-                                        <option value="Es Teh" {{ old('pesanan') == 'Es Teh' ? 'selected' : '' }}>Es
-                                            Teh
-                                        </option>
-                                        <option value="Jus Alpukat"
-                                            {{ old('pesanan') == 'Jus Alpukat' ? 'selected' : '' }}>
-                                            Jus Alpukat
-                                        </option>
+                                        @foreach ($menu as $item)
+                                            <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">
+                                                {{ $item->nama }}
+                                            </option>
+                                        @endforeach
                                     </select>
-                                    @error('pesanan')
+
+
+                                    @error('menu_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -195,38 +184,42 @@
                                     <label for="total_harga" class="form-label">Total Harga</label>
                                     <input type="number" id="total_harga" name="total_harga"
                                         class="form-control @error('total_harga') is-invalid @enderror"
-                                        value="{{ old('total_harga') }}">
+                                        value="{{ old('total_harga') }}" readonly>
                                     @error('total_harga')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="d-grid gep-2">
-                                <button type="submit" class="btn btn-primary">
-                                    <span class="ti ti-send me-2"></span>PESAN</button>
-                            </div>
+
                         </div>
-                    </form>
+                        <div class="d-grid gep-2">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="ti ti-send me-2"></span>PESAN</button>
+                        </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+    </div>
 
     <script>
-        // Contoh kalkulasi otomatis total harga (sederhana)
-        const hargaMenu = {
-            "Nasi Goreng": 20000,
-            "Ayam Bakar": 25000,
-            "Mie Ayam": 15000,
-            "Es Teh": 5000,
-            "Jus Alpukat": 12000
-        };
+        document.addEventListener("DOMContentLoaded", function() {
+            let menuSelect = document.getElementById('menu_id');
+            let totalInput = document.getElementById('total_harga');
 
-        document.getElementById('pesanan').addEventListener('change', function() {
-            let menu = this.value;
-            document.getElementById('total_harga').value = hargaMenu[menu] ?? 0;
+            menuSelect.addEventListener('change', function() {
+                let harga = this.options[this.selectedIndex].getAttribute('data-harga');
+                if (harga) {
+                    totalInput.value = harga; // angka mentah, contoh: 5000
+                } else {
+                    totalInput.value = "";
+                }
+            });
         });
     </script>
+
+
 
 </body>
 
