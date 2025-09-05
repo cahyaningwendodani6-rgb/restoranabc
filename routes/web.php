@@ -1,10 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormPesananController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
+Route::post('/', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
+
+
+
 
 Auth::routes([
     'register' => false,
