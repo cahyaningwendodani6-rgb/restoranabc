@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Pesanan;
+use App\Models\Menu;
 
 class PesananController extends Controller
 {
@@ -50,8 +51,9 @@ class PesananController extends Controller
 
         // Simpan relasi pesanan-menu
         foreach ($request->menu_id as $menuId) {
-            $pesanan->menus()->attach($menuId, ['jumlah' => 1]);
-        }
+        $pesanan->menu()->attach($menuId, ['jumlah' => 1]); // ✔ pakai "menu"
+    }
+
 
         // Redirect ke halaman struk
         return redirect()->route('pesanan.struk', $pesanan->id);
@@ -95,7 +97,15 @@ class PesananController extends Controller
 
     public function struk($id)
     {
+        // Ambil pesanan beserta menu
         $pesanan = Pesanan::with('menu')->findOrFail($id);
-        return view('pages.pesanan.struk', compact('pesanan'));
+
+        // Generate QRIS string dinamis berdasarkan ID & total harga
+        $qrisString = "PESANAN|ID:{$pesanan->id}|TOTAL:{$pesanan->total_harga}";
+
+        // Kirim ke view
+        return view('pages.pesanan.struk', compact('pesanan', 'qrisString'));
     }
+
+
 }

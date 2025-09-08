@@ -7,23 +7,23 @@
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-       
+
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-           
+
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
-                    data-bs-toggle="dropdown">
-                   <div class="d-flex align-items-center gap-1">
-                    <div class="avatar avatar-online">
-                        <img src="{{ asset(Auth::user()->profile_photo ?? 'img/avatars/download.jpeg') }}" alt="Foto Profil" class="rounded-circle" />
+                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="d-flex align-items-center gap-1">
+                        <div class="avatar avatar-online">
+                            <img src="{{ asset(auth()->user()->profile_photo ?? 'img/avatars/download.jpeg') }}"
+                                alt="Foto Profil" class="rounded-circle" />
+                            <span>{{ auth()->user()->name }}</span>
+                        </div>
                     </div>
-                    <span>{{ Auth::user()->name }}</span>
-                   </div>  
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    
+
                     <li>
                         <a class="dropdown-item" href="{{ route('ubah-profil') }}">
                             <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">Ubah Profil</span>
@@ -31,7 +31,8 @@
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
-                            <a class="btn btn-sm btn-danger d-flex" onclick="$('#logout-form').submit()" href="javascript:void(0);" >
+                            <a class="btn btn-sm btn-danger d-flex" onclick="$('#logout-form').submit()"
+                                href="javascript:void(0);">
                                 <small class="align-middle">Logout</small>
                                 <i class="ti ti-logout ms-2 ti-14px"></i>
                             </a>

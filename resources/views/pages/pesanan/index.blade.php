@@ -101,15 +101,16 @@
         }
     </script>
 
-    @if (Session::has('success'))
+    @if (session()->has('success'))
         <script type="text/javascript">
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: '{{ Session::get('success') }}',
+                text: '{{ session('success') }}',
                 showConfirmButton: false,
                 timer: 3000
             });
         </script>
     @endif
+
 @endpush

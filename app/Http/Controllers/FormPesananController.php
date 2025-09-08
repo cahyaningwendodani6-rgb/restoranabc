@@ -14,6 +14,7 @@ class FormPesananController extends Controller
         $pesanan = Pesanan::with('menu')
             ->orderBy('id', 'desc')
             ->get();
+
         return view('pages.formpesanan.index', compact('menu', 'pesanan'));
     }
 
@@ -43,18 +44,17 @@ class FormPesananController extends Controller
         // Simpan detail menu (pakai attach langsung)
         $pesanan->menu()->attach($validated['menu_id']);
 
-        // Redirect ke halaman form dengan struk di session
-        return redirect()
-            ->route('formpesanan.index')
-            ->with('success', 'Pesanan berhasil dibuat!')
-            ->with('pesanan', $pesanan->load('menu')); // kirim satu object Pesanan, bukan collection
-        }
-
+        // Setelah simpan → langsung redirect ke struk
+        return redirect()->route('pesanan.struk', $pesanan->id);
+    }
 
     public function struk($id)
     {
         $pesanan = Pesanan::with('menu')->findOrFail($id);
-        return view('pages.pesanan.struk', compact('pesanan'));
-    }
 
+        // QRIS string
+        $qrisString = "PESANAN|ID:{$pesanan->id}|TOTAL:{$pesanan->total_harga}";
+
+        return view('pages.pesanan.struk', compact('pesanan', 'qrisString'));
+    }
 }
