@@ -11,63 +11,71 @@
                     <tr>
                         <th width="25%">ID</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->id}}</td>
+                        <td>{{ $pesanan->id }}</td>
                     </tr>
 
                     <tr>
                         <th width="25%">Nama</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->nama}}</td>
+                        <td>{{ $pesanan->nama }}</td>
                     </tr>
 
                     <tr>
                         <th width="25%">No Telepon</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->telp}}</td>
+                        <td>{{ $pesanan->telp }}</td>
                     </tr>
 
                     <tr>
                         <th width="25%">Email</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->email}}</td>
+                        <td>{{ $pesanan->email }}</td>
                     </tr>
 
                     <tr>
                         <th width="25%">Alamat</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->alamat}}</td>
+                        <td>{{ $pesanan->alamat }}</td>
                     </tr>
 
                     <tr>
                         <th width="25%">Menu Pesanan</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->menu->nama}}</td>
-                    </tr>
-
-                    <tr>
-                        <th width="25%">Metode Pembayaran</th>
-                        <th width="10px">:</th>
-                        <td>{{ $pesanan->metode_pembayaran}}</td>
-                    </tr>
-
-                    <tr>
-                        <th width="25%">Catatan</th>
-                        <th width="10px">:</th>
-                        <td>{{ $pesanan->catatan}}</td>
+                        <td>
+                            @if ($pesanan->menu && $pesanan->menu->count())
+                                @foreach ($pesanan->menu as $menu)
+                                    {{ $menu->nama }}@if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            @else
+                                -
+                            @endif
+                        </td>
                     </tr>
 
                     <tr>
                         <th width="25%">Total Harga</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->total_harga}}</td>
+                        <td>Rp {{ number_format($pesanan->menu->sum('harga') ?? 0, 0, ',', '.') }}</td>
                     </tr>
 
+                    <tr>
+                        <th width="25%">Metode Pembayaran</th>
+                        <th width="10px">:</th>
+                        <td>{{ $pesanan->metode_pembayaran }}</td>
+                    </tr>
 
+                    <tr>
+                        <th width="25%">Catatan</th>
+                        <th width="10px">:</th>
+                        <td>{{ $pesanan->catatan }}</td>
+                    </tr>
 
                     <tr>
                         <th width="25%">Memesan Pada</th>
                         <th width="10px">:</th>
-                        <td>{{ $pesanan->created_at->isoFormat('DD MMM Y HH:mm')}}</td>
+                        <td>{{ $pesanan->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                     </tr>
 
 
@@ -76,14 +84,14 @@
 
             </div>
 
-            
-                <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">
-                    <span class="ti ti-arrow-left"></span>
-                    Kembali
-                </a>
 
-                
-           
+            <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">
+                <span class="ti ti-arrow-left"></span>
+                Kembali
+            </a>
+
+
+
         </div>
     </div>
 @endsection

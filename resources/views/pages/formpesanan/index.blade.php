@@ -130,19 +130,25 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="menu_id" class="form-label">Pesanan</label>
-                                    <select id="menu_id" name="menu_id" class="form-control">
-                                        <option value="">-- Pilih Menu --</option>
+                                    <label class="form-label">Pesanan</label>
+                                    <div class="row">
                                         @foreach ($menu as $item)
-                                            <option value="{{ $item->id }}" data-harga="{{ $item->harga }}">
-                                                {{ $item->nama }}
-                                            </option>
+                                            <div class="col-md-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input menu-checkbox" type="checkbox"
+                                                        name="menu_id[]" value="{{ $item->id }}"
+                                                        data-harga="{{ $item->harga }}"
+                                                        id="menu_{{ $item->id }}">
+                                                    <label class="form-check-label" for="menu_{{ $item->id }}">
+                                                        {{ $item->nama }} - Rp
+                                                        {{ number_format($item->harga, 0, ',', '.') }}
+                                                    </label>
+                                                </div>
+                                            </div>
                                         @endforeach
-                                    </select>
-
-
+                                    </div>
                                     @error('menu_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -205,21 +211,22 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let menuSelect = document.getElementById('menu_id');
+            let checkboxes = document.querySelectorAll('.menu-checkbox');
             let totalInput = document.getElementById('total_harga');
 
-            menuSelect.addEventListener('change', function() {
-                let harga = this.options[this.selectedIndex].getAttribute('data-harga');
-                if (harga) {
-                    totalInput.value = harga; // angka mentah, contoh: 5000
-                } else {
-                    totalInput.value = "";
-                }
-            });
+            function updateTotal() {
+                let total = 0;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        total += parseInt(cb.getAttribute('data-harga'));
+                    }
+                });
+                totalInput.value = total;
+            }
+
+            checkboxes.forEach(cb => cb.addEventListener('change', updateTotal));
         });
     </script>
-
-
 
 </body>
 

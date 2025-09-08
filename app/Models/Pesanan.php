@@ -16,7 +16,6 @@ class Pesanan extends Model
         'telp',
         'email',
         'alamat',
-        'menu_id',
         'metode_pembayaran',
         'catatan',
         'total_harga'
@@ -24,6 +23,7 @@ class Pesanan extends Model
 
     public function menu()
     {
-        return $this->belongsTo(Menu::class);
+        return $this->belongsToMany(Menu::class, 'pesanan_menu', 'pesanan_id', 'menu_id')
+                    ->withPivot('jumlah')->withTimestamps();
     }
 }

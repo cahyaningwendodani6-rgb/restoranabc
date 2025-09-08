@@ -13,7 +13,7 @@ class PesananController extends Controller
      */
     public function index()
     {
-        $pesanan = Pesanan::with('menu')->orderBy('id', 'desc')->get();
+         $pesanan = Pesanan::with('menu')->orderBy('id', 'desc')->get();
         return view('pages.pesanan.index', compact('pesanan'));
     }
 
@@ -38,7 +38,7 @@ class PesananController extends Controller
      */
     public function show(string $id)
     {
-        $pesanan = Pesanan::with('menu')->find($id);
+        $pesanan = Pesanan::with('menu')->findOrFail($id);
         return view('pages.pesanan.show', compact('pesanan'));
     }
 

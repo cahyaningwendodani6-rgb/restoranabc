@@ -16,16 +16,13 @@ return new class extends Migration
             $table->string('nama', 128);                     
             $table->string('telp', 20)->nullable();          
             $table->string('email', 128)->nullable();        
-            $table->text('alamat')->nullable();              
-            $table->unsignedBigInteger('menu_id');                  
+            $table->text('alamat')->nullable();                               
             $table->enum('metode_pembayaran', [              
                 'Cash', 'Transfer', 'QRIS'
             ]);
             $table->text('catatan')->nullable();             
             $table->decimal('total_harga', 10, 2)->default(0); 
             $table->timestamps();  
-
-            $table->foreign('menu_id')->references('id')->on('menu')->onDelete('cascade');
         });
     }
 
