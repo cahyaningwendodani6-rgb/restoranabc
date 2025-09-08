@@ -30,8 +30,33 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'telp' => 'required',
+            'menu_id' => 'required|array',
+            'metode_pembayaran' => 'required',
+        ]);
+
+        // Simpan pesanan
+        $pesanan = Pesanan::create([
+            'nama' => $request->nama,
+            'telp' => $request->telp,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'catatan' => $request->catatan,
+            'total_harga' => $request->total_harga,
+        ]);
+
+        // Simpan relasi pesanan-menu
+        foreach ($request->menu_id as $menuId) {
+            $pesanan->menus()->attach($menuId, ['jumlah' => 1]);
+        }
+
+        // Redirect ke halaman struk
+        return redirect()->route('pesanan.struk', $pesanan->id);
     }
+
 
     /**
      * Display the specified resource.
@@ -66,5 +91,11 @@ class PesananController extends Controller
         $pesanan = Pesanan::find($id);
         $pesanan->delete();
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dihapus');
+    }
+
+    public function struk($id)
+    {
+        $pesanan = Pesanan::with('menu')->findOrFail($id);
+        return view('pages.pesanan.struk', compact('pesanan'));
     }
 }

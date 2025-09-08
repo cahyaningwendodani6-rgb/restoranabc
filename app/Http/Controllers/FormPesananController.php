@@ -19,32 +19,42 @@ class FormPesananController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama'              => 'required',
-            'telp'              => 'required',
-            'email'             => 'nullable|email',
-            'alamat'            => 'required',
-            'menu_id'           => 'required|array',
-            'menu_id.*'         => 'exists:menu,id',
-            'metode_pembayaran' => 'required',
-            'catatan'           => 'nullable',
-            'total_harga'       => 'required|numeric',
-        ], [
-            'nama.required' => 'Nama harus diisi',
-            'telp.required' => 'Nomor telepon harus diisi',
-            'alamat.required' => 'Alamat harus diisi',
-            'menu_id.required' => 'Menu harus dipilih',
-            'total_harga.required' => 'Total harga harus diisi',
-
+        $validated = $request->validate([
+            'nama' => 'required|string|max:100',
+            'telp' => 'required|string|max:20',
+            'email' => 'nullable|email',
+            'alamat' => 'required|string',
+            'menu_id' => 'required|array',
+            'metode_pembayaran' => 'required|string',
+            'total_harga' => 'required|numeric',
         ]);
 
-        $pesanan = Pesanan::create($request->only([
-            'nama', 'telp', 'email', 'alamat', 'metode_pembayaran', 'catatan', 'total_harga'
-        ]));
+        // Simpan pesanan
+        $pesanan = Pesanan::create([
+            'nama' => $validated['nama'],
+            'telp' => $validated['telp'],
+            'email' => $validated['email'] ?? null,
+            'alamat' => $validated['alamat'],
+            'metode_pembayaran' => $validated['metode_pembayaran'],
+            'total_harga' => $validated['total_harga'],
+            'catatan' => $request->catatan,
+        ]);
 
-        $pesanan->menu()->attach($request->menu_id);
+        // Simpan detail menu (pakai attach langsung)
+        $pesanan->menu()->attach($validated['menu_id']);
 
-        return redirect()->route('formpesanan.index')->with('success', 'Pesanan berhasil ditambahkan');
+        // Redirect ke halaman form dengan struk di session
+        return redirect()
+            ->route('formpesanan.index')
+            ->with('success', 'Pesanan berhasil dibuat!')
+            ->with('pesanan', $pesanan->load('menu')); // kirim satu object Pesanan, bukan collection
+        }
+
+
+    public function struk($id)
+    {
+        $pesanan = Pesanan::with('menu')->findOrFail($id);
+        return view('pages.pesanan.struk', compact('pesanan'));
     }
 
 }
