@@ -14,12 +14,12 @@
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="d-flex align-items-center gap-1">
+                    <div class="d-flex align-items-center gap-2">
                         <div class="avatar avatar-online">
                             <img src="{{ asset(auth()->user()->profile_photo ?? 'img/avatars/download.jpeg') }}"
                                 alt="Foto Profil" class="rounded-circle" />
-                            <span>{{ auth()->user()->name }}</span>
                         </div>
+                        <span>{{ auth()->user()->name }}</span>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
