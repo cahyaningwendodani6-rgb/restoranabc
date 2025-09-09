@@ -47,6 +47,11 @@
                                         <span class="ti ti-eye"></span>
                                     </a>
 
+                                    <a href="{{ route('pesanan.struk', $item->id) }}" class="btn btn-sm btn-success"
+                                        target="_blank">
+                                        <span class="ti ti-printer"></span>
+                                    </a>
+
                                     <a href="javascript:;"
                                         onclick="actionDelete('{{ route('pesanan.destroy', $item->id) }}')"
                                         class="btn btn-sm btn-danger">
@@ -96,15 +101,16 @@
         }
     </script>
 
-    @if (Session::has('success'))
+    @if (session()->has('success'))
         <script type="text/javascript">
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
-                text: '{{ Session::get('success') }}',
+                text: '{{ session('success') }}',
                 showConfirmButton: false,
                 timer: 3000
             });
         </script>
     @endif
+
 @endpush

@@ -77,21 +77,25 @@
                         <th width="10px">:</th>
                         <td>{{ $pesanan->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                     </tr>
-
-
-
                 </table>
-
             </div>
 
+            {{-- Tambahan: QR Code + Cetak Struk --}}
+            <div class="card card-body text-center mt-3">
+                <h5>QR Pembayaran</h5>
+                {!! QrCode::size(200)->generate(
+                    'Pesanan #' . $pesanan->id . ' - Rp' . number_format($pesanan->menu->sum('harga') ?? 0, 0, ',', '.'),
+                ) !!}
+                <hr>
+                <button onclick="window.print()" class="btn btn-success">
+                    <span class="ti ti-printer"></span> Cetak Struk
+                </button>
+            </div>
 
             <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">
                 <span class="ti ti-arrow-left"></span>
                 Kembali
             </a>
-
-
-
         </div>
     </div>
 @endsection
