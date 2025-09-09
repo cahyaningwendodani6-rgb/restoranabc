@@ -161,8 +161,6 @@
                                     <select id="metode_pembayaran" name="metode_pembayaran"
                                         class="form-select @error('metode_pembayaran') is-invalid @enderror">
                                         <option value="">-- Pilih Metode --</option>
-                                        <option value="Cash"
-                                            {{ old('metode_pembayaran') == 'Cash' ? 'selected' : '' }}>Cash</option>
                                         <option value="Transfer"
                                             {{ old('metode_pembayaran') == 'Transfer' ? 'selected' : '' }}>Transfer
                                             Bank</option>
