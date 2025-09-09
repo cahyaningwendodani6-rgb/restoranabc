@@ -29,9 +29,35 @@ class PesananController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'telp' => 'required|string|max:15',
+        'email' => 'nullable|email',
+        'alamat' => 'required|string',
+        'menu_id' => 'required|exists:menu,id',
+        'catatan' => 'nullable|string',
+    ]);
+
+    // ambil harga dari menu yang dipilih
+    $menu = \App\Models\Menu::findOrFail($request->menu_id);
+
+    // simpan pesanan
+    $pesanan = Pesanan::create([
+        'nama' => $request->nama,
+        'telp' => $request->telp,
+        'email' => $request->email,
+        'alamat' => $request->alamat,
+        'menu_id' => $menu->id,
+        'metode_pembayaran' => $request->metode_pembayaran ?? null,
+        'catatan' => $request->catatan,
+        'total_harga' => $menu->harga, // total harga ikut harga menu
+    ]);
+
+    return redirect()->route('pembayaran.form', $pesanan->id)
+                     ->with('success', 'Pesanan berhasil dibuat, silakan lanjutkan pembayaran.');
+}
+
 
     /**
      * Display the specified resource.

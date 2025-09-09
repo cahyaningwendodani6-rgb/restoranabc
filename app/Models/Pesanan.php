@@ -26,4 +26,10 @@ class Pesanan extends Model
         return $this->belongsToMany(Menu::class, 'pesanan_menu', 'pesanan_id', 'menu_id')
                     ->withPivot('jumlah')->withTimestamps();
     }
+
+    public function pembayaran()
+    {
+         return $this->hasOne(Pembayaran::class, 'pesanan_id');
+    }
+
 }

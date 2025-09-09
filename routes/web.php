@@ -1,11 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\FormPesananController;
+use App\Models\Pesanan;
 
 Route::get('/', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
 Route::post('/', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
 
+
+
+Route::get('/pembayaran-terbaru', function () {
+    $pesanan = Pesanan::latest()->first();
+
+    if (!$pesanan) {
+        return redirect()->route('pembayaran.index')->with('error', 'Belum ada pesanan.');
+    }
+
+    return redirect()->route('pembayaran.form', $pesanan->id);
+})->name('pembayaran.terbaru');
 
 
 
@@ -28,4 +41,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/owner/profile', [App\Http\Controllers\OwnerController::class, 'editProfile'])->name('owner.profile');
     Route::put('/owner/profile', [App\Http\Controllers\OwnerController::class, 'updateProfile'])->name('owner.update');
+
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('/pembayaran/{id}', [PembayaranController::class, 'showForm'])->name('pembayaran.form');
+    Route::post('/pembayaran/{id}', [PembayaranController::class, 'process'])->name('pembayaran.process');
+
 });

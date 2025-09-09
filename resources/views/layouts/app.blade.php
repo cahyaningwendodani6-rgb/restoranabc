@@ -8,6 +8,7 @@
   data-assets-path="{{ asset('/') }}"
   data-template="vertical-menu-template"
   data-style="light">
+
   <head>
     <meta charset="utf-8" />
     <meta
@@ -48,6 +49,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/js/config.js') }}"></script>
     @stack('styles')
+      <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
   </head>
 
   <body>
