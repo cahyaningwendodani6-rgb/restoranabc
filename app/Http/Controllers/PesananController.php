@@ -30,44 +30,50 @@ class PesananController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
+    {
     $request->validate([
-        'nama' => 'required|string|max:255',
-        'telp' => 'required|string|max:15',
-        'email' => 'nullable|email',
-        'alamat' => 'required|string',
-        'menu_id' => 'required|array', // multi menu
-        'metode_pembayaran' => 'required|string',
-        'catatan' => 'nullable|string',
-    ]);
+            'nama' => 'required|string|max:255',
+            'telp' => 'required|string|max:15',
+            'email' => 'nullable|email',
+            'alamat' => 'required|string',
+            'menu_id' => 'required|array',
+            'menu_id.*' => 'exists:menu,id',
+            'jumlah' => 'required|array',
+            'jumlah.*' => 'integer|min:1',
+            'metode_pembayaran' => 'required|string',
+            'catatan' => 'nullable|string',
+        ]);
 
-    // hitung total harga
-    $total = 0;
-    foreach ($request->menu_id as $menuId) {
-        $menu = Menu::findOrFail($menuId);
-        $total += $menu->harga;
-    }
 
-    // simpan pesanan
-    $pesanan = Pesanan::create([
-        'nama' => $request->nama,
-        'telp' => $request->telp,
-        'email' => $request->email,
-        'alamat' => $request->alamat,
-        'metode_pembayaran' => $request->metode_pembayaran,
-        'catatan' => $request->catatan,
-        'total_harga' => $total,
-    ]);
+        // hitung total harga
+         $total = 0;
+        foreach ($request->menu_id as $key => $menuId) {
+            $menu = Menu::findOrFail($menuId);
+            $jumlah = $request->jumlah[$key];
+            $total += $menu->harga * $jumlah;
+        }
 
-    // simpan relasi pesanan-menu
-    foreach ($request->menu_id as $menuId) {
-        $pesanan->menu()->attach($menuId, ['jumlah' => 1]);
-    }
+        // simpan pesanan
+        $pesanan = Pesanan::create([
+            'nama' => $request->nama,
+            'telp' => $request->telp,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'catatan' => $request->catatan,
+            'total_harga' => $total,
+        ]);
 
-    // redirect ke struk
-    return redirect()->route('pesanan.struk', $pesanan->id)
+        // simpan relasi pesanan-menu
+        foreach ($request->menu_id as $key => $menuId) {
+            $jumlah = $request->jumlah[$key];
+            $pesanan->menu()->attach($menuId, ['jumlah' => $jumlah]);
+        }
+
+        // redirect ke struk
+        return redirect()->route('pesanan.struk', $pesanan->id)
                      ->with('success', 'Pesanan berhasil dibuat.');
-}
+    }
 
 
 

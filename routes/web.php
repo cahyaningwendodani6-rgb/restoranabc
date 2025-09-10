@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\FormPesananController;
 use App\Models\Pesanan;
@@ -41,7 +42,11 @@ Auth::routes([
 ]);
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/home', function () {
+        return redirect()->route('dashboard'); // arahkan ke dashboard
+    })->name('home');
 
     Route::get('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'index'])->name('ubah-profil');
     Route::post('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'update'])->name('ubah-profil.update');

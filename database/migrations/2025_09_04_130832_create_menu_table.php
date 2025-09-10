@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('menu', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 100);
-            $table->string('kategori', 50)->default('makanan')->after('nama');
+            $table->string('kategori', 50)->default('makanan');
             $table->decimal('harga', 10, 2);
             $table->timestamps();
         });
@@ -25,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('menu', function (Blueprint $table) {
-            $table->dropColumn('kategori');
-        });
+         Schema::dropIfExists('menu');
     }
 };
