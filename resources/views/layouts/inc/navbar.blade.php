@@ -7,40 +7,29 @@
     </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-
-
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-<<<<<<< HEAD
-                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
-                    data-bs-toggle="dropdown">
-                   <div class="d-flex align-items-center gap-1">
-                    <div class="avatar avatar-online">
-                        <img src="{{ asset(Auth::user()->profile_photo ?? 'img/avatars/profil.jpeg') }}" alt="Foto Profil" class="rounded-circle" />
-=======
                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="d-flex align-items-center gap-2">
                         <div class="avatar avatar-online">
-                            <img src="{{ asset(auth()->user()->profile_photo ?? 'img/avatars/download.jpeg') }}"
+                            <img src="{{ asset(auth()->user()->profile_photo ?? 'img/avatars/profil.jpeg') }}"
                                 alt="Foto Profil" class="rounded-circle" />
                         </div>
                         <span>{{ auth()->user()->name }}</span>
->>>>>>> ea195d3bda81fce76a248a8558e85e8ce82b940a
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-
                     <li>
                         <a class="dropdown-item" href="{{ route('ubah-profil') }}">
-                            <i class="ti ti-user me-3 ti-md"></i><span class="align-middle">Ubah Profil</span>
+                            <i class="ti ti-user me-3 ti-md"></i>
+                            <span class="align-middle">Ubah Profil</span>
                         </a>
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
-                            <a class="btn btn-sm btn-danger d-flex" onclick="$('#logout-form').submit()"
-                                href="javascript:void(0);">
+                            <a class="btn btn-sm btn-danger d-flex" onclick="$('#logout-form').submit()" href="javascript:void(0);">
                                 <small class="align-middle">Logout</small>
                                 <i class="ti ti-logout ms-2 ti-14px"></i>
                             </a>
@@ -52,13 +41,14 @@
                 </ul>
             </li>
             <!--/ User -->
+
         </ul>
     </div>
 
     <!-- Search Small Screens -->
     <div class="navbar-search-wrapper search-input-wrapper d-none">
-        <input type="text" class="form-control search-input container-xxl border-0" placeholder="Search..."
-            aria-label="Search..." />
+        <input type="text" class="form-control search-input container-xxl border-0"
+            placeholder="Search..." aria-label="Search..." />
         <i class="ti ti-x search-toggler cursor-pointer"></i>
     </div>
 </nav>
