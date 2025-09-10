@@ -199,7 +199,7 @@
 
                         </div>
                         <div class="d-grid gep-2">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn bg-black text-white">
                                 <span class="ti ti-send me-2"></span>PESAN</button>
                         </div>
                 </div>
