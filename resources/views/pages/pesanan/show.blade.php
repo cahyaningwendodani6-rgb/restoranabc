@@ -66,6 +66,26 @@
                         <td>{{ $pesanan->metode_pembayaran }}</td>
                     </tr>
 
+                    {{-- Tambahan: Info Transfer --}}
+                    @if ($pesanan->metode_pembayaran == 'Transfer')
+                        <tr>
+                            <th width="25%">Bank</th>
+                            <th width="10px">:</th>
+                            <td>{{ $pesanan->bank ?? 'BCA 1234567890' }}</td>
+                        </tr>
+                        <tr>
+                            <th width="25%">Nomor Rekening</th>
+                            <th width="10px">:</th>
+                            <td>{{ $pesanan->no_rekening ?? '1234567890' }}</td>
+                        </tr>
+                        <tr>
+                            <th width="25%">Atas Nama</th>
+                            <th width="10px">:</th>
+                            <td>{{ $pesanan->atas_nama ?? 'Nama Pemilik Rekening' }}</td>
+                        </tr>
+                    @endif
+
+
                     <tr>
                         <th width="25%">Catatan</th>
                         <th width="10px">:</th>
@@ -81,21 +101,18 @@
             </div>
 
             {{-- Tambahan: QR Code + Cetak Struk --}}
-            <div class="card card-body text-center mt-3">
-                <h5>QR Pembayaran</h5>
-                {!! QrCode::size(200)->generate(
-                    'Pesanan #' . $pesanan->id . ' - Rp' . number_format($pesanan->menu->sum('harga') ?? 0, 0, ',', '.'),
-                ) !!}
-                <hr>
-                <button onclick="window.print()" class="btn btn-success">
-                    <span class="ti ti-printer"></span> Cetak Struk
-                </button>
-            </div>
-
-            <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">
-                <span class="ti ti-arrow-left"></span>
-                Kembali
-            </a>
+            @if ($pesanan->metode_pembayaran != 'Transfer')
+                <div class="card card-body text-center mt-3">
+                    <h5>QR Pembayaran</h5>
+                    {!! QrCode::size(200)->generate(
+                        'Pesanan #' . $pesanan->id . ' - Rp' . number_format($pesanan->menu->sum('harga') ?? 0, 0, ',', '.'),
+                    ) !!}
+                    <hr>
+                    <button onclick="window.print()" class="btn btn-success">
+                        <span class="ti ti-printer"></span> Cetak Struk
+                    </button>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
