@@ -36,19 +36,23 @@ class PesananController extends Controller
             'telp' => 'required|string|max:15',
             'email' => 'nullable|email',
             'alamat' => 'required|string',
-            'menu_id' => 'required|array', // multi menu
+            'menu_id' => 'required|array',
+            'menu_id.*' => 'exists:menu,id',
+            'jumlah' => 'required|array',
+            'jumlah.*' => 'integer|min:1',
             'metode_pembayaran' => 'required|string',
             'catatan' => 'nullable|string',
         ]);
 
-        // Hitung total harga
+        // hitung total harga
         $total = 0;
-        foreach ($request->menu_id as $menuId) {
+        foreach ($request->menu_id as $key => $menuId) {
             $menu = Menu::findOrFail($menuId);
-            $total += $menu->harga;
+            $jumlah = $request->jumlah[$key];
+            $total += $menu->harga * $jumlah;
         }
 
-        // Simpan pesanan
+        // simpan pesanan
         $pesanan = Pesanan::create([
             'nama' => $request->nama,
             'telp' => $request->telp,
@@ -59,14 +63,15 @@ class PesananController extends Controller
             'total_harga' => $total,
         ]);
 
-        // Simpan relasi pesanan-menu
-        foreach ($request->menu_id as $menuId) {
-            $pesanan->menu()->attach($menuId, ['jumlah' => 1]);
+        // simpan relasi pesanan-menu
+        foreach ($request->menu_id as $key => $menuId) {
+            $jumlah = $request->jumlah[$key];
+            $pesanan->menu()->attach($menuId, ['jumlah' => $jumlah]);
         }
 
-        // Redirect ke halaman struk
+        // redirect ke struk
         return redirect()->route('pesanan.struk', $pesanan->id)
-                         ->with('success', 'Pesanan berhasil dibuat.');
+                        ->with('success', 'Pesanan berhasil dibuat.');
     }
 
     /**

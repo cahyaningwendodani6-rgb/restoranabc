@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email', 128)->nullable();        
             $table->text('alamat')->nullable();                               
             $table->enum('metode_pembayaran', [              
-                'Cash', 'Transfer', 'QRIS'
+                'Transfer', 'QRIS'
             ]);
             $table->text('catatan')->nullable();             
             $table->decimal('total_harga', 10, 2)->default(0); 

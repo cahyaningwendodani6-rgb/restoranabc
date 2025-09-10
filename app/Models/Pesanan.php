@@ -24,8 +24,9 @@ class Pesanan extends Model
 
     public function menu()
     {
-        return $this->belongsToMany(Menu::class, 'pesanan_menu', 'pesanan_id', 'menu_id')
-                    ->withPivot('jumlah')->withTimestamps();
+        return $this->belongsToMany(Menu::class, 'pesanan_menu')
+                ->withPivot('jumlah')
+                ->withTimestamps();
     }
 
     public function pembayaran()
