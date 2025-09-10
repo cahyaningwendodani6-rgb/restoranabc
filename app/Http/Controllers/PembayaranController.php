@@ -38,6 +38,10 @@ class PembayaranController extends Controller
             'metode' => $request->metode,
         ]);
 
+         $pesanan->update([
+        'total_harga' => 0
+        ]);
+
         return redirect()->route('pembayaran.form', $pesanan->id)
                          ->with('success', 'Pembayaran berhasil diproses!');
     }

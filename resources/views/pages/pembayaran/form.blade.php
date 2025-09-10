@@ -15,19 +15,18 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Subtotal</label>
-                            <input type="text" class="form-control" value="Rp {{ number_format($subtotal, 0, ',', '.') }}"
-                                readonly>
+                            <input type="text" class="form-control"
+                                value="{{ $subtotal > 0 ? 'Rp ' . number_format($subtotal, 0, ',', '.') : '' }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Total</label>
-                            <input type="text" class="form-control" value="Rp {{ number_format($total, 0, ',', '.') }}"
-                                readonly>
+                            <input type="text" class="form-control"
+                                value="{{ $total > 0 ? 'Rp ' . number_format($total, 0, ',', '.') : '' }}" readonly>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Metode Pembayaran</label>
                             <select name="metode" class="form-select" required>
                                 <option value="">Pilih metode</option>
-                                <option value="Tunai">Cash</option>
                                 <option value="Transfer">Transfer</option>
                                 <option value="QRIS">QRIS</option>
                             </select>

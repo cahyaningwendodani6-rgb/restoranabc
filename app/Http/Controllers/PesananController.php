@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Pesanan;
 use App\Models\Menu;
+use App\Models\Pembayaran; 
 
 class PesananController extends Controller
 {
@@ -14,7 +14,7 @@ class PesananController extends Controller
      */
     public function index()
     {
-         $pesanan = Pesanan::with('menu')->orderBy('id', 'desc')->get();
+        $pesanan = Pesanan::with('menu')->orderBy('id', 'desc')->get();
         return view('pages.pesanan.index', compact('pesanan'));
     }
 
@@ -31,19 +31,28 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
     $request->validate([
+=======
+        $request->validate([
+>>>>>>> 3a1772d4cc74727cabb8981fc353ad6518253548
             'nama' => 'required|string|max:255',
             'telp' => 'required|string|max:15',
             'email' => 'nullable|email',
             'alamat' => 'required|string',
+<<<<<<< HEAD
             'menu_id' => 'required|array',
             'menu_id.*' => 'exists:menu,id',
             'jumlah' => 'required|array',
             'jumlah.*' => 'integer|min:1',
+=======
+            'menu_id' => 'required|array', // multi menu
+>>>>>>> 3a1772d4cc74727cabb8981fc353ad6518253548
             'metode_pembayaran' => 'required|string',
             'catatan' => 'nullable|string',
         ]);
 
+<<<<<<< HEAD
 
         // hitung total harga
          $total = 0;
@@ -77,6 +86,36 @@ class PesananController extends Controller
 
 
 
+=======
+        // Hitung total harga
+        $total = 0;
+        foreach ($request->menu_id as $menuId) {
+            $menu = Menu::findOrFail($menuId);
+            $total += $menu->harga;
+        }
+
+        // Simpan pesanan
+        $pesanan = Pesanan::create([
+            'nama' => $request->nama,
+            'telp' => $request->telp,
+            'email' => $request->email,
+            'alamat' => $request->alamat,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'catatan' => $request->catatan,
+            'total_harga' => $total,
+        ]);
+
+        // Simpan relasi pesanan-menu
+        foreach ($request->menu_id as $menuId) {
+            $pesanan->menu()->attach($menuId, ['jumlah' => 1]);
+        }
+
+        // Redirect ke halaman struk
+        return redirect()->route('pesanan.struk', $pesanan->id)
+                         ->with('success', 'Pesanan berhasil dibuat.');
+    }
+
+>>>>>>> 3a1772d4cc74727cabb8981fc353ad6518253548
     /**
      * Display the specified resource.
      */
@@ -107,11 +146,14 @@ class PesananController extends Controller
      */
     public function destroy(string $id)
     {
-        $pesanan = Pesanan::find($id);
+        $pesanan = Pesanan::findOrFail($id);
         $pesanan->delete();
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dihapus');
     }
 
+    /**
+     * Struk pesanan + QRIS
+     */
     public function struk($id)
     {
         // Ambil pesanan beserta menu
@@ -123,6 +165,4 @@ class PesananController extends Controller
         // Kirim ke view
         return view('pages.pesanan.struk', compact('pesanan', 'qrisString'));
     }
-
-
 }
