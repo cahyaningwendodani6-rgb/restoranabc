@@ -49,7 +49,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="" class="menu-link">
+            <a href="{{ route('laporan.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bi bi-bar-chart-fill me-2"></i>
                 Laporan
             </a>

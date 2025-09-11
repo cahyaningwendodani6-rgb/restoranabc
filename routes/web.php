@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\PembayaranController; 
+use App\Http\Controllers\LaporanController;
 use App\Models\Pesanan;
+
 
 Route::get('/', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
 Route::post('/', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
@@ -55,5 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('/pembayaran/{id}', [PembayaranController::class, 'showForm'])->name('pembayaran.form');
     Route::post('/pembayaran/{id}', [PembayaranController::class, 'process'])->name('pembayaran.process');
+
+    Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/{tanggal}', [App\Http\Controllers\LaporanController::class, 'detail'])->name('laporan.detail');
 
 });
