@@ -3,33 +3,47 @@
 @section('title', 'Halaman Menu')
 
 @section('content')
-    <!-- resources/views/menu/index.blade.php -->
     <div class="container py-4">
         <h1 class="mb-4 fw-bold">Menu</h1>
 
         <!-- Form -->
-        <form action="{{ route('menu.store') }}" method="POST" class="row g-3">
+        <form action="{{ route('menu.store') }}" method="POST" class="row g-3" novalidate>
             @csrf
             <div class="col-md-6">
                 <label class="form-label">Nama Menu</label>
-                <input type="text" class="form-control" name="nama" required>
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                    value="{{ old('nama') }}">
+                @error('nama')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
+
             <div class="col-md-3">
                 <label class="form-label">Kategori</label>
-                <select name="kategori" class="form-select">
-                    <option value="Makanan">Makanan</option>
-                    <option value="Minuman">Minuman</option>
+                <select name="kategori" class="form-select @error('kategori') is-invalid @enderror">
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="Makanan" {{ old('kategori') == 'Makanan' ? 'selected' : '' }}>Makanan</option>
+                    <option value="Minuman" {{ old('kategori') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
                 </select>
+                @error('kategori')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
+
             <div class="col-md-3">
                 <label class="form-label">Harga</label>
                 <div class="input-group">
                     <span class="input-group-text">Rp</span>
-                    <input type="number" class="form-control" name="harga" required>
+                    <input type="number" class="form-control @error('harga') is-invalid @enderror" name="harga"
+                        value="{{ old('harga') }}">
+                    @error('harga')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
+
             <div class="col-12 d-flex justify-content-end">
-                <button type="submit" class="btn btn-dark">Simpan</button>
+                <button type="submit" class="btn bg-black text-white">Simpan</button>
             </div>
         </form>
 
@@ -42,6 +56,7 @@
                             <th>Nama Menu</th>
                             <th>Kategori</th>
                             <th class="text-end">Harga</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +65,12 @@
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->kategori }}</td>
                                 <td class="text-end">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('menu.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="javascript:;" onclick="confirmDelete('{{ $item->id }}')"
+                                        class="btn btn-sm btn-danger">Hapus</a>
+
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -57,8 +78,11 @@
             </div>
         </div>
     </div>
-
-
+    <form id="delete-form-{{ $item->id }}" action="{{ route('menu.destroy', $item->id) }}" method="POST"
+        style="display: none;">
+        @csrf
+        @method('DELETE')
+    </form>
 
 @endsection
 
@@ -71,22 +95,24 @@
 @push('scripts')
     <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        $(function() {
-            $('.dataTable').DataTable();
-        });
+        //penusisan java script internal
 
-        function actionDelete(url) {
+        function confirmDelete(id) {
             Swal.fire({
-                title: 'Apakah anda yakin?',
-                text: "Data akan dihapus!",
-                icon: 'warning',
-                showCancelButton: false,
-                confirmButtonText: 'Ya, hapus!'
+                title: "Apakah kamu yakin?",
+                text: "Data yang dihapus tidak bisa dikembalikan.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc3545",
+                cancelButtonColor: "#343a40",
+                confirmButtonText: "Ya, Hapus!",
+                cancelButtonText: "Batal"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $('#formDelete').attr('action', url);
-                    $('#formDelete').submit();
+                    var form = document.getElementById('delete-form-' + id);
+                    form.submit();
                 }
             });
         }
@@ -103,5 +129,4 @@
             });
         </script>
     @endif
-
 @endpush

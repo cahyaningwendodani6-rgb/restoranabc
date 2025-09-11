@@ -22,12 +22,21 @@ class FormPesananController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:100',
-            'telp' => 'required|string|max:20',
+            'telp' => 'required|max:20',
             'email' => 'nullable|email',
             'alamat' => 'required|string',
-            'menu_id' => 'required|array',
-            'metode_pembayaran' => 'required|string',
+            'menu_id' => 'required',
+            'metode_pembayaran' => 'required',
             'total_harga' => 'required|numeric',
+        ], [
+            'nama.required' => 'Nama harus diisi',
+            'nama.string' => 'Nama harus berupa teks',
+            'telp.required' => 'Nomor telepon harus diisi',
+            'alamat.required' => 'Alamat harus diisi',
+            'alamat.string' => 'Alamat harus berupa teks',
+            'menu_id.required' => 'Menu harus dipilih',
+            'metode_pembayaran.required' => 'Metode pembayaran harus dipilih',
+            'total_harga.required' => 'Total harga belum muncul sebelum kamu memilih menu',
         ]);
 
         // Simpan pesanan

@@ -25,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('menu', function (Blueprint $table) {
-            $table->dropColumn('kategori');
-        });
+         Schema::dropIfExists('menu');
     }
 };

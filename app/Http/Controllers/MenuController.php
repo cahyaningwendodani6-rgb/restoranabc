@@ -36,6 +36,12 @@ class MenuController extends Controller
             'nama' => 'required',
             'kategori' => 'required',
             'harga' => 'required|numeric|min:0'
+        ], [
+            'nama.required' => 'Nama menu harus diisi',
+            'kategori.required' => 'Kategori menu harus dipilih',
+            'harga.required' => 'Harga menu harus diisi',
+            'harga.numeric' => 'Harga menu harus berupa angka',
+            'harga.min' => 'Harga menu harus lebih besar dari 0'
         ]);
 
         Menu::create($request->all());
@@ -55,7 +61,8 @@ class MenuController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        return view('pages.menu.edit', compact('menu'));
     }
 
     /**
@@ -63,7 +70,26 @@ class MenuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'kategori' => 'required',
+            'harga' => 'required|numeric|min:0'
+        ], [
+            'nama.required' => 'Nama menu harus diisi',
+            'kategori.required' => 'Kategori menu harus dipilih',
+            'harga.required' => 'Harga menu harus diisi',
+            'harga.numeric' => 'Harga menu harus berupa angka',
+            'harga.min' => 'Harga menu harus lebih besar dari 0'
+        ]);
+
+        $menu = Menu::findOrFail($id);
+        $menu->update($request->all());
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil diubah')->with('menu', [
+            'id' => $menu->id,
+            'nama' => $menu->nama,
+            'kategori' => $menu->kategori,
+            'harga' => $menu->harga
+        ]);
     }
 
     /**
@@ -71,6 +97,8 @@ class MenuController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $menu->delete();
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil dihapus');
     }
 }
