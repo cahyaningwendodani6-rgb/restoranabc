@@ -203,11 +203,9 @@
                                 </button>
                             </div>
                         </div>
-
+                    </form>
                 </div>
-
             </div>
-            </form>
 
             <!-- STRUK PESANAN -->
             @if (session('pesanan'))
