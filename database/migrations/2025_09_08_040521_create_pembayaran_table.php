@@ -9,16 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-{
-    Schema::create('pembayaran', function (Blueprint $table) {
-        $table->id();
-        $table->foreignId('pesanan_id')->constrained('pesanan')->onDelete('cascade');
-        $table->decimal('total', 12, 2);
-        $table->string('metode');
-        $table->timestamps();
-    });
-}
+    public function up(): void
+    {
+        Schema::create('pembayaran', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('pesanan_id');
+            $table->string('metode')->default('transfer'); // transfer / qris / cod
+            $table->string('bukti')->nullable(); // path upload bukti pembayaran
+            $table->string('status')->default('pending'); // pending / dibayar / gagal
+            $table->timestamps();
+
+            $table->foreign('pesanan_id')
+                ->references('id')->on('pesanan')
+                ->onDelete('cascade');
+        });
+    }
+
 
 
     /**

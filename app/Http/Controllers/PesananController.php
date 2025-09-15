@@ -19,14 +19,6 @@ class PesananController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -58,7 +50,7 @@ class PesananController extends Controller
             'telp' => $request->telp,
             'email' => $request->email,
             'alamat' => $request->alamat,
-            'metode_pembayaran' => $request->metode_pembayaran,
+            'metode_pembayaran' => strtolower($request->metode_pembayaran),
             'catatan' => $request->catatan,
             'total_harga' => $total,
         ]);
@@ -68,6 +60,12 @@ class PesananController extends Controller
             $jumlah = $request->jumlah[$key];
             $pesanan->menu()->attach($menuId, ['jumlah' => $jumlah]);
         }
+
+        // buat pembayaran default (pending)
+        $pesanan->pembayaran()->create([
+            'metode' => $request->metode_pembayaran,
+            'status' => 'pending'
+        ]);
 
         // redirect ke struk
         return redirect()->route('pesanan.struk', $pesanan->id)
@@ -81,22 +79,6 @@ class PesananController extends Controller
     {
         $pesanan = Pesanan::with('menu')->findOrFail($id);
         return view('pages.pesanan.show', compact('pesanan'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**
@@ -115,7 +97,7 @@ class PesananController extends Controller
     public function struk($id)
     {
         // Ambil pesanan beserta menu
-        $pesanan = Pesanan::with('menu')->findOrFail($id);
+        $pesanan = Pesanan::with('menu', 'pembayaran')->findOrFail($id);
 
         // Generate QRIS string dinamis berdasarkan ID & total harga
         $qrisString = "PESANAN|ID:{$pesanan->id}|TOTAL:{$pesanan->total_harga}";

@@ -72,17 +72,18 @@
 
                                 </td>
                             </tr>
+                            <form id="delete-form-{{ $item->id }}" action="{{ route('menu.destroy', $item->id) }}"
+                                method="POST" style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <form id="delete-form-{{ $item->id }}" action="{{ route('menu.destroy', $item->id) }}" method="POST"
-        style="display: none;">
-        @csrf
-        @method('DELETE')
-    </form>
+
 
 @endsection
 
