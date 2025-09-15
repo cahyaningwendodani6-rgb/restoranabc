@@ -77,16 +77,27 @@ class PembayaranController extends Controller
             'bukti' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $pembayaran = Pembayaran::findOrFail($id);
+        $pesanan = Pesanan::findOrFail($id);
 
-        $path = $request->file('bukti')->store('bukti', 'public');
-        $pembayaran->update([
-            'bukti' => $path,
-            'status' => 'pending',
-        ]);
+        // simpan file
+        $path = $request->file('bukti')->store('bukti_pembayaran', 'public');
 
-        return redirect()->route('pesanan.struk', $pembayaran->pesanan_id)
+        // update atau buat pembayaran
+        if ($pesanan->pembayaran) {
+            $pesanan->pembayaran->update([
+                'bukti' => $path,
+                'status' => 'pending',
+            ]);
+        } else {
+            $pesanan->pembayaran()->create([
+                'metode' => 'transfer',
+                'bukti' => $path,
+                'status' => 'pending',
+            ]);
+        }
+
+        return redirect()->route('pesanan.struk', $id)
             ->with('success', 'Bukti pembayaran berhasil diupload, menunggu verifikasi.');
     }
-
+    
 }

@@ -59,6 +59,21 @@
 
         <hr>
 
+        {{-- Form Upload Bukti Pembayaran --}}
+@if(!$pesanan->pembayaran)
+    <div class="mt-4">
+        <h5>Upload Bukti Pembayaran</h5>
+        <form action="{{ route('pembayaran.uploadBukti', $pesanan->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-3">
+                <input type="file" name="bukti" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Bayar</button>
+        </form>
+    </div>
+@endif
+
+
         {{-- Detail Pesanan --}}
         <h5>Detail Menu:</h5>
         <ul>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class FormPembayaranController extends Controller
 {
     public function index()
     {

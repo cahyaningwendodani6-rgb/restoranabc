@@ -10,10 +10,9 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\PesananController; 
 use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\FormPembayaranController;
 
 use App\Models\Pesanan;
-
 
 Route::get('/', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
 Route::post('/', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
@@ -69,16 +68,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/owner/profile', [App\Http\Controllers\OwnerController::class, 'editProfile'])->name('owner.profile');
     Route::put('/owner/profile', [App\Http\Controllers\OwnerController::class, 'updateProfile'])->name('owner.update');
 
-    Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment.index');
-    Route::get('/payment/{id}/verifikasi', [App\Http\Controllers\PaymentController::class, 'verifikasi'])->name('payment.verifikasi');
-    Route::get('/payment/{id}/batal', [App\Http\Controllers\PaymentController::class, 'batal'])->name('payment.batal');
+    Route::get('/form-pembayaran', [App\Http\Controllers\FormPembayaranController::class, 'index'])->name('form-pembayaran.index');
+    Route::get('/form-pembayaran/{id}/verifikasi', [App\Http\Controllers\FormPembayaranController::class, 'verifikasi'])->name('form-pembayaran.verifikasi');
+    Route::get('/form-pembayaran/{id}/batal', [App\Http\Controllers\FormPembayaranController::class, 'batal'])->name('form-pembayaran.batal');
 
     
 
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('payment.index');
-        Route::post('/payment/{id}/verifikasi', [App\Http\Controllers\PaymentController::class, 'verifikasi'])->name('payment.verifikasi');
-        Route::post('/payment/{id}/tolak', [App\Http\Controllers\PaymentController::class, 'tolak'])->name('payment.tolak');
+        Route::get('/form-pembayaran', [App\Http\Controllers\FormPembayaranController::class, 'index'])->name('form-pembayaran.index');
+        Route::post('/form-pembayaran/{id}/verifikasi', [App\Http\Controllers\FormPembayaranController::class, 'verifikasi'])->name('form-pembayaran.verifikasi');
+        Route::post('/form-pembayaran/{id}/tolak', [App\Http\Controllers\FormPembayaranController::class, 'tolak'])->name('form-pembayaran.tolak');
     });
 
     Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
