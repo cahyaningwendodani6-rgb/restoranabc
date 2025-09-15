@@ -71,6 +71,11 @@
                                         class="btn btn-sm btn-danger">Hapus</a>
 
                                 </td>
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('menu.destroy', $item->id) }}"
+                                    method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             </tr>
                         @endforeach
                     </tbody>
@@ -78,11 +83,7 @@
             </div>
         </div>
     </div>
-    <form id="delete-form-{{ $item->id }}" action="{{ route('menu.destroy', $item->id) }}" method="POST"
-        style="display: none;">
-        @csrf
-        @method('DELETE')
-    </form>
+
 
 @endsection
 
