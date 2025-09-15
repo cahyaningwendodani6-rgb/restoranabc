@@ -204,7 +204,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </iv>
             </div>
 
             <!-- STRUK PESANAN -->
