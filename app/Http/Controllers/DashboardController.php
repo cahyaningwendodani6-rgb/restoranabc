@@ -17,16 +17,16 @@ class DashboardController extends Controller
         $totalPesanan = Pesanan::count();
 
         // Ambil pendapatan dari tabel pembayaran
-        $pendapatan = Pembayaran::sum('total');
+        $pendapatan = Pesanan::sum('total_harga');
 
         $pesananTerbaru = Pesanan::with(['menu' => function ($q) {
             $q->distinct();
         }])->latest()->take(5)->get();
 
         // Data untuk grafik harian (ambil dari pembayaran, bukan pesanan)
-        $penjualanHarian = Pembayaran::select(
+        $penjualanHarian = Pesanan::select(
                 DB::raw('DATE(created_at) as tanggal'),
-                DB::raw('SUM(total) as total')
+                DB::raw('SUM(total_harga) as total')
             )
             ->groupBy('tanggal')
             ->orderBy('tanggal', 'ASC')

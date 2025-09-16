@@ -22,7 +22,7 @@
                 Dashboard
             </a>
         </li>
- 
+
         <li class="menu-item">
             <a href="{{ route('menu.index') }}" class="menu-link">
                 <!-- Bootstrap Icons CSS -->
@@ -42,7 +42,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="{{ route('pembayaran.terbaru') }}" class="menu-link">
+            <a href="{{ route('form-pembayaran.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bi bi-currency-dollar me-2"></i>
                 Pembayaran
             </a>

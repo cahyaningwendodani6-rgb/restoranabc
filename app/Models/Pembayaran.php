@@ -13,8 +13,9 @@ class Pembayaran extends Model
 
     protected $fillable = [
         'pesanan_id',
-        'total',
-        'metode'
+        'metode',
+        'bukti',
+        'status',
     ];
 
     public function pesanan()
