@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pesanan;
 use App\Models\Pembayaran;
+use App\Models\Pesanan;
+use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
     public function index()
     {
         $pembayaran = Pembayaran::with('pesanan')->orderBy('created_at', 'desc')->get();
+
         return view('pages.pembayaran.index', compact('pembayaran'));
     }
 
     public function form($id)
     {
         $pesanan = Pesanan::findOrFail($id);
+
         return view('pages.pembayaran.form', compact('pesanan'));
     }
 
@@ -37,7 +39,7 @@ class PembayaranController extends Controller
 
         $request->validate([
             'metode' => 'required|string',
-            'bukti' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'bukti' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         // kalau ada upload bukti (transfer)
@@ -50,13 +52,13 @@ class PembayaranController extends Controller
         if ($pesanan->pembayaran) {
             $pesanan->pembayaran->update([
                 'metode' => strtolower($request->metode),
-                'bukti'  => $buktiPath,
+                'bukti' => $buktiPath,
                 'status' => $buktiPath ? 'pending' : 'pending',
             ]);
         } else {
             $pesanan->pembayaran()->create([
                 'metode' => strtolower($request->metode),
-                'bukti'  => $buktiPath,
+                'bukti' => $buktiPath,
                 'status' => $buktiPath ? 'pending' : 'pending',
             ]);
         }
@@ -76,10 +78,17 @@ class PembayaranController extends Controller
     public function uploadBukti(Request $request, $id)
     {
         $request->validate([
-            'metode' => 'required|string'
+            'metode' => 'required|string',
+            'bukti' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $pesanan = Pesanan::findOrFail($id);
+
+        // Simpan file bukti ke storage/app/public/bukti_pembayaran
+        $buktiPath = null;
+        if ($request->hasFile('bukti')) {
+            $buktiPath = $request->file('bukti')->store('bukti_pembayaran', 'public');
+        }
 
         // Simpan pembayaran
         Pembayaran::create([
@@ -87,16 +96,17 @@ class PembayaranController extends Controller
             'nama_pemesan' => $pesanan->nama,
             'total' => $pesanan->total_harga,
             'metode' => $request->metode,
+            'bukti' => $buktiPath, // simpan path bukti ke kolom tabel
             'status' => 'pending',
         ]);
 
         // Update pesanan
         $pesanan->update([
-            'status' => 'Lunas'
+            'status' => 'Menunggu Verifikasi',
         ]);
 
-        return redirect()->route('pembayaran.form', $pesanan->id)
-            ->with('success', 'Pembayaran berhasil untuk pesanan #' . $pesanan->id);
+        return redirect()->route('pesanan.struk', $pesanan->id)
+            ->with('success', 'Bukti pembayaran berhasil diupload untuk pesanan #'.$pesanan->id);
     }
 
     public function tolak($id)
@@ -106,6 +116,4 @@ class PembayaranController extends Controller
 
         return back()->with('error', 'Pembayaran ditolak.');
     }
-
-
 }

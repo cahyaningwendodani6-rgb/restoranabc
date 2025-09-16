@@ -29,7 +29,7 @@ Route::get('/pesanan/{id}/bayar', function ($id) {
     return "Pembayaran untuk Pesanan #{$id} - Total Rp " . number_format($pesanan->total_harga, 0, ',', '.');
 });
 
-Route::post('/pembayaran/{id}/upload-bukti', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.uploadBukti');
+Route::post('/pembayaran/{id}/upload-bukti', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.store');
 
 
 Route::get('/pembayaran-terbaru', function () {

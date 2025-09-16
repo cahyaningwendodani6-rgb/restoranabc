@@ -53,8 +53,13 @@
                         <td>{{ $pembayaran->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                     </tr>
                 </table>
+
+
             </div>
 
+            <div class="mt-3">
+                <a href="{{ route('form-pembayaran.index') }}" class="btn btn-primary">Back</a>
+            </div>
         </div>
     </div>
 @endsection

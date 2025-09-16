@@ -66,7 +66,7 @@
         @if (!$pesanan->pembayaran)
             <div class="mt-4">
                 <h5>Upload Bukti Pembayaran</h5>
-                <form action="{{ route('pembayaran.uploadBukti', $pesanan->id) }}" method="POST"
+                <form action="{{ route('pembayaran.store', $pesanan->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="metode" value="{{ $pesanan->metode_pembayaran }}">
@@ -78,6 +78,7 @@
                 </form>
 
             </div>
+            <hr>
         @endif
 
         {{-- Detail Pesanan --}}
