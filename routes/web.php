@@ -2,26 +2,17 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\FormPesananController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\PesananController;
-use App\Http\Controllers\PembayaranController; 
 use App\Http\Controllers\LaporanController;
 use App\Models\Pesanan;
 
 
-=======
-use App\Models\Pesanan;
-
-
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\PesananController;
-
->>>>>>> d380b14c5173ed805dcc29279f42d278a5924170
 Route::get('/', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
 Route::post('/', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
 
