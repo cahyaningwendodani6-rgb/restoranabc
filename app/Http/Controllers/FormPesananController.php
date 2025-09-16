@@ -25,7 +25,7 @@ class FormPesananController extends Controller
             'telp' => 'required|max:20',
             'email' => 'nullable|email',
             'alamat' => 'required|string',
-            'menu_id' => 'required',
+            'menu' => 'required|array|min:1',
             'metode_pembayaran' => 'required',
             'total_harga' => 'required|numeric',
         ], [
@@ -34,7 +34,7 @@ class FormPesananController extends Controller
             'telp.required' => 'Nomor telepon harus diisi',
             'alamat.required' => 'Alamat harus diisi',
             'alamat.string' => 'Alamat harus berupa teks',
-            'menu_id.required' => 'Menu harus dipilih',
+            'menu.required' => 'Menu harus dipilih',
             'metode_pembayaran.required' => 'Metode pembayaran harus dipilih',
             'total_harga.required' => 'Total harga belum muncul sebelum kamu memilih menu',
         ]);
@@ -51,7 +51,11 @@ class FormPesananController extends Controller
         ]);
 
         // Simpan detail menu (pakai attach langsung)
-        $pesanan->menu()->attach($validated['menu_id']);
+        foreach ($request->menu as $menuData) {
+            $pesanan->menu()->attach($menuData['id'], [
+                'jumlah' => $menuData['jumlah'],
+            ]);
+        }
 
         // Setelah simpan → langsung redirect ke struk
         return redirect()->route('pesanan.struk', $pesanan->id);

@@ -139,12 +139,15 @@
                                             @foreach ($items as $item)
                                                 <div class="col-6">
                                                     <label>
-                                                        <input type="checkbox" class="menu-checkbox" name="menu_id[]"
-                                                            value="{{ $item->id }}"
+                                                        <input type="checkbox" name="menu[{{ $item->id }}][id]"
+                                                            class="menu-checkbox" value="{{ $item->id }}"
                                                             data-harga="{{ $item->harga }}">
                                                         {{ $item->nama }} - Rp
                                                         {{ number_format($item->harga, 0, ',', '.') }}
                                                     </label>
+                                                    <input type="number" name="menu[{{ $item->id }}][jumlah]"
+                                                        class="menu-jumlah" value="1" min="1" disabled
+                                                        style="width: 60px; margin-left:5px;">
                                                 </div>
                                             @endforeach
                                         @endforeach
@@ -204,44 +207,46 @@
                             </div>
                         </div>
                     </form>
-                </iv>
-            </div>
+                    </iv>
+                </div>
 
-            <!-- STRUK PESANAN -->
-            @if (session('pesanan'))
-                @php $pesanan = session('pesanan'); @endphp
-                <div class="card mt-4">
-                    <div class="card-body" style="max-width:400px; margin:auto; border:1px dashed #333;">
-                        <h5 class="text-center fw-bold">Struk Pesanan</h5>
-                        <hr>
-                        <p><strong>Nama:</strong> {{ $pesanan->nama }}</p>
-                        <p><strong>Telp:</strong> {{ $pesanan->telp }}</p>
-                        <p><strong>Alamat:</strong> {{ $pesanan->alamat }}</p>
-                        <hr>
-                        <h6>Pesanan:</h6>
-                        <ul>
-                            @foreach ($pesanan->menu as $menu)
-                                <li>{{ $menu->nama }} - Rp {{ number_format($menu->harga, 0, ',', '.') }}</li>
-                            @endforeach
-                        </ul>
-                        <hr>
-                        <p><strong>Total:</strong> Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</p>
-                        <p><strong>Metode Bayar:</strong> {{ $pesanan->metode_pembayaran }}</p>
+                <!-- STRUK PESANAN -->
+                @if (session('pesanan'))
+                    @php $pesanan = session('pesanan'); @endphp
+                    <div class="card mt-4">
+                        <div class="card-body" style="max-width:400px; margin:auto; border:1px dashed #333;">
+                            <h5 class="text-center fw-bold">Struk Pesanan</h5>
+                            <hr>
+                            <p><strong>Nama:</strong> {{ $pesanan->nama }}</p>
+                            <p><strong>Telp:</strong> {{ $pesanan->telp }}</p>
+                            <p><strong>Alamat:</strong> {{ $pesanan->alamat }}</p>
+                            <hr>
+                            <h6>Pesanan:</h6>
+                            <ul>
+                                @foreach ($pesanan->menu as $menu)
+                                    <li>{{ $menu->nama }} x {{ $menu->pivot->jumlah }}
+                                        - Rp {{ number_format($menu->harga * $menu->pivot->jumlah, 0, ',', '.') }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <hr>
+                            <p><strong>Total:</strong> Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</p>
+                            <p><strong>Metode Bayar:</strong> {{ $pesanan->metode_pembayaran }}</p>
 
-                        @if ($pesanan->metode_pembayaran == 'QRIS')
-                            <p>Scan QRIS untuk bayar:</p>
-                            <img src="{{ asset('img/qris.png') }}" alt="QRIS" width="150">
-                        @endif
+                            @if ($pesanan->metode_pembayaran == 'QRIS')
+                                <p>Scan QRIS untuk bayar:</p>
+                                <img src="{{ asset('img/qris.png') }}" alt="QRIS" width="150">
+                            @endif
 
-                        <div class="text-center mt-3">
-                            <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨 Cetak
-                                Struk</button>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨 Cetak
+                                    Struk</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
-    </div>
     </div>
     </div>
 
@@ -253,14 +258,24 @@
             function updateTotal() {
                 let total = 0;
                 checkboxes.forEach(cb => {
+                    let jumlahInput = cb.closest('div').querySelector('.menu-jumlah');
                     if (cb.checked) {
-                        total += parseInt(cb.getAttribute('data-harga'));
+                        jumlahInput.disabled = false;
+                        let jumlah = parseInt(jumlahInput.value) || 1;
+                        total += parseInt(cb.getAttribute('data-harga')) * jumlah;
+                    } else {
+                        jumlahInput.disabled = true;
                     }
                 });
                 totalInput.value = total;
             }
 
             checkboxes.forEach(cb => cb.addEventListener('change', updateTotal));
+
+            // Update juga ketika jumlah diubah
+            document.querySelectorAll('.menu-jumlah').forEach(input => {
+                input.addEventListener('input', updateTotal);
+            });
         });
     </script>
 </body>

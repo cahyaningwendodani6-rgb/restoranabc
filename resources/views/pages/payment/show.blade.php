@@ -8,8 +8,6 @@
             <h3 class="page-title">Detail Bukti Pembayaran</h3>
             <div class="card card-body p-0">
                 <table class="table table-striped">
-
-
                     <tr>
                         <th width="25%">ID</th>
                         <th width="10px">:</th>
@@ -46,6 +44,42 @@
                         </td>
                     </tr>
 
+                    <tr>
+                        <th width="25%">Menu Pesanan</th>
+                        <th width="10px">:</th>
+                        <td>
+                            @if ($pembayaran->pesanan->menu && $pembayaran->pesanan->menu->count())
+                                @foreach ($pembayaran->pesanan->menu as $menu)
+                                    {{ $menu->nama }} ({{ $menu->pivot->jumlah }} pcs)@if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            @else
+                                -
+                            @endif
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th width="25%">Total Harga</th>
+                        <th width="10px">:</th>
+                        <td>Rp
+                            {{ number_format(
+                                $pembayaran->pesanan->menu->sum(function ($m) {
+                                    return $m->harga * $m->pivot->jumlah;
+                                }),
+                                0,
+                                ',',
+                                '.',
+                            ) }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th width="25%">Catatan</th>
+                        <th width="10px">:</th>
+                        <td>{{ $pembayaran->catatan }}</td>
+                    </tr>
 
                     <tr>
                         <th width="25%">Memesan Pada</th>
@@ -53,8 +87,6 @@
                         <td>{{ $pembayaran->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                     </tr>
                 </table>
-
-
             </div>
 
             <div class="mt-3">
