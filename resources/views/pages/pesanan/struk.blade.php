@@ -93,6 +93,9 @@
 
         <hr>
         <p class="text-center text-muted small">Terima kasih telah memesan di <strong>Restoran ABC</strong></p>
+        <div class="text-center mt-3">
+            <a href="{{ route('formpesanan.index') }}" class="btn bg-black text-white">Pesan Lagi</a>
+        </div>
     </div>
 
     {{-- SweetAlert Notif --}}
