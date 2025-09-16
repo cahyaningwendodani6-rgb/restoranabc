@@ -99,6 +99,9 @@
                     </tr>
                 </table>
             </div>
+            <div class="mt-3">
+                <a href="{{ route('pesanan.index') }}" class="btn btn-primary">Back</a>
+            </div>
 
             {{-- Tambahan: QR Code + Cetak Struk --}}
             @if ($pesanan->metode_pembayaran != 'Transfer')

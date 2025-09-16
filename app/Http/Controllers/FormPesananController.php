@@ -59,11 +59,12 @@ class FormPesananController extends Controller
 
     public function struk($id)
     {
-        $pesanan = Pesanan::with('menu')->findOrFail($id);
+        $pesanan = Pesanan::with(['menu', 'pembayaran'])->findOrFail($id);
 
-        // QRIS string
+        // QRIS string simulasi (optional)
         $qrisString = "PESANAN|ID:{$pesanan->id}|TOTAL:{$pesanan->total_harga}";
 
         return view('pages.pesanan.struk', compact('pesanan', 'qrisString'));
     }
+
 }

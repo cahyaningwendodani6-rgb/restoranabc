@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\Pesanan;
 use Illuminate\Support\Facades\DB;
+use App\Models\Pembayaran;
 
 class DashboardController extends Controller
 {
@@ -14,12 +15,15 @@ class DashboardController extends Controller
         // Hitung ringkasan
         $totalMenu = Menu::count();
         $totalPesanan = Pesanan::count();
+
+        // Ambil pendapatan dari tabel pembayaran
         $pendapatan = Pesanan::sum('total_harga');
+
         $pesananTerbaru = Pesanan::with(['menu' => function ($q) {
             $q->distinct();
         }])->latest()->take(5)->get();
 
-        // Data untuk grafik harian
+        // Data untuk grafik harian (ambil dari pembayaran, bukan pesanan)
         $penjualanHarian = Pesanan::select(
                 DB::raw('DATE(created_at) as tanggal'),
                 DB::raw('SUM(total_harga) as total')
@@ -36,4 +40,7 @@ class DashboardController extends Controller
             'penjualanHarian'
         ));
     }
+    
 }
+
+

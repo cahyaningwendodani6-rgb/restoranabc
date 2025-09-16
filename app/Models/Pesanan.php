@@ -31,7 +31,7 @@ class Pesanan extends Model
 
     public function pembayaran()
     {
-         return $this->hasOne(Pembayaran::class, 'pesanan_id');
+         return $this->hasOne(Pembayaran::class, 'pesanan_id', 'id');
     }
 
 }

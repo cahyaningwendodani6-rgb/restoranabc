@@ -28,17 +28,21 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>#{{ $item->pesanan_id }}</td>
                                 <td>{{ $item->pesanan->nama ?? '-' }}</td>
-                                <td>Rp {{ number_format($item->total, 0, ',', '.') }}</td>
-                                <td>{{ $item->metode ?? '-' }}</td>
+                                <td>Rp {{ number_format($item->pesanan->total_harga, 0, ',', '.') }}</td>
+                                <td>{{ strtoupper($item->metode) ?? '-' }}</td>
                                 <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                 <td>
-                                    @if (!$item->metode)
+                                    @if ($item->status == 'pending')
+                                        <span class="badge bg-warning text-dark">Menunggu Verifikasi</span>
+                                    @elseif ($item->status == 'dibayar')
+                                        <span class="badge bg-success">Lunas</span>
+                                    @elseif ($item->status == 'ditolak')
+                                        <span class="badge bg-danger">Ditolak</span>
+                                    @else
                                         <a href="{{ route('pembayaran.form', $item->pesanan_id) }}" class="btn btn-sm"
                                             style="background-color:#222; color:white; font-weight:500;">
                                             Bayar
                                         </a>
-                                    @else
-                                        <span class="text-success">Lunas</span>
                                     @endif
                                 </td>
                             </tr>
