@@ -53,7 +53,7 @@
                                     <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
                                 </form>
                             @else
-                                <span class="text-muted">-</span>
+                                <span class="text-muted"></span>
                             @endif
 
                             <form action="{{ route('admin.form-pembayaran.show', $p->id) }}" method="POST"

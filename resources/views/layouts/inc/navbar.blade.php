@@ -16,7 +16,7 @@
                     <div class="avatar avatar-online">
                         <img src="{{ auth()->check() && auth()->user()->profile_photo
                             ? asset(auth()->user()->profile_photo)
-                            : asset('img/avatars/profil.jpeg') }}"
+                            : asset('img/avatars/org.jpg') }}"
                             alt="Foto Profil" class="rounded-circle" />
                     </div>
                     <span class="fw-medium">{{ auth()->user()->name ?? 'Guest' }}</span>

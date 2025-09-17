@@ -63,11 +63,21 @@
         <div class="row justify-content-center py-5">
             <div class="col-md-7">
                 <div class="card card-body">
-                    <h5 class=" mb-0 fw-bold text-center">
-                        Halaman Pelanggan
-                    </h5>
+                    <!-- Logo -->
+                        <div class="app-brand justify-content-center mb-2">
+                            <a href="index.html" class="app-brand-link">
+                                <span class="app-brand-logo demo">
+                                    <img src="{{ asset('img/logo-restoran.jpg') }}" alt="Logo Resto ABC"
+                                        height="40">
+                                </span>
+                                <span class="app-brand-text demo text-heading fw-bold">Resto ABC</span>
+                            </a>
+                        </div>
+                        <!-- /Logo -->
+                        <h6 class="mb-1 text-center">Selamat Datang! 👋</h6>
+                        <p class="mb-6 text-center">Silahkan isi form untuk memesan</p>
 
-                    <hr />
+                    <hr class="opacity-100" style="color:#000;" />
                     <!-- Notifikasi sukses -->
                     @if (session('success'))
                         <div class="alert alert-success">

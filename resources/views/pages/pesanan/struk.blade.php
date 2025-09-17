@@ -93,6 +93,13 @@
 
         <hr>
         <p class="text-center text-muted small">Terima kasih telah memesan di <strong>Restoran ABC</strong></p>
+        {{-- Tombol Pesan Lagi muncul setelah upload bukti pembayaran --}}
+        @if ($pesanan->pembayaran)
+            <div class="text-center mt-3">
+                <a href="{{ route('formpesanan.index') }}" class="btn bg-black text-white">Pesan Lagi</a>
+            </div>
+        @endif
+
     </div>
 
     {{-- SweetAlert Notif --}}
