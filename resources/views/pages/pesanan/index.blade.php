@@ -36,7 +36,7 @@
                                 <td>{{ $item->telp }}</td>
                                 <td>
                                     @foreach ($item->menu as $menu)
-                                        {{ $menu->nama }}@if (!$loop->last)
+                                        {{ $menu->nama }} x {{ $menu->pivot->jumlah }}@if (!$loop->last)
                                             ,
                                         @endif
                                     @endforeach

@@ -44,7 +44,8 @@
                         <td>
                             @if ($pesanan->menu && $pesanan->menu->count())
                                 @foreach ($pesanan->menu as $menu)
-                                    {{ $menu->nama }}@if (!$loop->last)
+                                    {{ $menu->nama }}  {{ $menu->pivot->jumlah }} pcs
+                                    @if (!$loop->last)
                                         ,
                                     @endif
                                 @endforeach
