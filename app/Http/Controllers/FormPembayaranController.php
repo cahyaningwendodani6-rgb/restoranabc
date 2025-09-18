@@ -22,14 +22,15 @@ class FormPembayaranController extends Controller
         return redirect()->back()->with('success', 'Pembayaran sudah diverifikasi.');
     }
 
-    public function batal($id)
+    public function tolak($id)
     {
         $pembayaran = Pembayaran::findOrFail($id);
+        $pembayaran->status = 'gagal';
+        $pembayaran->save();
 
-        $pembayaran->update(['status' => 'gagal']);
-
-        return redirect()->back()->with('success', 'Pembayaran ditolak.');
+        return redirect()->back()->with('error', 'Pembayaran ditolak dan tidak dihitung ke dashboard!');
     }
+
 
     public function store(Request $request, $pesananId)
     {

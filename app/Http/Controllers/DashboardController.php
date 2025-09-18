@@ -2,45 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Menu;
-use App\Models\Pesanan;
-use Illuminate\Support\Facades\DB;
 use App\Models\Pembayaran;
+use App\Models\Pesanan;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Hitung ringkasan
         $totalMenu = Menu::count();
-        $totalPesanan = Pesanan::count();
 
-        // Ambil pendapatan dari tabel pembayaran
-        $pendapatan = Pesanan::sum('total_harga');
+        // Hanya pesanan dengan pembayaran sukses yang dihitung
+        $totalPesanan = Pesanan::whereHas('pembayaran', function ($q) {
+            $q->where('status', 'dibayar');
+        })->count();
 
-        $pesananTerbaru = Pesanan::with(['menu' => function ($q) {
-            $q->distinct();
-        }])->latest()->take(5)->get();
+        $pendapatan = Pesanan::whereHas('pembayaran', function ($q) {
+            $q->where('status', 'dibayar');
+        })->with('menu')->get()->sum(function ($pesanan) {
+            return $pesanan->menu->sum(function ($m) {
+                return $m->pivot->jumlah * $m->harga;
+            });
+        });
 
-        // Data untuk grafik harian (ambil dari pembayaran, bukan pesanan)
-        $penjualanHarian = Pesanan::select(
-                DB::raw('DATE(created_at) as tanggal'),
-                DB::raw('SUM(total_harga) as total')
-            )
+        // Penjualan harian
+        $penjualanHarian = Pesanan::whereHas('pembayaran', function ($q) {
+            $q->where('status', 'dibayar');
+        })
+            ->selectRaw('DATE(created_at) as tanggal, SUM(total_harga) as total')
             ->groupBy('tanggal')
-            ->orderBy('tanggal', 'ASC')
+            ->orderBy('tanggal', 'asc')
             ->get();
+
+        // Pesanan terbaru (hanya yang berhasil bayar)
+        $pesananTerbaru = Pesanan::whereHas('pembayaran', function ($q) {
+            $q->where('status', 'dibayar');
+        })->latest()->take(5)->get();
 
         return view('pages.dashboard.index', compact(
             'totalMenu',
             'totalPesanan',
             'pendapatan',
-            'pesananTerbaru',
-            'penjualanHarian'
+            'penjualanHarian',
+            'pesananTerbaru'
         ));
     }
-    
 }
-
-
