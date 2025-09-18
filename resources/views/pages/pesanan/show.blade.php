@@ -108,6 +108,8 @@
                                 <span class="badge bg-warning">Pending</span>
                             @elseif($pesanan->status == 'diproses')
                                 <span class="badge bg-primary">Diproses</span>
+                            @elseif($pesanan->status == 'diantar')
+                                <span class="badge bg-secondary">Diantar</span>
                             @elseif($pesanan->status == 'selesai')
                                 <span class="badge bg-success">Selesai</span>
                             @else
@@ -130,6 +132,7 @@
                     <select name="status" id="status" class="form-select w-auto">
                         <option value="pending" {{ $pesanan->status == 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="diproses" {{ $pesanan->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                        <option value="diantar" {{ $pesanan->status == 'diantar' ? 'selected' : '' }}>Diantar</option>
                         <option value="selesai" {{ $pesanan->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
                         <option value="batal" {{ $pesanan->status == 'batal' ? 'selected' : '' }}>Batal</option>
                     </select>

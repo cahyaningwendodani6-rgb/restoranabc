@@ -19,6 +19,8 @@
                 <span class="badge bg-warning">Pending</span>
             @elseif($pesanan->status == 'diproses')
                 <span class="badge bg-primary">Diproses</span>
+            @elseif($pesanan->status == 'diantar')
+                <span class="badge bg-secondary">Diantar</span>
             @elseif($pesanan->status == 'selesai')
                 <span class="badge bg-success">Selesai</span>
             @else
