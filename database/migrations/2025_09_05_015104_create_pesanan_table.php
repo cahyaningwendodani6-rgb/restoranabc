@@ -22,6 +22,7 @@ return new class extends Migration
             ]);
             $table->text('catatan')->nullable();             
             $table->decimal('total_harga', 10, 2)->default(0); 
+            $table->string('status')->default('pending');
             $table->timestamps();  
         });
     }
@@ -31,6 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pesanan');
+         Schema::table('pesanan', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };

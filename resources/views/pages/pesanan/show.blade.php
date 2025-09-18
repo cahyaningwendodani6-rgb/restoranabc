@@ -44,7 +44,7 @@
                         <td>
                             @if ($pesanan->menu && $pesanan->menu->count())
                                 @foreach ($pesanan->menu as $menu)
-                                    {{ $menu->nama }}  {{ $menu->pivot->jumlah }} pcs
+                                    {{ $menu->nama }} {{ $menu->pivot->jumlah }} pcs
                                     @if (!$loop->last)
                                         ,
                                     @endif
@@ -98,11 +98,58 @@
                         <th width="10px">:</th>
                         <td>{{ $pesanan->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
                     </tr>
+
+                    <tr>
+                        <th width="25%">Status</th>
+                        <th width="10px">:</th>
+                        <td>
+                            {{-- Tampilkan badge status --}}
+                            @if ($pesanan->status == 'pending')
+                                <span class="badge bg-warning">Pending</span>
+                            @elseif($pesanan->status == 'diproses')
+                                <span class="badge bg-primary">Diproses</span>
+                            @elseif($pesanan->status == 'selesai')
+                                <span class="badge bg-success">Selesai</span>
+                            @else
+                                <span class="badge bg-danger">Batal</span>
+                            @endif
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div class="mt-3">
                 <a href="{{ route('pesanan.index') }}" class="btn btn-primary">Back</a>
             </div>
+
+            {{-- Form Update Status (khusus admin) --}}
+            <div class="mt-3">
+                <form action="{{ route('pesanan.updateStatus', $pesanan->id) }}" method="POST"
+                    class="d-flex align-items-center gap-2">
+                    @csrf
+                    <label for="status" class="form-label me-2">Ubah Status:</label>
+                    <select name="status" id="status" class="form-select w-auto">
+                        <option value="pending" {{ $pesanan->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="diproses" {{ $pesanan->status == 'diproses' ? 'selected' : '' }}>Diproses</option>
+                        <option value="selesai" {{ $pesanan->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                        <option value="batal" {{ $pesanan->status == 'batal' ? 'selected' : '' }}>Batal</option>
+                    </select>
+                    <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+
+            {{-- Tambahan: QR Code + Cetak Struk --}}
+            @if ($pesanan->metode_pembayaran != 'Transfer')
+                <div class="card card-body text-center mt-3">
+                    <h5>QR Pembayaran</h5>
+                    {!! QrCode::size(200)->generate(
+                        'Pesanan #' . $pesanan->id . ' - Rp' . number_format($pesanan->menu->sum('harga') ?? 0, 0, ',', '.'),
+                    ) !!}
+                    <hr>
+                    <button onclick="window.print()" class="btn btn-success">
+                        <span class="ti ti-printer"></span> Cetak Struk
+                    </button>
+                </div>
+            @endif
 
             {{-- Tambahan: QR Code + Cetak Struk --}}
             @if ($pesanan->metode_pembayaran != 'Transfer')

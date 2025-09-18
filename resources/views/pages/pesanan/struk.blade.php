@@ -34,6 +34,18 @@
                 <span class="badge bg-secondary">Belum Bayar</span>
             @endif
         </p>
+        <p><strong>Status Pesanan:</strong>
+            @if ($pesanan->status == 'pending')
+                <span class="badge bg-warning">Pending</span>
+            @elseif($pesanan->status == 'diproses')
+                <span class="badge bg-primary">Diproses</span>
+            @elseif($pesanan->status == 'selesai')
+                <span class="badge bg-success">Selesai</span>
+            @else
+                <span class="badge bg-danger">Batal</span>
+            @endif
+        </p>
+
 
         <hr>
 
@@ -93,10 +105,11 @@
 
         <hr>
         <p class="text-center text-muted small">Terima kasih telah memesan di <strong>Restoran ABC</strong></p>
-        {{-- Tombol Pesan Lagi muncul setelah upload bukti pembayaran --}}
+
         @if ($pesanan->pembayaran)
             <div class="text-center mt-3">
                 <a href="{{ route('formpesanan.index') }}" class="btn bg-black text-white">Pesan Lagi</a>
+
             </div>
         @endif
 

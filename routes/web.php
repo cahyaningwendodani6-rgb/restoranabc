@@ -1,18 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\FormPesananController;
-use App\Http\Controllers\PesananController; 
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\FormPembayaranController;
-
+use App\Http\Controllers\PesananController;
 use App\Models\Pesanan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
 Route::post('/', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
@@ -26,33 +19,34 @@ Route::get('/pesanan/{id}/struk', [App\Http\Controllers\PesananController::class
 
 Route::get('/pesanan/{id}/bayar', function ($id) {
     $pesanan = \App\Models\Pesanan::findOrFail($id);
-    return "Pembayaran untuk Pesanan #{$id} - Total Rp " . number_format($pesanan->total_harga, 0, ',', '.');
+
+    return "Pembayaran untuk Pesanan #{$id} - Total Rp ".number_format($pesanan->total_harga, 0, ',', '.');
 });
 
 Route::post('/pembayaran/{id}/upload-bukti', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.store');
 
-
 Route::get('/pembayaran-terbaru', function () {
     $pesanan = Pesanan::latest()->first();
 
-    if (!$pesanan) {
+    if (! $pesanan) {
         return redirect()->route('pembayaran.index')->with('error', 'Belum ada pesanan.');
     }
 
     return redirect()->route('pembayaran.form', $pesanan->id);
 })->name('pembayaran.terbaru');
 
-
+Route::get('/pesanan/{id}/status', [App\Http\Controllers\PesananController::class, 'showStatus'])->name('pesanan.status');
+Route::post('/pesanan/{id}/status', [App\Http\Controllers\PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 
 Auth::routes([
     'register' => false,
     'reset' => false,
     'verify' => false,
-    'confirm' => false
+    'confirm' => false,
 ]);
 
 Route::group(['middleware' => ['auth']], function () {
-    
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/home', function () {
         return redirect()->route('dashboard'); // arahkan ke dashboard
@@ -72,8 +66,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/form-pembayaran/{id}/verifikasi', [App\Http\Controllers\FormPembayaranController::class, 'verifikasi'])->name('form-pembayaran.verifikasi');
     Route::get('/form-pembayaran/{id}/batal', [App\Http\Controllers\FormPembayaranController::class, 'batal'])->name('form-pembayaran.batal');
 
-    
-
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/form-pembayaran', [App\Http\Controllers\FormPembayaranController::class, 'index'])->name('form-pembayaran.index');
         Route::post('/form-pembayaran/{id}/verifikasi', [App\Http\Controllers\FormPembayaranController::class, 'verifikasi'])->name('form-pembayaran.verifikasi');
@@ -83,5 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/{tanggal}', [App\Http\Controllers\LaporanController::class, 'detail'])->name('laporan.detail');
+
+    Route::get('/admin/pesanan', [PesananController::class, 'indexAdmin'])->name('admin.pesanan.index');
+    Route::post('/admin/pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('admin.pesanan.updateStatus');
 
 });

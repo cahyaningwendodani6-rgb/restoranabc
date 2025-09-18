@@ -107,4 +107,32 @@ class PesananController extends Controller
         return redirect()->route('pesanan.struk', $pesanan->id)
                         ->with('success', 'Pesanan berhasil dibuat.');
     }
+
+    // Pelanggan lihat status pesanan
+    public function showStatus($id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+        return view('pesanan.status', compact('pesanan'));
+    }
+
+    // Admin update status
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,diproses,selesai,batal'
+        ]);
+
+        $pesanan = Pesanan::findOrFail($id);
+        $pesanan->status = $request->status;
+        $pesanan->save();
+
+        return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui.');
+    }
+
+    public function indexAdmin()
+    {
+        $pesanan = \App\Models\Pesanan::with('menu')->latest()->get();
+        return view('admin.pesanan.index', compact('pesanan'));
+    }
+
 }
