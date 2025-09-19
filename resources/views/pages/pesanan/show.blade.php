@@ -58,7 +58,18 @@
                     <tr>
                         <th width="25%">Total Harga</th>
                         <th width="10px">:</th>
-                        <td>Rp {{ number_format($pesanan->menu->sum('harga') ?? 0, 0, ',', '.') }}</td>
+                        <td>
+                            Rp
+                            {{ number_format(
+                                $pesanan->menu->sum(function ($menu) {
+                                    return $menu->pivot->jumlah * $menu->harga;
+                                }),
+                                0,
+                                ',',
+                                '.',
+                            ) }}
+                        </td>
+
                     </tr>
 
                     <tr>
