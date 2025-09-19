@@ -119,7 +119,7 @@ class PesananController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,diproses,selesai,batal'
+            'status' => 'required|in:pending,diproses,diantar,selesai,batal'
         ]);
 
         $pesanan = Pesanan::findOrFail($id);
