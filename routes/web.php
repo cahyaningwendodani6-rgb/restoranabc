@@ -6,9 +6,13 @@ use App\Http\Controllers\PesananController;
 use App\Models\Pesanan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
-Route::post('/', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/form-pesanan', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
+
+Route::post('/store', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
 
 Route::get('/pembayaran/{id}', [PembayaranController::class, 'showForm'])->name('pembayaran.form');
 Route::post('/pembayaran/{id}', [PembayaranController::class, 'store'])->name('pembayaran.store');
