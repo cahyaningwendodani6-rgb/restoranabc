@@ -110,7 +110,7 @@
 
         @if ($pesanan->pembayaran)
             <div class="text-center mt-3">
-                <a href="{{ route('formpesanan.index') }}" class="btn bg-black text-white">Pesan Lagi</a>
+                <a href="{{ route('landing') }}" class="btn bg-black text-white">Pesan Lagi</a>
 
             </div>
         @endif
