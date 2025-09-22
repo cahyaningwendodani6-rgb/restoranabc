@@ -31,6 +31,8 @@
                                 </option>
                                 <option value="Minuman" {{ old('kategori') == 'Minuman' ? 'selected' : '' }}>Minuman
                                 </option>
+                                <option value="Camilan" {{ old('kategori') == 'Camilan' ? 'selected' : '' }}>Camilan
+                                </option>
                             </select>
                             @error('kategori')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -44,7 +46,7 @@
                             @error('harga')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                        </div> 
+                        </div>
 
 
                         <button type="submit" class="btn btn-primary">Simpan</button>

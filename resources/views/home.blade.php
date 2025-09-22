@@ -167,10 +167,10 @@
 
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Fish Crispy Teriyaki Bowl</h4>
-                                    <h4 class="price">Rp30.000</h4>
+                                    <h4 class="name">Teriyaki Salmon Bowl</h4>
+                                    <h4 class="price">Rp45.000</h4>
                                 </div>
-                                <p>Ikan crispy dengan saus teriyaki.</p>
+                                <p>Ikan salmon dengan saus teriyaki.</p>
                             </div>
 
                             <div class="single-dish">
@@ -468,7 +468,7 @@
 
             <div class="row">
                 <!-- reservation form -->
-                <div class="col-md-6 col-md-offset-1 col-sm-10 col-sm-offset-1">
+                <div class="col-md-10 col-md-offset-1 col-sm-12">
 
                     <form action="{{ route('formpesanan.store') }}" method="POST" class="reserve-form row">
                         @csrf
