@@ -114,7 +114,7 @@
 
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Beef Blackpepper Bowl</h4>
+                                    <h4 class="name">Beef Black Pepper Bowl</h4>
                                     <h4 class="price">Rp32.000</h4>
                                 </div>
                                 <p>Daging sapi dengan saus lada hitam.</p>
@@ -127,6 +127,40 @@
                                 </div>
                                 <p>Ayam crispy dengan saus telur asin.</p>
                             </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Ayam Geprek Keju Mozarella</h4>
+                                    <h4 class="price">Rp28.000</h4>
+                                </div>
+                                <p>Ayam geprek pedas gurih dengan lelehan keju mozarella yang nikmat.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Sup Ayam Hangat</h4>
+                                    <h4 class="price">Rp20.000</h4>
+                                </div>
+                                <p>Sup ayam hangat dengan kuah gurih dan segar.</p>
+                            </div>
+
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Nasi Goreng Spesial</h4>
+                                    <h4 class="price">Rp24.000</h4>
+                                </div>
+                                <p>Nasi goreng dengan bumbu spesial, dilengkapi telur, ayam, dan sayuran segar.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Lasagna Cheese Melt</h4>
+                                    <h4 class="price">Rp35.000</h4>
+                                </div>
+                                <p>Lasagna lembut dengan lelehan keju melimpah.</p>
+                            </div>
+
 
                         </div>
                         <div class="col-md-6">
@@ -141,6 +175,14 @@
 
                             <div class="single-dish">
                                 <div class="single-dish-heading">
+                                    <h4 class="name">Mix Bowl (Ayam + Telur + Sayur)</h4>
+                                    <h4 class="price">Rp28.000</h4>
+                                </div>
+                                <p>Perpaduan ayam lembut, telur gurih, dan sayuran segar dalam satu mangkuk.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
                                     <h4 class="name">Mie Goreng Spicy</h4>
                                     <h4 class="price">Rp22.000</h4>
                                 </div>
@@ -149,11 +191,38 @@
 
                             <div class="single-dish">
                                 <div class="single-dish-heading">
+                                    <h4 class="name">Mie Kuah Pedas</h4>
+                                    <h4 class="price">Rp23.000</h4>
+                                </div>
+                                <p>Mie hangat dengan kuah pedas gurih.</p>
+                            </div>
+
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
                                     <h4 class="name">Spaghetti Bolognese</h4>
                                     <h4 class="price">Rp28.000</h4>
                                 </div>
                                 <p>Pasta dengan saus tomat daging cincang.</p>
                             </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Spaghetti Carbonara</h4>
+                                    <h4 class="price">Rp30.000</h4>
+                                </div>
+                                <p>Spaghetti creamy dengan saus carbonara gurih.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Sate Ayam Madura</h4>
+                                    <h4 class="price">Rp22.000</h4>
+                                </div>
+                                <p>Sate ayam empuk dengan bumbu kacang khas Madura.</p>
+                            </div>
+
+
                         </div>
                     </div>
 
@@ -175,6 +244,47 @@
                                 </div>
                                 <p>Jeruk peras asli tanpa pengawet.</p>
                             </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Es Kopi Susu Gula Aren</h4>
+                                    <h4 class="price">Rp20.000</h4>
+                                </div>
+                                <p>Kopi susu dingin dengan manis legit gula aren.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Matcha Latte</h4>
+                                    <h4 class="price">Rp22.000</h4>
+                                </div>
+                                <p>Minuman matcha creamy dengan aroma teh hijau khas Jepang.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Thai Tea</h4>
+                                    <h4 class="price">Rp18.000</h4>
+                                </div>
+                                <p>Teh ala Thailand dengan rasa manis dan creamy.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Chocolate Ice/Hot</h4>
+                                    <h4 class="price">Rp18.000</h4>
+                                </div>
+                                <p>Minuman cokelat nikmat, bisa disajikan dingin atau panas.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Taro Latte</h4>
+                                    <h4 class="price">Rp20.000</h4>
+                                </div>
+                                <p>Minuman taro ungu manis dengan rasa creamy yang lembut.</p>
+                            </div>
+
                         </div>
 
                         <div class="col-md-6">
@@ -192,6 +302,47 @@
                                     <h4 class="price">Rp18.000</h4>
                                 </div>
                                 <p>Kopi dengan campuran susu dan foam lembut.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Jus Alpukat</h4>
+                                    <h4 class="price">Rp20.000</h4>
+                                </div>
+                                <p>Jus alpukat segar dengan rasa lembut dan creamy.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Jus Mangga</h4>
+                                    <h4 class="price">Rp18.000</h4>
+                                </div>
+                                <p>Jus mangga manis segar dari buah pilihan.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Jus Stroberi</h4>
+                                    <h4 class="price">Rp18.000</h4>
+                                </div>
+                                <p>Jus stroberi segar dengan rasa manis asam alami.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Mineral Water</h4>
+                                    <h4 class="price">Rp6.000</h4>
+                                </div>
+                                <p>Air mineral murni untuk menyegarkan hari Anda.</p>
+                            </div>
+
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Lemon Tea</h4>
+                                    <h4 class="price">Rp12.000</h4>
+                                </div>
+                                <p>Teh segar dengan perasan lemon alami.</p>
                             </div>
                         </div>
                     </div>
@@ -214,6 +365,41 @@
                                 </div>
                                 <p>Sayap ayam goreng dengan saus pilihan.</p>
                             </div>
+
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Pisang Goreng Cokelat Keju</h4>
+                                    <h4 class="price">Rp18.000</h4>
+                                </div>
+                                <p>Pisang goreng manis dengan topping cokelat dan keju.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Roti Bakar Cokelat</h4>
+                                    <h4 class="price">Rp15.000</h4>
+                                </div>
+                                <p>Roti bakar hangat dengan olesan cokelat manis.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Cireng Bumbu Rujak</h4>
+                                    <h4 class="price">Rp15.000</h4>
+                                </div>
+                                <p>Cireng gurih disajikan dengan bumbu rujak pedas manis.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Martabak Mini Manis</h4>
+                                    <h4 class="price">Rp20.000</h4>
+                                </div>
+                                <p>Martabak mini lembut dengan aneka topping manis.</p>
+                            </div>
+
+
                         </div>
 
                         <div class="col-md-6">
@@ -224,6 +410,49 @@
                                 </div>
                                 <p>Bawang bombay goreng crispy.</p>
                             </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Sosis Bakar</h4>
+                                    <h4 class="price">Rp15.000</h4>
+                                </div>
+                                <p>Sosis panggang dengan bumbu spesial.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Tahu Crispy</h4>
+                                    <h4 class="price">Rp12.000</h4>
+                                </div>
+                                <p>Tahu goreng renyah dengan rasa gurih.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Tempe Mendoan</h4>
+                                    <h4 class="price">Rp12.000</h4>
+                                </div>
+                                <p>Tempe goreng tipis dengan balutan tepung gurih.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Bakwan Jagung</h4>
+                                    <h4 class="price">Rp12.000</h4>
+                                </div>
+                                <p>Gorengan jagung renyah dengan rasa gurih manis.</p>
+                            </div>
+
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Lumpia Sayur</h4>
+                                    <h4 class="price">Rp12.000</h4>
+                                </div>
+                                <p>Lumpia renyah berisi sayuran segar.</p>
+                            </div>
+
+
                         </div>
                     </div>
 
