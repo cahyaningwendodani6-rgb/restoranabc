@@ -90,7 +90,7 @@
             </div>
 
             <div class="mt-3">
-                <a href="{{ route('form-pembayaran.index') }}" class="btn btn-primary">Back</a>
+                <a href="{{ route('admin.form-pembayaran.index') }}" class="btn btn-primary">Back</a>
             </div>
         </div>
     </div>
