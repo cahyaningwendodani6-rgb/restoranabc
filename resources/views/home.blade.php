@@ -11,8 +11,7 @@
             <div class="col-md-10 col-md-offset-1 text-center">
                 <div class="home-content">
                     <h1 class="white-text">Selamat Datang di Restoran ABC</h1>
-                    <h4 class="white-text lead">Nec solet elaboraret eu, ea usu vidit accusam. Ea per legimus singulis
-                        percipitur...</h4>
+                    <h4 class="white-text lead">"Nikmati Hidangan Lezat, Pesan Praktis, Rasa Tak Terlupakan."</h4>
                     <a href="#menu"><button class="main-button">Temukan Menu</button></a>
                 </div>
             </div>
@@ -24,16 +23,30 @@
         <div class="container">
             <div class="row">
                 <div class="section-header text-center">
-                    <h4 class="sub-title">About Us</h4>
-                    <h2 class="title">The Risotto Restaurant</h2>
+                    <h4 class="sub-title">Tentang Kami</h4>
+                    <h2 class="title">Restoran ABC</h2>
                 </div>
 
                 <div class="col-md-5">
-                    <h4 class="lead">Welcome to Risotto Restaurant. Since 1988...</h4>
+                    <h4 class="lead">Selamat datang di Restoran ABC! Sejak 2025, kami hadir dengan hidangan modern,
+                        praktis, dan lezat yang siap Anda pesan dan nikmati kapan saja, di mana saja.</h4>
                 </div>
 
                 <div class="col-md-7">
-                    <p>Te sit stet labitur veritus, sea similique consetetur ut...</p>
+                    <p>Restoran ABC adalah restoran modern yang menghadirkan beragam hidangan lezat dengan konsep praktis
+                        dan kekinian. Mengusung semangat “Good Food, Easy Life”, kami menyajikan menu favorit seperti rice
+                        bowl, mie, pasta, camilan, hingga minuman kekinian yang diracik dengan bahan segar dan berkualitas.
+                    </p>
+                    <p>
+                        Dengan layanan online dan delivery yang cepat, pelanggan dapat menikmati hidangan Restoran ABC kapan
+                        saja dan di mana saja, cukup dengan sekali klik. Setiap menu dikemas rapi dan higienis sehingga
+                        tetap nikmat meski dinikmati di rumah, kantor, atau saat perjalanan.
+                    </p>
+                    <p>
+                        Restoran ABC menjadi pilihan tepat bagi mahasiswa, pekerja kantoran, hingga keluarga modern yang
+                        ingin menikmati makanan enak, praktis, dan terjangkau. Kami percaya, makanan bukan hanya soal rasa,
+                        tapi juga tentang pengalaman yang hangat dan menyenangkan.
+                    </p>
                 </div>
 
                 <div class="col-md-12">
@@ -73,133 +86,152 @@
         <div class="container">
             <div class="row">
                 <div class="section-header text-center">
-                    <h4 class="sub-title">Discover</h4>
-                    <h2 class="title white-text">Our Menu</h2>
+                    <h4 class="sub-title">Temukan</h4>
+                    <h2 class="title white-text">Menu Kami</h2>
                 </div>
 
                 <ul class="menu-nav">
-                    <li class="active"><a data-toggle="tab" href="#menu1">Dinner</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Drinks</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Launch</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Dessert</a></li>
+                    <li class="active"><a data-toggle="tab" href="#makanan">Makanan</a></li>
+                    <li><a data-toggle="tab" href="#minuman">Minuman</a></li>
+                    <li><a data-toggle="tab" href="#camilan">Camilan</a></li>
                 </ul>
 
                 <div id="menu-content" class="tab-content">
-                    <div id="menu1" class="tab-pane fade in active">
-                        {{-- contoh dish --}}
+
+                    {{-- Tab Makanan --}}
+                    <div id="makanan" class="tab-pane fade in active">
                         <div class="col-md-6">
 
                             <!-- single dish -->
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Basted Rhubarb Mussels</h4>
-                                    <h4 class="price">57£</h4>
+                                    <h4 class="name">Chicken Sambal Matah Bowl</h4>
+                                    <h4 class="price">Rp25.000</h4>
                                 </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
+                                <p>Ayam goreng dengan sambal matah khas Bali.</p>
                             </div>
                             <!-- /single dish -->
 
-                            <!-- single dish -->
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Steamed Chili Moussaka</h4>
-                                    <h4 class="price">145£</h4>
+                                    <h4 class="name">Beef Blackpepper Bowl</h4>
+                                    <h4 class="price">Rp32.000</h4>
                                 </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
+                                <p>Daging sapi dengan saus lada hitam.</p>
                             </div>
-                            <!-- /single dish -->
 
-                            <!-- single dish -->
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Blanched Fennel & Orange Lasagna</h4>
-                                    <h4 class="price">79£</h4>
+                                    <h4 class="name">Chicken Salted Egg Bowl</h4>
+                                    <h4 class="price">Rp27.000</h4>
                                 </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
+                                <p>Ayam crispy dengan saus telur asin.</p>
                             </div>
-                            <!-- /single dish -->
-
-                            <!-- single dish -->
-                            <div class="single-dish">
-                                <div class="single-dish-heading">
-                                    <h4 class="name">Slow-Cooked Basil & Lime Ostrich</h4>
-                                    <h4 class="price">57£</h4>
-                                </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
-                            </div>
-                            <!-- /single dish -->
-
-                            <!-- single dish -->
-                            <div class="single-dish">
-                                <div class="single-dish-heading">
-                                    <h4 class="name">Stuffed Oregano Chicken</h4>
-                                    <h4 class="price">145£</h4>
-                                </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
-                            </div>
-                            <!-- /single dish -->
 
                         </div>
-
                         <div class="col-md-6">
 
-                            <!-- single dish -->
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Pressure-Fried Asparagus Chicken</h4>
-                                    <h4 class="price">57£</h4>
+                                    <h4 class="name">Fish Crispy Teriyaki Bowl</h4>
+                                    <h4 class="price">Rp30.000</h4>
                                 </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
+                                <p>Ikan crispy dengan saus teriyaki.</p>
                             </div>
-                            <!-- /single dish -->
 
-                            <!-- single dish -->
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Tenderized Egg & Coconut Duck</h4>
-                                    <h4 class="price">87£</h4>
+                                    <h4 class="name">Mie Goreng Spicy</h4>
+                                    <h4 class="price">Rp22.000</h4>
                                 </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
+                                <p>Mie goreng dengan tingkat kepedasan sesuai selera.</p>
                             </div>
-                            <!-- /single dish -->
 
-                            <!-- single dish -->
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Milk Chocolate Gingerbread</h4>
-                                    <h4 class="price">155£</h4>
+                                    <h4 class="name">Spaghetti Bolognese</h4>
+                                    <h4 class="price">Rp28.000</h4>
                                 </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
+                                <p>Pasta dengan saus tomat daging cincang.</p>
                             </div>
-                            <!-- /single dish -->
-
-                            <!-- single dish -->
-                            <div class="single-dish">
-                                <div class="single-dish-heading">
-                                    <h4 class="name">Simmered Mango & Pine Rabbit</h4>
-                                    <h4 class="price">57£</h4>
-                                </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
-                            </div>
-                            <!-- /single dish -->
-
-                            <!-- single dish -->
-                            <div class="single-dish">
-                                <div class="single-dish-heading">
-                                    <h4 class="name">Red Wine Surprise</h4>
-                                    <h4 class="price">87£</h4>
-                                </div>
-                                <p>te vero tritani iuvaret vis. Nec odio periculis adipiscing an.</p>
-                            </div>
-                            <!-- /single dish -->
-
                         </div>
                     </div>
+
+                    {{-- Tab Minuman --}}
+                    <div id="minuman" class="tab-pane fade">
+                        <div class="col-md-6">
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Es Teh Manis</h4>
+                                    <h4 class="price">Rp8.000</h4>
+                                </div>
+                                <p>Teh segar manis disajikan dingin.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Es Jeruk Segar</h4>
+                                    <h4 class="price">Rp10.000</h4>
+                                </div>
+                                <p>Jeruk peras asli tanpa pengawet.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Kopi Hitam</h4>
+                                    <h4 class="price">Rp12.000</h4>
+                                </div>
+                                <p>Kopi pilihan dengan cita rasa pekat.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Cappuccino</h4>
+                                    <h4 class="price">Rp18.000</h4>
+                                </div>
+                                <p>Kopi dengan campuran susu dan foam lembut.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Tab Camilan --}}
+                    <div id="camilan" class="tab-pane fade">
+                        <div class="col-md-6">
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">French Fries</h4>
+                                    <h4 class="price">Rp15.000</h4>
+                                </div>
+                                <p>Kentang goreng renyah dengan saus.</p>
+                            </div>
+
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Chicken Wings</h4>
+                                    <h4 class="price">Rp25.000</h4>
+                                </div>
+                                <p>Sayap ayam goreng dengan saus pilihan.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="single-dish">
+                                <div class="single-dish-heading">
+                                    <h4 class="name">Onion Rings</h4>
+                                    <h4 class="price">Rp18.000</h4>
+                                </div>
+                                <p>Bawang bombay goreng crispy.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-
+    `
     {{-- Reservation --}}
     <div id="reservation" class="section">
         <div class="bg-image" style="background-image:url({{ asset('tpt/img/background03.jpg') }})"></div>
@@ -213,8 +245,8 @@
                         @csrf
 
                         <div class="section-header text-center">
-                            <h4 class="sub-title">Reservation</h4>
-                            <h2 class="title white-text">Book Your Table</h2>
+                            <h4 class="sub-title">Reservasi</h4>
+                            <h2 class="title white-text">Pesanan Anda</h2>
                         </div>
 
                         <!-- Nama -->
@@ -344,36 +376,36 @@
                 <div class="col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1">
                     <div class="opening-time row">
                         <div class="section-header text-center">
-                            <h2 class="title white-text">Opening Time</h2>
+                            <h2 class="title white-text">Jam Buka</h2>
                         </div>
                         <ul>
                             <li>
-                                <h4 class="day">Sunday</h4>
-                                <h4 class="hours">8:00 am – 11:00 pm</h4>
+                                <h4 class="day">Minggu</h4>
+                                <h4 class="hours">08:00 – 23:00</h4>
                             </li>
                             <li>
-                                <h4 class="day">Monday</h4>
-                                <h4 class="hours">8:00 am – 11:00 pm</h4>
+                                <h4 class="day">Senin</h4>
+                                <h4 class="hours">08:00 – 23:00</h4>
                             </li>
                             <li>
-                                <h4 class="day">Tuesday</h4>
-                                <h4 class="hours">8:00 am – 11:00 pm</h4>
+                                <h4 class="day">Selasa</h4>
+                                <h4 class="hours">08:00 – 23:00</h4>
                             </li>
                             <li>
-                                <h4 class="day">Wednesday</h4>
-                                <h4 class="hours">8:00 am – 11:00 pm</h4>
+                                <h4 class="day">Rabu</h4>
+                                <h4 class="hours">08:00 – 23:00</h4>
                             </li>
                             <li>
-                                <h4 class="day">Thursday</h4>
-                                <h4 class="hours">8:00 am – 11:00 pm</h4>
+                                <h4 class="day">Kamis</h4>
+                                <h4 class="hours">08:00 – 23:00</h4>
                             </li>
                             <li>
-                                <h4 class="day">Friday</h4>
-                                <h4 class="hours">Closed</h4>
+                                <h4 class="day">Jumat</h4>
+                                <h4 class="hours">08:00 – 23:00</h4>
                             </li>
                             <li>
-                                <h4 class="day">Saturday</h4>
-                                <h4 class="hours">Closed</h4>
+                                <h4 class="day">Sabtu</h4>
+                                <h4 class="hours">08:00 – 00:00</h4>
                             </li>
                         </ul>
                     </div>
