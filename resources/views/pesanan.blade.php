@@ -3,11 +3,12 @@
 @section('title', 'Pesan - Restoran ABC')
 
 @section('content')
-    <div id="reservation" class="section">
+    <div id="reservation" class="section pt-5 mb-5 pb-5" style="padding-top:170px;">
+
         <div class="bg-image" style="background-image:url({{ asset('tpt/img/background03.jpg') }})"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-md-offset-1 col-sm-12">
+                <div class="col-md-10 col-md-offset-1 col-sm-12"> 
 
                     {{-- Form Pesanan --}}
                     <form action="{{ route('pesanan.store') }}" method="POST" class="reserve-form row">
@@ -141,43 +142,44 @@
             </div>
         </div>
     </div>
+
+    <br>
 @endsection
 
 @push('scripts')
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const checkboxes = document.querySelectorAll(".menu-checkbox");
-    const totalInput = document.getElementById("total_harga");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkboxes = document.querySelectorAll(".menu-checkbox");
+            const totalInput = document.getElementById("total_harga");
 
-    function hitungTotal() {
-        let total = 0;
-        checkboxes.forEach(chk => {
-            if (chk.checked) {
-                const harga = parseInt(chk.dataset.harga);
+            function hitungTotal() {
+                let total = 0;
+                checkboxes.forEach(chk => {
+                    if (chk.checked) {
+                        const harga = parseInt(chk.dataset.harga);
+                        const jumlahInput = chk.closest("label").nextElementSibling;
+                        const jumlah = parseInt(jumlahInput.value);
+                        total += harga * jumlah;
+                    }
+                });
+                totalInput.value = total;
+            }
+
+            checkboxes.forEach(chk => {
                 const jumlahInput = chk.closest("label").nextElementSibling;
-                const jumlah = parseInt(jumlahInput.value);
-                total += harga * jumlah;
-            }
+
+                chk.addEventListener("change", function() {
+                    if (chk.checked) {
+                        jumlahInput.disabled = false;
+                    } else {
+                        jumlahInput.disabled = true;
+                        jumlahInput.value = 1;
+                    }
+                    hitungTotal();
+                });
+
+                jumlahInput.addEventListener("input", hitungTotal);
+            });
         });
-        totalInput.value = total;
-    }
-
-    checkboxes.forEach(chk => {
-        const jumlahInput = chk.closest("label").nextElementSibling;
-
-        chk.addEventListener("change", function () {
-            if (chk.checked) {
-                jumlahInput.disabled = false;
-            } else {
-                jumlahInput.disabled = true;
-                jumlahInput.value = 1;
-            }
-            hitungTotal();
-        });
-
-        jumlahInput.addEventListener("input", hitungTotal);
-    });
-});
-</script>
+    </script>
 @endpush
-
