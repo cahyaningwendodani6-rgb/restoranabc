@@ -24,6 +24,7 @@
                     <option value="">-- Pilih Kategori --</option>
                     <option value="Makanan" {{ old('kategori') == 'Makanan' ? 'selected' : '' }}>Makanan</option>
                     <option value="Minuman" {{ old('kategori') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
+                    <option value="Camilan" {{ old('kategori') == 'Camilan' ? 'selected' : '' }}>Camilan</option>
                 </select>
                 @error('kategori')
                     <div class="invalid-feedback">{{ $message }}</div>
