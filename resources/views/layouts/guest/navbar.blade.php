@@ -6,7 +6,7 @@
 
              <!-- logo -->
              <div class="logo">
-                 <a href="{{ url('/') }}"><img src="{{ asset('tpt/img/logo.png') }}" alt="logo"></a>
+                 <a href="{{ url('/') }}"><img src="{{ asset('tpt/img/logo0.jpg') }}" alt="logo"></a>
              </div>
              <!-- logo -->
 
