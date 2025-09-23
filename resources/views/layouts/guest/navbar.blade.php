@@ -33,13 +33,12 @@
                      <li><a href="#home">Home</a></li>
                      <li><a href="#about">About</a></li>
                      <li><a href="#menu">Menu</a></li>
-                     <li><a href="#reservation">Pesan</a></li>
                  </ul>
                  <!-- /nav -->
 
                  <!-- button nav -->
                  <ul class="cta-nav">
-                     <li><a href="#reservation" class="main-button">Pesan</a></li>
+                     <li><a href="{{ route('pesanan') }}" class="main-button">Pesan</a></li>
                  </ul>
                  <!-- button nav -->
 
