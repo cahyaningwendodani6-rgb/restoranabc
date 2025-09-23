@@ -72,6 +72,8 @@
     <script type="text/javascript" src="{{ asset('tpt/js/google-map.js') }}"></script>
     <script type="text/javascript" src="{{ asset('tpt/js/main.js') }}"></script>
 
+    @stack('scripts')
+
 </body>
 
 </html>
