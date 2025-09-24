@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\FormPesananController;
 use App\Models\Pesanan;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::post('/pembayaran/{id}/upload-bukti', [PembayaranController::class, 'uplo
 Route::get('/pembayaran/{id}/verifikasi', [PembayaranController::class, 'verifikasi'])->name('pembayaran.verifikasi');
 
 // Pembayaran terbaru
+Route::post('/pesanan', [FormPesananController::class, 'store'])->name('formpesanan.store');
 Route::get('/pembayaran-terbaru', function () {
     $pesanan = Pesanan::latest()->first();
     if (! $pesanan) {

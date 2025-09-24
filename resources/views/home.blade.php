@@ -52,23 +52,23 @@
                 <div class="col-md-12">
                     <div id="Gallery" class="owl-carousel owl-theme">
                         <div class="Gallery-item">
-                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image01.jpg') }})"></div>
+                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/sate.jpg') }})"></div>
                         </div>
                         <div class="Gallery-item">
-                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image02.jpg') }})"></div>
-                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image03.jpg') }})"></div>
+                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/makanan.jpg') }})"></div>
+                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/es.jpg') }})"></div>
                         </div>
                         <div class="Gallery-item">
                             <div class="item-column">
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image04.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/nasgor.jpg') }})">
                                 </div>
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image05.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/kentang.jpg') }})">
                                 </div>
                             </div>
                             <div class="item-column">
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image06.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/ramen.jpg') }})">
                                 </div>
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image07.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/l.jpg') }})">
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
 
     {{-- Menu --}}
     <div id="menu" class="section">
-        <div class="bg-image bg-parallax overlay" style="background-image:url({{ asset('tpt/img/background01.jpg') }})">
+        <div class="bg-image bg-parallax overlay" style="background-image:url({{ asset('tpt/img/makan.jpg') }})">
         </div>
         <div class="container">
             <div class="row">
@@ -191,10 +191,10 @@
 
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Mie Kuah Pedas</h4>
+                                    <h4 class="name">Ramen</h4>
                                     <h4 class="price">Rp23.000</h4>
                                 </div>
-                                <p>Mie hangat dengan kuah pedas gurih.</p>
+                                <p>Mie ramen dengan tingkat kepedasan sesuai selera.</p>
                             </div>
 
 
@@ -464,7 +464,7 @@
     {{-- Reservation --}}
     <div id="reservation" class="section">
         <div class="bg-image"
-            style="background-image:url({{ asset('tpt/img/background03.jpg') }}); 
+            style="background-image:url({{ asset('tpt/img/jus1.jpg') }}); 
             height:500px; 
             background-size:cover; 
             background-position:center;">

@@ -11,7 +11,7 @@
                 <div class="col-md-10 col-md-offset-1 col-sm-12"> 
 
                     {{-- Form Pesanan --}}
-                    <form action="{{ route('pesanan.store') }}" method="POST" class="reserve-form row">
+                    <form action="{{ route('formpesanan.store') }}" method="POST" class="reserve-form row">
                         @csrf
                         <div class="section-header text-center">
                             <h4 class="sub-title">Reservasi</h4>
