@@ -11,7 +11,32 @@ use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
 
 // --- Halaman publik (tanpa login) ---
-Route::get('/', [HomeController::class, 'index'])->name('landing');
+Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/menunya', function () {
+    return view('menunya');
+})->name('menunya');
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/reservation', function () {
+    return view('reservation');
+})->name('reservation');
+
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/gallery', function () {
+    return view('gallery');
+});
+
+
 
 // Form pesanan
 Route::get('/pesan', function () {
