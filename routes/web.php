@@ -9,15 +9,18 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\FormPembayaranController;
 use App\Models\Pesanan;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
 
 // --- Halaman publik (tanpa login) ---
 Route::get('/', [HomeController::class, 'index'])->name('landing');
 
 // Form pesanan
-Route::get('/form-pesanan', [App\Http\Controllers\FormPesananController::class, 'index'])->name('formpesanan.index');
-Route::post('/store', [App\Http\Controllers\FormPesananController::class, 'store'])->name('formpesanan.store');
-
+Route::get('/pesan', function () {
+    $menu = Menu::all();
+    return view('pesanan', compact('menu'));
+})->name('pesanan');
+Route::post('/pesan', [PesananController::class, 'store'])->name('pesanan.store');
 // Pembayaran
 Route::get('/pembayaran/{id}', [PembayaranController::class, 'showForm'])->name('pembayaran.form');
 Route::post('/pembayaran/{id}', [PembayaranController::class, 'store'])->name('pembayaran.store');
@@ -25,6 +28,7 @@ Route::post('/pembayaran/{id}/upload-bukti', [PembayaranController::class, 'uplo
 Route::get('/pembayaran/{id}/verifikasi', [PembayaranController::class, 'verifikasi'])->name('pembayaran.verifikasi');
 
 // Pembayaran terbaru
+Route::post('/pesanan', [FormPesananController::class, 'store'])->name('formpesanan.store');
 Route::get('/pembayaran-terbaru', function () {
     $pesanan = Pesanan::latest()->first();
     if (! $pesanan) {

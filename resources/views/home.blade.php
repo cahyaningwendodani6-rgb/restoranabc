@@ -52,23 +52,23 @@
                 <div class="col-md-12">
                     <div id="Gallery" class="owl-carousel owl-theme">
                         <div class="Gallery-item">
-                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image01.jpg') }})"></div>
+                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/sate.jpg') }})"></div>
                         </div>
                         <div class="Gallery-item">
-                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image02.jpg') }})"></div>
-                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image03.jpg') }})"></div>
+                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/makanan.jpg') }})"></div>
+                            <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/es.jpg') }})"></div>
                         </div>
                         <div class="Gallery-item">
                             <div class="item-column">
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image04.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/nasgor.jpg') }})">
                                 </div>
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image05.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/kentang.jpg') }})">
                                 </div>
                             </div>
                             <div class="item-column">
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image06.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/ramen.jpg') }})">
                                 </div>
-                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/image07.jpg') }})">
+                                <div class="Gallery-img" style="background-image:url({{ asset('tpt/img/l.jpg') }})">
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
 
     {{-- Menu --}}
     <div id="menu" class="section">
-        <div class="bg-image bg-parallax overlay" style="background-image:url({{ asset('tpt/img/background01.jpg') }})">
+        <div class="bg-image bg-parallax overlay" style="background-image:url({{ asset('tpt/img/makan.jpg') }})">
         </div>
         <div class="container">
             <div class="row">
@@ -191,10 +191,10 @@
 
                             <div class="single-dish">
                                 <div class="single-dish-heading">
-                                    <h4 class="name">Mie Kuah Pedas</h4>
+                                    <h4 class="name">Ramen</h4>
                                     <h4 class="price">Rp23.000</h4>
                                 </div>
-                                <p>Mie hangat dengan kuah pedas gurih.</p>
+                                <p>Mie ramen dengan tingkat kepedasan sesuai selera.</p>
                             </div>
 
 
@@ -463,146 +463,18 @@
     `
     {{-- Reservation --}}
     <div id="reservation" class="section">
-        <div class="bg-image" style="background-image:url({{ asset('tpt/img/background03.jpg') }})"></div>
+        <div class="bg-image"
+            style="background-image:url({{ asset('tpt/img/jus1.jpg') }}); 
+            height:500px; 
+            background-size:cover; 
+            background-position:center;">
+        </div>
+
         <div class="container">
 
             <div class="row">
-                <!-- reservation form -->
-                <div class="col-md-10 col-md-offset-1 col-sm-12">
-
-                    <form action="{{ route('formpesanan.store') }}" method="POST" class="reserve-form row">
-                        @csrf
-
-                        <div class="section-header text-center">
-                            <h4 class="sub-title">Reservasi</h4>
-                            <h2 class="title white-text">Pesanan Anda</h2>
-                        </div>
-
-                        <!-- Nama -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nama">Nama</label>
-                                <input type="text" id="nama" name="nama"
-                                    class="input @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
-                                @error('nama')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Telepon -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="telp">No. Telepon</label>
-                                <input type="text" id="telp" name="telp"
-                                    class="input @error('telp') is-invalid @enderror" value="{{ old('telp') }}">
-                                @error('telp')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email"
-                                    class="input @error('email') is-invalid @enderror" value="{{ old('email') }}">
-                                @error('email')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Alamat -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <textarea id="alamat" name="alamat" class="input @error('alamat') is-invalid @enderror">{{ old('alamat') }}</textarea>
-                                @error('alamat')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Pesanan (checkbox menu) -->
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Pesanan</label>
-                                <div class="row">
-                                    @foreach ($menu->groupBy('kategori') as $kategori => $items)
-                                        <div class="col-12 mb-2">
-                                            <strong>{{ ucfirst($kategori) }}</strong>
-                                        </div>
-                                        @foreach ($items as $item)
-                                            <div class="col-md-6">
-                                                <label>
-                                                    <input type="checkbox" name="menu[{{ $item->id }}][id]"
-                                                        class="menu-checkbox" value="{{ $item->id }}"
-                                                        data-harga="{{ $item->harga }}">
-                                                    {{ $item->nama }} - Rp
-                                                    {{ number_format($item->harga, 0, ',', '.') }}
-                                                </label>
-                                                <input type="number" name="menu[{{ $item->id }}][jumlah]"
-                                                    class="menu-jumlah" value="1" min="1" disabled
-                                                    style="width:60px; margin-left:5px;">
-                                            </div>
-                                        @endforeach
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Metode Pembayaran -->
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="metode_pembayaran">Metode Pembayaran</label>
-                                <select id="metode_pembayaran" name="metode_pembayaran"
-                                    class="input @error('metode_pembayaran') is-invalid @enderror">
-                                    <option value="">-- Pilih Metode --</option>
-                                    <option value="Transfer"
-                                        {{ old('metode_pembayaran') == 'Transfer' ? 'selected' : '' }}>
-                                        Transfer Bank</option>
-                                    <option value="QRIS" {{ old('metode_pembayaran') == 'QRIS' ? 'selected' : '' }}>QRIS
-                                    </option>
-                                </select>
-                                @error('metode_pembayaran')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Catatan -->
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="catatan">Pesan untuk Penjual</label>
-                                <textarea id="catatan" name="catatan" class="input @error('catatan') is-invalid @enderror">{{ old('catatan') }}</textarea>
-                                @error('catatan')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Total harga -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="total_harga">Total Harga</label>
-                                <input type="number" id="total_harga" name="total_harga" class="input"
-                                    value="{{ old('total_harga') }}" readonly>
-                            </div>
-                        </div>
-
-                        <!-- Tombol -->
-                        <div class="col-md-12 text-center">
-                            <button type="submit" class="main-button">Pesan Sekarang</button>
-                        </div>
-                    </form>
-
-                </div>
-                <!-- /reservation form -->
-
                 <!-- opening time -->
-                <div class="col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1">
+                <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1">
                     <div class="opening-time row">
                         <div class="section-header text-center">
                             <h2 class="title white-text">Jam Buka</h2>
