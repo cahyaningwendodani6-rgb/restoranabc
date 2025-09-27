@@ -15,7 +15,7 @@ class FormPesananController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('pages.formpesanan.index', compact('menu', 'pesanan'));
+        return view('reservation', compact('menu', 'pesanan'));
     }
 
     public function store(Request $request)

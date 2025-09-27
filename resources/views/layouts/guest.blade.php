@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('tpt/css/flexslider.css') }}">
     <link rel="stylesheet" href="{{ asset('tpt/css/style.css') }}">
 
+    
+
     {{-- Modernizr --}}
     <script src="{{ asset('tpt/js/modernizr-2.6.2.min.js') }}"></script>
     <!--[if lt IE 9]>
@@ -126,6 +128,11 @@
 <script src="{{ asset('tpt/js/jquery.stellar.min.js') }}"></script>
 <script src="{{ asset('tpt/js/jquery.flexslider-min.js') }}"></script>
 <script src="{{ asset('tpt/js/main.js') }}"></script>
+
+@yield('scripts')
+@stack('scripts')
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </body>
 </html>

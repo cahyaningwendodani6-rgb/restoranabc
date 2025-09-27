@@ -2,18 +2,17 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
-use App\Http\Controllers\FormPesananController;
-use App\Models\Pesanan;
 use App\Models\Menu;
+use App\Models\Pesanan;
 use Illuminate\Support\Facades\Route;
 
 // --- Halaman publik (tanpa login) ---
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get('/', [HomeController::class, 'index'])->name('landing');
 
 Route::get('/menunya', function () {
     return view('menunya');
@@ -23,9 +22,8 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/reservation', function () {
-    return view('reservation');
-})->name('reservation');
+Route::get('/reservation', [FormPesananController::class, 'index'])->name('reservation');
+Route::post('/reservation', [FormPesananController::class, 'store'])->name('formpesanan.store');
 
 
 Route::get('/contact', function () {
@@ -36,13 +34,10 @@ Route::get('/gallery', function () {
     return view('gallery');
 });
 
+Route::get('/pesan', [HomeController::class, 'create'])->name('pesanan.create');
+Route::post('/pesan', [FormPesananController::class, 'store'])->name('formpesanan.store');
 
 
-// Form pesanan
-Route::get('/pesan', function () {
-    $menu = Menu::all();
-    return view('pesanan', compact('menu'));
-})->name('pesanan');
 Route::post('/pesan', [PesananController::class, 'store'])->name('pesanan.store');
 // Pembayaran
 Route::get('/pembayaran/{id}', [PembayaranController::class, 'showForm'])->name('pembayaran.form');
