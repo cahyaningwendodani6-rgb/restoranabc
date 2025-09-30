@@ -25,6 +25,14 @@ class HomeController extends Controller
     public function index()
     {
         $menu = Menu::all();
+
         return view('home', compact('menu'));
+    }
+
+    public function create()
+    {
+        $menu = Menu::all(); // ambil semua data menu dari database
+
+        return view('pesanan', compact('menu'));
     }
 }

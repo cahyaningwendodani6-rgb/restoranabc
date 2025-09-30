@@ -3,17 +3,24 @@
 @section('title', 'Struk Pesanan - Restoran ABC')
 
 @section('content')
-    <div id="receipt" class="section pt-5 mb-5 pb-5" style="padding-top:170px;">
+    <div id="receipt" class="section pt-5 mb-5 pb-5" style="margin-top:200px;">
+
         <div class="bg-image" style="background-image:url({{ asset('tpt/img/background03.jpg') }})"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-sm-12">
 
-                    <div class="reserve-form row p-4 rounded shadow-sm" style="background: #fff;">
-                        <div class="section-header text-center">
-                            <h4 class="sub-title">Struk</h4>
-                            <h2 class="title">Pesanan #{{ $pesanan->id }}</h2>
+                    <div class="reserve-form row p-5 rounded shadow-lg"
+                        style="background: rgba(0, 0, 0, 0.85); color: #fff; font-size:18px; line-height:1.8; max-width:900px; margin:auto;">
+
+                        <div class="section-header text-center"
+                            style="color:#fff !important; font-size:18px; line-height:1.8; max-width:900px; margin:auto;">
+                            <h2 class="title mb-4" style="color:#fff !important; font-size:32px; font-weight:700;">
+                                Struk Pesanan #{{ $pesanan->id }}
+                            </h2>
                         </div>
+
+
                         <hr class="my-3">
 
                         {{-- Data Pemesan --}}
@@ -27,40 +34,44 @@
                                         <span class="badge bg-warning text-dark">Menunggu Verifikasi</span>
                                     @elseif($pesanan->pembayaran->status == 'dibayar')
                                         <span class="badge bg-success">Lunas</span>
-                                    @else
+                                    @elseif($pesanan->pembayaran->status == 'ditolak')
                                         <span class="badge bg-danger">Ditolak</span>
+                                    @else
+                                        <span class="badge bg-info text-dark">Status Tidak Dikenal</span>
                                     @endif
                                 @else
                                     <span class="badge bg-secondary">Belum Bayar</span>
                                 @endif
                             </p>
+
                             <p><strong>Status Pesanan:</strong>
                                 @if ($pesanan->status == 'pending')
-                                    <span class="badge bg-warning">Pending</span>
+                                    <span class="badge bg-warning text-dark">Pending</span>
                                 @elseif($pesanan->status == 'diproses')
-                                    <span class="badge bg-primary">Diproses</span>
+                                    <span class="badge bg-info text-dark">Diproses</span>
                                 @elseif($pesanan->status == 'diantar')
-                                    <span class="badge bg-secondary">Diantar</span>
+                                    <span class="badge bg-primary">Diantar</span>
                                 @elseif($pesanan->status == 'selesai')
                                     <span class="badge bg-success">Selesai</span>
                                 @else
                                     <span class="badge bg-danger">Batal</span>
                                 @endif
                             </p>
+
                         </div>
 
                         <hr class="my-3">
 
                         {{-- Tampilkan sesuai metode --}}
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-12 mb-3" style="color:#fff;">
                             @if ($pesanan->metode_pembayaran == 'QRIS')
-                                <h5 class="mb-3">Silakan Scan QRIS untuk Membayar</h5>
+                                <h5 class="mb-3" style="color:#fff;">Silakan Scan QRIS untuk Membayar</h5>
                                 <div class="text-center mb-3">
                                     {!! QrCode::size(200)->generate($qrisString) !!}
                                 </div>
                             @elseif (strtolower($pesanan->metode_pembayaran) == 'transfer')
-                                <h5 class="mb-3">Transfer ke Rekening:</h5>
-                                <div class="border p-3 rounded">
+                                <h5 class="mb-3" style="color:#fff;">Transfer ke Rekening:</h5>
+                                <div class="border p-3 rounded" style="color:#fff;">
                                     <p><strong>Bank BCA</strong></p>
                                     <p>No. Rekening: <strong>1234567890</strong></p>
                                     <p>Atas Nama: <strong>Restoran ABC</strong></p>
@@ -68,21 +79,38 @@
                             @endif
                         </div>
 
+
                         <hr class="my-3">
 
                         {{-- Upload Bukti Pembayaran --}}
                         @if (!$pesanan->pembayaran)
                             <div class="col-md-12 mb-3">
-                                <h5>Upload Bukti Pembayaran</h5>
+                                <h5 style="color:#fff;">Upload Bukti Pembayaran</h5>
                                 <form action="{{ route('pembayaran.store', $pesanan->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="metode" value="{{ $pesanan->metode_pembayaran }}">
+
+                                    {{-- Input File --}}
                                     <div class="mb-3">
-                                        <input type="file" name="bukti" class="form-control" required>
+                                        <input type="file" name="bukti" class="form-control"
+                                            style="background-color:#101010; color:white; border:1px solid #fff; 
+           font-family:'Times New Roman', serif; 
+           padding:15px; height:55px; font-size:16px; 
+           border-radius:10px;"
+                                            required>
+
                                     </div>
-                                    <button type="submit" class="main-button">Bayar</button>
+
+                                    {{-- Tombol Bayar --}}
+                                    <div class="text-center mt-3">
+                                        <button type="submit"
+                                            style="background-color:white; color:black; font-weight:bold; font-family:'Times New Roman', serif; padding:12px 40px; border:none; border-radius:10px; font-size:18px; cursor:pointer; transition:0.3s;">
+                                            Bayar
+                                        </button>
+                                    </div>
                                 </form>
+
                             </div>
                         @endif
 
@@ -90,7 +118,7 @@
 
                         {{-- Detail Pesanan --}}
                         <div class="col-md-12 mb-3">
-                            <h5>Detail Menu:</h5>
+                            <h5 style="color:#fff;">Detail Menu:</h5>
                             <ul>
                                 @foreach ($pesanan->menu as $menu)
                                     <li>{{ $menu->nama }} x {{ $menu->pivot->jumlah }} -
@@ -101,11 +129,18 @@
                         </div>
 
                         <div class="col-md-12 text-center mt-3">
-                            <p class="text-muted small">Terima kasih telah memesan di <strong>Restoran ABC</strong></p>
+                            <p style="color:#fff; font-size:16px; font-weight:600; margin-top:15px;">
+                                Terima kasih telah memesan di <strong>Restoran ABC</strong>
+                            </p>
+
                             @if ($pesanan->pembayaran)
-                                <a href="{{ route('landing') }}" id="btn-exit" class="main-button">Keluar</a>
+                                <a href="{{ route('landing') }}" id="btn-exit" class="btn btn-primary"
+                                    style="font-size:20px; padding:12px 40px; font-weight:700; border-radius:10px;">
+                                    Keluar
+                                </a>
                             @endif
                         </div>
+
                     </div>
 
                 </div>
@@ -115,42 +150,74 @@
 @endsection
 
 @push('scripts')
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: '{{ session('success') }}',
-                showConfirmButton: false,
-                timer: 3000
-            });
-        </script>
-    @endif
-@endpush
-
-@push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.getElementById("btn-exit").addEventListener("click", function(e) {
-            e.preventDefault(); // cegah langsung redirect
-            let url = this.getAttribute("href");
 
-            Swal.fire({
-                    title: '<h2 style="font-size:32px">Yakin ingin keluar?</h2>',
-                    html: '<p style="font-size:24px">Keluar sekarang berarti Anda tidak bisa memantau pesanan yang sudah dibuat.</p>',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#f97316',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: '<span style="font-size:20px; padding:10px 20px; display:inline-block;">Ya, keluar</span>',
-                    cancelButtonText: '<span style="font-size:20px; padding:10px 20px; display:inline-block;">Batal</span>',
-                    width: '600px'
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = url;
+    <script>
+        // success alert
+        @if (session('success'))
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: @json(session('success')),
+                    showConfirmButton: false,
+                    timer: 3000,
+                    customClass: {
+                        title: 'swal2-title-custom',
+                        popup: 'swal2-popup-custom',
+                        icon: 'swal2-icon-custom',
+                        htmlContainer: 'swal2-text-custom'
                     }
                 });
+            });
+        @endif
+
+        // exit button
+        document.addEventListener("DOMContentLoaded", function() {
+            const btnExit = document.getElementById("btn-exit");
+
+            if (btnExit) {
+                btnExit.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    let url = this.getAttribute("href");
+
+                    Swal.fire({
+                        title: '<h2 style="font-size:28px; font-weight:700;">Yakin ingin keluar?</h2>',
+                        html: '<p style="font-size:18px; font-weight:600;">Keluar sekarang berarti Anda tidak bisa memantau pesanan yang sudah dibuat.</p>',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#f97316',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: '<span style="font-size:20px; padding:10px 25px; font-weight:700; display:inline-block;">Ya, keluar</span>',
+                        cancelButtonText: '<span style="font-size:20px; padding:10px 25px; font-weight:700; display:inline-block;">Batal</span>',
+                        width: '600px'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = url;
+                        }
+                    });
+
+                });
+            }
         });
     </script>
+
+    <style>
+        .swal2-popup-custom {
+            font-size: 1.4rem !important;
+            padding: 30px !important;
+        }
+
+        .swal2-title-custom {
+            font-size: 2rem !important;
+        }
+
+        .swal2-text-custom {
+            font-size: 1.2rem !important;
+        }
+
+        .swal2-icon-custom {
+            transform: scale(1.5);
+        }
+    </style>
 @endpush
