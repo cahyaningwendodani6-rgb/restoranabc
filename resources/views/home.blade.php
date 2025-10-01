@@ -78,7 +78,8 @@
 
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item margin_top">
-                        <img src="{{ asset('tpt/images/Beef-Black-Pepper-Bow.jpg') }}" class="img-responsive" alt="">
+                        <img src="{{ asset('tpt/images/Beef-Black-Pepper-Bow.jpg') }}" class="img-responsive"
+                            alt="">
                         <h3>Beef Black Pepper Bowl</h3>
                         <span class="fh5co-price">Rp32.000</span>
                         <p>Daging sapi dengan saus lada hitam.</p>
@@ -309,6 +310,26 @@
                             <h3>Lemon Tea</h3>
                             <span class="fh5co-price">Rp12.000</span>
                             <p>Teh segar dengan perasan lemon alami.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item">
+                            <img src="{{ asset('tpt/images/stroberi-boba-tea.jpeg') }}" class="img-responsive"
+                                alt="">
+                            <h3>Strawberry Boba Tea</h3>
+                            <span class="fh5co-price">Rp35.000</span>
+                            <p>Teh segar rasa stroberi manis dengan susu creamy dan boba kenyal.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item margin_top">
+                            <img src="{{ asset('tpt/images/Purple-Boba-Tea.jpeg') }}" class="img-responsive"
+                                alt="">
+                            <h3>Purple Boba Tea</h3>
+                            <span class="fh5co-price">Rp35.000</span>
+                            <p>Teh susu lembut dengan rasa ubi ungu manis, dipadukan boba kenyal yang bikin nagih.</p>
                         </div>
                     </div>
                 </div>
