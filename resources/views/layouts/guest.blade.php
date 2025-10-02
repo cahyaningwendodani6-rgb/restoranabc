@@ -88,7 +88,7 @@
                         <ul class="fh5co-footer-links">
                             <li><a href="{{ url('/') }}">Home</a></li>
                             <li><a href="{{ url('/about') }}">About</a></li>
-                            <li><a href="{{ url('/menu') }}">Menu</a></li>
+                            <li><a href="{{ url('/menunya') }}">Menu</a></li>
                             <li><a href="{{ url('/gallery') }}">Gallery</a></li>
                         </ul>
                     </div>
@@ -103,8 +103,8 @@
                     <div class="col-md-4 col-md-push-1 fh5co-widget">
                         <h4>Kontak</h4>
                         <ul class="fh5co-footer-links">
-                            <li>Jl. Contoh No.123, Jakarta</li>
-                            <li><a href="tel://08123456789">+62 812-3456-789</a></li>
+                            <li>Jl. Raya Selaganggeng, Dusun 1, Selaganggeng, Purbalingga, Jawa Tengah 53352</li>
+                            <li><a href="tel://08123456789">+62 857-0076-3873</a></li>
                             <li><a href="mailto:info@restoranabc.com">info@restoranabc.com</a></li>
                             <li><a href="http://restoranabc.com">restoranabc.com</a></li>
                         </ul>
@@ -113,18 +113,18 @@
                 <div class="row copyright">
                     <div class="col-md-12 text-center">
                         <p>
-                            <small class="block">&copy; {{ date('Y') }} Restoran ABC. All Rights Reserved.</small>
-                            <small class="block">Designed by FreeHTML5.co | Customized by Restoran ABC</small>
+                            <small class="block">&copy; {{ date('Y') }} Restoran ABC. Terima kasih sudah
+                                berkunjung!</small>
+                            <small class="block">Website by Restoran ABC</small>
                         </p>
-                        <p>
                         <ul class="fh5co-social-icons">
-                            <li><a href="#"><i class="icon-twitter2"></i></a></li>
-                            <li><a href="#"><i class="icon-facebook2"></i></a></li>
-                            <li><a href="#"><i class="icon-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/yourpage"><i class="icon-twitter2"></i></a></li>
+                            <li><a href="https://facebook.com/yourpage"><i class="icon-facebook2"></i></a></li>
+                            <li><a href="https://instagram.com/yourpage"><i class="icon-instagram"></i></a></li>
                         </ul>
-                        </p>
                     </div>
                 </div>
+
             </div>
         </footer>
     </div>
@@ -145,9 +145,6 @@
 
     @yield('scripts')
     @stack('scripts')
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </body>
 
 </html>
