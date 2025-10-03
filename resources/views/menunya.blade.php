@@ -35,8 +35,8 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="text-center text-uppercase fw-bold my-4 text-white border-bottom pb-2 d-inline-block">
-                    Makanan
+                <h2 style="text-align: center; color: #fff; border-bottom: 2px solid #fff; padding-bottom: 8px; margin-bottom: 20px;">
+                         Makanan
                 </h2>
                 {{-- Contoh item menu --}}
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
@@ -153,8 +153,8 @@
 
                 {{-- Minuman --}}
                 <div class="row">
-                    <h2 class="text-center text-uppercase fw-bold my-4 text-white border-bottom pb-2 d-inline-block">
-                        Minuman
+                    <h2 style="text-align: center; color: #fff; border-bottom: 2px solid #fff; padding-bottom: 8px; margin-bottom: 20px;">
+                       Minuman
                     </h2>
 
                     <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
@@ -311,7 +311,7 @@
 
                 {{-- Camilan --}}
                 <div class="row">
-                    <h2 class="text-center text-uppercase fw-bold my-4 text-white border-bottom pb-2 d-inline-block">
+                    <h2 style="text-align: center; color: #fff; border-bottom: 2px solid #fff; padding-bottom: 8px; margin-bottom: 20px;">
                         Camilan
                     </h2>
 
