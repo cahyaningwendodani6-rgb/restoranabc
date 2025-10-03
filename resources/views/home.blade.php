@@ -180,7 +180,7 @@
                         <p>Sup ayam hangat dengan kuah gurih dan segar.</p>
                     </div>
                 </div>
-
+            </div>
                 {{-- Minuman --}}
                 <div class="row">
                     <h2 style="text-align: center; color: #fff; border-bottom: 2px solid #fff; padding-bottom: 8px; margin-bottom: 20px;">
@@ -456,7 +456,7 @@
                     </div>
                 </div>
 
-            </div>
+            
         </div>
     </div>
 
