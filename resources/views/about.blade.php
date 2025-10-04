@@ -118,9 +118,7 @@
 
 
     {{-- Call to Action --}}
-    <div id="fh5co-started" class="fh5co-section animate-box"
-        style="background-image: url({{ asset('tpt/images/hero_1.jpeg') }});" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
+    <div id="fh5co-started" class="fh5co-section animate-box">
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">

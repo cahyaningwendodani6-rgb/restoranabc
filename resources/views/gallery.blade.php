@@ -64,9 +64,7 @@
     </div>
 
     {{-- Call to Action --}}
-    <div id="fh5co-started" class="fh5co-section animate-box"
-        style="background-image: url({{ asset('tpt/images/hero_1.jpeg') }});" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
+    <div id="fh5co-started" class="fh5co-section animate-box">
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
@@ -75,7 +73,11 @@
                         Pesan sekarang secara online dan nikmati hidangan favorit Anda dengan cepat, praktis, dan higienis.
                     </p>
                     <p>Kami siap mengantarkan pesanan langsung ke rumah, kantor, atau tempat Anda bersantai.</p>
-                    <p><a href="{{ route('reservation') }}" class="btn btn-primary btn-outline">Pesan Sekarang</a></p>
+                    <p>
+                        <a href="{{ route('reservation') }}" class="btn btn-primary btn-lg btn-outline">
+                            Pesan Sekarang
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
