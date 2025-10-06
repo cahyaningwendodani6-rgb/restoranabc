@@ -25,21 +25,21 @@
     {{-- Featured Menu --}}
     <div id="fh5co-featured-menu" class="fh5co-section">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 fh5co-heading animate-box">
-                    <h2>Menu Kami</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>Kami menyajikan hidangan terbaik dengan bahan segar pilihan. Nikmati menu favorit Anda di
-                                Restoran ABC.</p>
-                        </div>
+            <div class="col-md-12 fh5co-heading animate-box">
+                <h2>Menu Kami</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Nikmati berbagai hidangan pilihan kami yang dimasak dengan bahan-bahan segar.</p>
                     </div>
                 </div>
+            </div>
+            {{-- Makanan --}}
+            <div class="row">
                 <h2
                     style="text-align: center; color: #fff; border-bottom: 2px solid #fff; padding-bottom: 8px; margin-bottom: 20px;">
                     Makanan
                 </h2>
-                {{-- Contoh item menu --}}
+
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item">
                         <img src="{{ asset('tpt/images/crispy-chicken-sambal-matah.jpg') }}" class="img-responsive"
@@ -50,6 +50,7 @@
                     </div>
                 </div>
 
+
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item margin_top">
                         <img src="{{ asset('tpt/images/Beef-Black-Pepper-Bow.jpg') }}" class="img-responsive"
@@ -59,6 +60,8 @@
                         <p>Daging sapi dengan saus lada hitam.</p>
                     </div>
                 </div>
+
+
 
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item">
@@ -71,6 +74,17 @@
 
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item margin_top">
+                        <img src="{{ asset('tpt/images/nasi goreng.jpg') }}" class="img-responsive" alt="">
+                        <h3>Nasi Goreng Spesial</h3>
+                        <span class="fh5co-price">Rp24.000</span>
+                        <p>Nasi goreng dengan bumbu spesial, dilengkapi telur, ayam, dan sayuran segar.</p>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                    <div class="fh5co-item">
                         <img src="{{ asset('tpt/images/Teriyaki-Salmon-Bowl.jpg') }}" class="img-responsive" alt="">
                         <h3>Teriyaki Salmon Bowl</h3>
                         <span class="fh5co-price">Rp45.000</span>
@@ -78,8 +92,10 @@
                     </div>
                 </div>
 
+
+
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                    <div class="fh5co-item">
+                    <div class="fh5co-item margin_top">
                         <img src="{{ asset('tpt/images/Ayam Geprek Keju Mozarella.jpg') }}" class="img-responsive"
                             alt="">
                         <h3>Ayam Geprek Keju Mozarella</h3>
@@ -88,14 +104,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                    <div class="fh5co-item margin_top">
-                        <img src="{{ asset('tpt/images/nasi goreng.jpg') }}" class="img-responsive" alt="">
-                        <h3>Nasi Goreng Spesial</h3>
-                        <span class="fh5co-price">Rp24.000</span>
-                        <p>Nasi goreng dengan bumbu spesial, dilengkapi telur, ayam, dan sayuran segar.</p>
-                    </div>
-                </div>
+
 
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item">
@@ -106,6 +115,7 @@
                     </div>
                 </div>
 
+
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item margin_top">
                         <img src="{{ asset('tpt/images/Ramen.jpg') }}" class="img-responsive" alt="">
@@ -114,6 +124,7 @@
                         <p>Mie ramen dengan tingkat kepedasan sesuai selera.</p>
                     </div>
                 </div>
+
 
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item">
@@ -124,6 +135,7 @@
                     </div>
                 </div>
 
+
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item margin_top">
                         <img src="{{ asset('tpt/images/spageti1.jpg') }}" class="img-responsive" alt="">
@@ -132,6 +144,8 @@
                         <p>Spaghetti creamy dengan saus carbonara gurih.</p>
                     </div>
                 </div>
+
+
 
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item">
@@ -143,6 +157,7 @@
                     </div>
                 </div>
 
+
                 <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                     <div class="fh5co-item margin_top">
                         <img src="{{ asset('tpt/images/Sup Ayam Fillet.jpg') }}" class="img-responsive" alt="">
@@ -151,7 +166,8 @@
                         <p>Sup ayam hangat dengan kuah gurih dan segar.</p>
                     </div>
                 </div>
-            </div>
+
+
                 {{-- Minuman --}}
                 <div class="row">
                     <h2
@@ -304,11 +320,10 @@
                                 alt="">
                             <h3>Purple Boba Tea</h3>
                             <span class="fh5co-price">Rp35.000</span>
-                            <p>Teh susu lembut dengan rasa ubi ungu manis, dipadukan boba kenyal yang bikin nagih.</p>
+                            <p>Teh susu lembut dengan rasa ubi ungu manis, dipadukan boba kenyal yang bikin nagih.
+                            </p>
                         </div>
                     </div>
-
-
                 </div>
 
                 {{-- Camilan --}}
@@ -330,67 +345,10 @@
 
                     <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                         <div class="fh5co-item margin_top">
-                            <img src="{{ asset('tpt/images/chicken-wings.jpeg') }}" class="img-responsive"
-                                alt="">
-                            <h3>Chicken Wings</h3>
-                            <span class="fh5co-price">Rp25.000</span>
-                            <p>Sayap ayam goreng dengan bumbu spesial.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                        <div class="fh5co-item">
-                            <img src="{{ asset('tpt/images/pisang goreng.jpeg') }}" class="img-responsive"
-                                alt="">
-                            <h3>Pisang Goreng Cokelat Keju</h3>
-                            <span class="fh5co-price">Rp18.000</span>
-                            <p>Pisang goreng dengan topping cokelat dan keju .</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                        <div class="fh5co-item margin_top">
-                            <img src="{{ asset('tpt/images/roti bakar.jpg') }}" class="img-responsive" alt="">
-                            <h3>Roti Bakar Cokelat</h3>
-                            <span class="fh5co-price">Rp15.000</span>
-                            <p>Roti bakar hangat dengan isian cokelat manis.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                        <div class="fh5co-item">
-                            <img src="{{ asset('tpt/images/cireng.jpg') }}" class="img-responsive" alt="">
-                            <h3>Cireng Bumbu Rujak</h3>
-                            <span class="fh5co-price">Rp15.000</span>
-                            <p>Cireng gurih dengan cocolan bumbu rujak pedas manis.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                        <div class="fh5co-item margin_top">
-                            <img src="{{ asset('tpt/images/martabak mini.jpg') }}" class="img-responsive"
-                                alt="">
-                            <h3>Martabak Mini Manis</h3>
-                            <span class="fh5co-price">Rp20.000</span>
-                            <p>Martabak mini dengan isian manis beragam.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                        <div class="fh5co-item">
-                            <img src="{{ asset('tpt/images/onion rings.jpg') }}" class="img-responsive" alt="">
-                            <h3>Onion Rings</h3>
-                            <span class="fh5co-price">Rp18.000</span>
-                            <p>Bawang bombay goreng renyah berbentuk cincin.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
-                        <div class="fh5co-item margin_top">
-                            <img src="{{ asset('tpt/images/sosis.jpg') }}" class="img-responsive" alt="">
-                            <h3>Sosis Bakar</h3>
-                            <span class="fh5co-price">Rp15.000</span>
-                            <p>Sosis panggang dengan rasa gurih manis.</p>
+                            <img src="{{ asset('tpt/images/bakwan.jpg') }}" class="img-responsive" alt="">
+                            <h3>Bakwan Jagung</h3>
+                            <span class="fh5co-price">Rp12.000</span>
+                            <p>Bakwan goreng dengan jagung manis yang renyah.</p>
                         </div>
                     </div>
 
@@ -403,6 +361,8 @@
                         </div>
                     </div>
 
+
+
                     <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                         <div class="fh5co-item margin_top">
                             <img src="{{ asset('tpt/images/mendoan.jpg') }}" class="img-responsive" alt="">
@@ -412,14 +372,81 @@
                         </div>
                     </div>
 
+
                     <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                         <div class="fh5co-item">
-                            <img src="{{ asset('tpt/images/bakwan.jpg') }}" class="img-responsive" alt="">
-                            <h3>Bakwan Jagung</h3>
-                            <span class="fh5co-price">Rp12.000</span>
-                            <p>Bakwan goreng dengan jagung manis yang renyah.</p>
+                            <img src="{{ asset('tpt/images/sosis.jpg') }}" class="img-responsive" alt="">
+                            <h3>Sosis Bakar</h3>
+                            <span class="fh5co-price">Rp15.000</span>
+                            <p>Sosis panggang dengan rasa gurih manis.</p>
                         </div>
                     </div>
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item margin_top">
+                            <img src="{{ asset('tpt/images/cireng.jpg') }}" class="img-responsive" alt="">
+                            <h3>Cireng Bumbu Rujak</h3>
+                            <span class="fh5co-price">Rp15.000</span>
+                            <p>Cireng gurih dengan cocolan bumbu rujak pedas manis.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item">
+                            <img src="{{ asset('tpt/images/pisang goreng.jpeg') }}" class="img-responsive"
+                                alt="">
+                            <h3>Pisang Goreng Cokelat Keju</h3>
+                            <span class="fh5co-price">Rp18.000</span>
+                            <p>Pisang goreng dengan topping cokelat dan keju .</p>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item margin_top">
+                            <img src="{{ asset('tpt/images/chicken-wings.jpeg') }}" class="img-responsive"
+                                alt="">
+                            <h3>Chicken Wings</h3>
+                            <span class="fh5co-price">Rp25.000</span>
+                            <p>Sayap ayam goreng dengan bumbu spesial.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item">
+                            <img src="{{ asset('tpt/images/martabak mini.jpg') }}" class="img-responsive"
+                                alt="">
+                            <h3>Martabak Mini Manis</h3>
+                            <span class="fh5co-price">Rp20.000</span>
+                            <p>Martabak mini dengan isian manis beragam.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item margin_top">
+                            <img src="{{ asset('tpt/images/onion rings.jpg') }}" class="img-responsive" alt="">
+                            <h3>Onion Rings</h3>
+                            <span class="fh5co-price">Rp18.000</span>
+                            <p>Bawang bombay goreng renyah berbentuk cincin.</p>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
+                        <div class="fh5co-item">
+                            <img src="{{ asset('tpt/images/roti bakar.jpg') }}" class="img-responsive" alt="">
+                            <h3>Roti Bakar Cokelat</h3>
+                            <span class="fh5co-price">Rp15.000</span>
+                            <p>Roti bakar hangat dengan isian cokelat manis.</p>
+                        </div>
+                    </div>
+
+
 
                     <div class="col-md-3 col-sm-6 col-xs-6 fh5co-item-wrap animate-box">
                         <div class="fh5co-item margin_top">
@@ -430,8 +457,7 @@
                         </div>
                     </div>
                 </div>
-
-            
+            </div>
         </div>
     </div>
 
