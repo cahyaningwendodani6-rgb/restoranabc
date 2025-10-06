@@ -12,6 +12,7 @@
     <meta name="keywords" content="restoran, makanan, minuman, reservasi, cafe" />
     <meta name="author" content="Restoran ABC" />
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon/favicon.ico') }}" />
     {{-- Google Fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
