@@ -14,7 +14,7 @@
                     <div class="display-t js-fullheight">
                         <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
                             <h1>Lihat <em>Gallery</em> Kami</h1>
-                            <h2>Brought to you by Restoran ABC</h2>
+                            <h2>Temukan Keindahan di Balik Setiap Sajian dan Suasana yang Kami Ciptakan</h2>
                         </div>
                     </div>
                 </div>
