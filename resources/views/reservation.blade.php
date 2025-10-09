@@ -131,13 +131,16 @@
                                         <div class="col-md-12">
                                             <label for="metode_pembayaran">Metode Pembayaran</label>
                                             <select id="metode_pembayaran" name="metode_pembayaran"
-                                                class="form-control @error('metode_pembayaran') is-invalid @enderror">
+                                                class="form-control @error('metode_pembayaran') is-invalid @enderror"
+                                                style="color: black; background-color: white;">
                                                 <option value="">-- Pilih Metode --</option>
                                                 <option value="Transfer"
                                                     {{ old('metode_pembayaran') == 'Transfer' ? 'selected' : '' }}>
-                                                    Transfer Bank</option>
+                                                    Transfer Bank
+                                                </option>
                                                 <option value="QRIS"
-                                                    {{ old('metode_pembayaran') == 'QRIS' ? 'selected' : '' }}>QRIS
+                                                    {{ old('metode_pembayaran') == 'QRIS' ? 'selected' : '' }}>
+                                                    QRIS
                                                 </option>
                                             </select>
                                             @error('metode_pembayaran')

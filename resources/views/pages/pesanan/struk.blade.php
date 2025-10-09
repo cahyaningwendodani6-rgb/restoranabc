@@ -31,31 +31,41 @@
                             <p><strong>Status Pembayaran:</strong>
                                 @if ($pesanan->pembayaran)
                                     @if ($pesanan->pembayaran->status == 'pending')
-                                        <span class="badge bg-warning text-dark">Menunggu Verifikasi</span>
+                                        <span
+                                            style="background-color:#ffc107; color:#000; padding:5px 10px; border-radius:10px;">Menunggu
+                                            Verifikasi</span>
                                     @elseif($pesanan->pembayaran->status == 'dibayar')
-                                        <span class="badge bg-success">Lunas</span>
+                                        <span
+                                            style="background-color:#28a745; color:#fff; padding:5px 10px; border-radius:10px;">Lunas</span>
                                     @elseif($pesanan->pembayaran->status == 'ditolak')
-                                        <span class="badge bg-danger">Ditolak</span>
-                                    @else
-                                        <span class="badge bg-info text-dark">Status Tidak Dikenal</span>
+                                        <span
+                                            style="background-color:#dc3545; color:#fff; padding:5px 10px; border-radius:10px;">Ditolak</span>
                                     @endif
                                 @else
-                                    <span class="badge bg-secondary">Belum Bayar</span>
+                                    <span
+                                        style="background-color:#6c757d; color:#fff; padding:5px 10px; border-radius:10px;">Belum
+                                        Bayar</span>
                                 @endif
                             </p>
 
                             <p><strong>Status Pesanan:</strong>
                                 @if ($pesanan->status == 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    <span
+                                        style="background-color:#ffc107; color:#000; padding:5px 10px; border-radius:10px;">Pending</span>
                                 @elseif($pesanan->status == 'diproses')
-                                    <span class="badge bg-info text-dark">Diproses</span>
+                                    <span
+                                        style="background-color:#17a2b8; color:#fff; padding:5px 10px; border-radius:10px;">Diproses</span>
                                 @elseif($pesanan->status == 'diantar')
-                                    <span class="badge bg-primary">Diantar</span>
+                                    <span
+                                        style="background-color:#007bff; color:#fff; padding:5px 10px; border-radius:10px;">Diantar</span>
                                 @elseif($pesanan->status == 'selesai')
-                                    <span class="badge bg-success">Selesai</span>
+                                    <span
+                                        style="background-color:#28a745; color:#fff; padding:5px 10px; border-radius:10px;">Selesai</span>
                                 @else
-                                    <span class="badge bg-danger">Batal</span>
+                                    <span
+                                        style="background-color:#dc3545; color:#fff; padding:5px 10px; border-radius:10px;">Batal</span>
                                 @endif
+
                             </p>
 
                         </div>
@@ -104,6 +114,7 @@
 
                                     {{-- Tombol Bayar --}}
                                     <div class="text-center mt-3">
+                                        <br>
                                         <button type="submit"
                                             style="background-color:white; color:black; font-weight:bold; font-family:'Times New Roman', serif; padding:12px 40px; border:none; border-radius:10px; font-size:18px; cursor:pointer; transition:0.3s;">
                                             Bayar
