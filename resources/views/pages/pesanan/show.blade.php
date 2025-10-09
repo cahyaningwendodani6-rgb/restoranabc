@@ -93,7 +93,7 @@
                         <tr>
                             <th width="25%">Atas Nama</th>
                             <th width="10px">:</th>
-                            <td>{{ $pesanan->atas_nama ?? 'Nama Pemilik Rekening' }}</td>
+                            <td>{{ $pesanan->atas_nama ?? 'Restoran ABC' }}</td>
                         </tr>
                     @endif
 
@@ -165,19 +165,23 @@
                 </div>
             @endif
 
-            {{-- Tambahan: QR Code + Cetak Struk --}}
-            @if ($pesanan->metode_pembayaran != 'Transfer')
-                <div class="card card-body text-center mt-3">
-                    <h5>QR Pembayaran</h5>
-                    {!! QrCode::size(200)->generate(
-                        'Pesanan #' . $pesanan->id . ' - Rp' . number_format($pesanan->menu->sum('harga') ?? 0, 0, ',', '.'),
-                    ) !!}
-                    <hr>
-                    <button onclick="window.print()" class="btn btn-success">
-                        <span class="ti ti-printer"></span> Cetak Struk
-                    </button>
-                </div>
-            @endif
+            
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+                timer: 2000,
+                timerProgressBar: true
+            })
+        </script>
+    @endif
 @endsection

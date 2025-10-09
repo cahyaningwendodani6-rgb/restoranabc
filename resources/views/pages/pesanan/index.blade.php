@@ -14,7 +14,9 @@
                             <label for="filter">Filter:</label>
                             <input type="date" name="tanggal" value="{{ request('tanggal') }}" class="form-control" />
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            <br>
                         </form>
+                        <br>
                     </div>
                 </div>
                 <table class="table dataTable">

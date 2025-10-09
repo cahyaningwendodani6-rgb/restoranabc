@@ -111,6 +111,10 @@
     <script src="{{ asset('/vendor/js/menu.js') }}"></script>
 
     <!-- endbuild -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @yield('scripts')
+
 
     <!-- Main JS -->
     <script src="{{ asset('/js/main.js') }}"></script>
