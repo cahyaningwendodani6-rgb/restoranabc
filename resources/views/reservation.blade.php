@@ -12,7 +12,7 @@
                     <div class="display-t js-fullheight">
                         <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
                             <h1>Pesan Menu Hari Ini!</h1>
-                            <h2>Brought to you by Restoran ABC</h2>
+                            <h2>Pesan Hidangan Favorit Anda Secara Online dengan Mudah dan Cepat</h2>
                         </div>
                     </div>
                 </div>
