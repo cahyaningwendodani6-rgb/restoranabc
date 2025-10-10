@@ -47,6 +47,8 @@ Route::post('/pembayaran/{id}', [PembayaranController::class, 'store'])->name('p
 Route::post('/pembayaran/{id}/upload-bukti', [PembayaranController::class, 'uploadBukti'])->name('pembayaran.upload');
 Route::get('/pembayaran/{id}/verifikasi', [PembayaranController::class, 'verifikasi'])->name('pembayaran.verifikasi');
 
+Route::put('/pembayaran/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
+
 // Pembayaran terbaru
 Route::post('/pesanan', [FormPesananController::class, 'store'])->name('formpesanan.store');
 Route::get('/pembayaran-terbaru', function () {

@@ -19,7 +19,7 @@
                             <th>Total</th>
                             <th>Metode</th>
                             <th>Tanggal</th>
-                            <th>Aksi</th> {{-- Kolom tombol Bayar --}}
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,16 +33,32 @@
                                 <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                 <td>
                                     @if ($item->status == 'pending')
-                                        <span class="badge bg-warning text-dark">Menunggu Verifikasi</span>
-                                    @elseif ($item->status == 'dibayar')
-                                        <span class="badge bg-success">Lunas</span>
-                                    @elseif ($item->status == 'ditolak')
-                                        <span class="badge bg-danger">Ditolak</span>
-                                    @else
-                                        <a href="{{ route('pembayaran.form', $item->pesanan_id) }}" class="btn btn-sm"
-                                            style="background-color:#222; color:white; font-weight:500;">
-                                            Bayar
-                                        </a>
+                                        <button type="button" class="btn btn-success btn-sm btn-verifikasi"
+                                            data-id="{{ $item->id }}">
+                                            Verifikasi
+                                        </button>
+
+                                        <button type="button" class="btn btn-danger btn-sm btn-tolak"
+                                            data-id="{{ $item->id }}">
+                                            Tolak
+                                        </button>
+
+                                        {{-- Form tersembunyi --}}
+                                        <form id="form-verifikasi-{{ $item->id }}"
+                                            action="{{ route('pembayaran.updateStatus', $item->id) }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="dibayar">
+                                        </form>
+
+                                        <form id="form-tolak-{{ $item->id }}"
+                                            action="{{ route('pembayaran.updateStatus', $item->id) }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="ditolak">
+                                        </form>
                                     @endif
                                 </td>
                             </tr>
@@ -57,3 +73,49 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("✅ Script SweetAlert aktif di halaman pembayaran");
+
+            // Tombol verifikasi
+            document.querySelectorAll('.btn-verifikasi').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    Swal.fire({
+                        title: 'Verifikasi Pembayaran?',
+                        text: 'Pastikan data pembayaran sudah benar sebelum memverifikasi.',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, Verifikasi',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('form-verifikasi-' + id).submit();
+                        }
+                    });
+                });
+            });
+
+            // Tombol tolak
+            document.querySelectorAll('.btn-tolak').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    Swal.fire({
+                        title: 'Tolak Pembayaran?',
+                        text: 'Data pembayaran akan ditolak dan tidak bisa dikembalikan.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, Tolak',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('form-tolak-' + id).submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

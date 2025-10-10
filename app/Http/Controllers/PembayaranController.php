@@ -116,4 +116,17 @@ class PembayaranController extends Controller
 
         return back()->with('error', 'Pembayaran ditolak.');
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:dibayar,ditolak',
+        ]);
+
+        $pembayaran = Pembayaran::findOrFail($id);
+        $pembayaran->status = $request->status;
+        $pembayaran->save();
+
+        return redirect()->back()->with('success', 'Status pembayaran berhasil diperbarui.');
+    }
 }
