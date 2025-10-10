@@ -4,7 +4,6 @@
 
 @section('content')
     <div id="receipt" class="section pt-5 mb-5 pb-5" style="margin-top:200px;">
-
         <div class="bg-image" style="background-image:url({{ asset('tpt/img/background03.jpg') }})"></div>
         <div class="container">
             <div class="row">
@@ -20,7 +19,6 @@
                             </h2>
                         </div>
 
-
                         <hr class="my-3">
 
                         {{-- Data Pemesan --}}
@@ -31,43 +29,38 @@
                             <p><strong>Status Pembayaran:</strong>
                                 @if ($pesanan->pembayaran)
                                     @if ($pesanan->pembayaran->status == 'pending')
-                                        <span
-                                            style="background-color:#ffc107; color:#000; padding:5px 10px; border-radius:10px;">Menunggu
-                                            Verifikasi</span>
+                                        <span style="background-color:#ffc107; color:#000; padding:5px 10px; border-radius:10px;">
+                                            Menunggu Verifikasi
+                                        </span>
                                     @elseif($pesanan->pembayaran->status == 'dibayar')
-                                        <span
-                                            style="background-color:#28a745; color:#fff; padding:5px 10px; border-radius:10px;">Lunas</span>
+                                        <span style="background-color:#28a745; color:#fff; padding:5px 10px; border-radius:10px;">
+                                            Lunas
+                                        </span>
                                     @elseif($pesanan->pembayaran->status == 'ditolak')
-                                        <span
-                                            style="background-color:#dc3545; color:#fff; padding:5px 10px; border-radius:10px;">Ditolak</span>
+                                        <span style="background-color:#dc3545; color:#fff; padding:5px 10px; border-radius:10px;">
+                                            Ditolak
+                                        </span>
                                     @endif
                                 @else
-                                    <span
-                                        style="background-color:#6c757d; color:#fff; padding:5px 10px; border-radius:10px;">Belum
-                                        Bayar</span>
+                                    <span style="background-color:#6c757d; color:#fff; padding:5px 10px; border-radius:10px;">
+                                        Belum Bayar
+                                    </span>
                                 @endif
                             </p>
 
                             <p><strong>Status Pesanan:</strong>
                                 @if ($pesanan->status == 'pending')
-                                    <span
-                                        style="background-color:#ffc107; color:#000; padding:5px 10px; border-radius:10px;">Pending</span>
+                                    <span style="background-color:#ffc107; color:#000; padding:5px 10px; border-radius:10px;">Pending</span>
                                 @elseif($pesanan->status == 'diproses')
-                                    <span
-                                        style="background-color:#17a2b8; color:#fff; padding:5px 10px; border-radius:10px;">Diproses</span>
+                                    <span style="background-color:#17a2b8; color:#fff; padding:5px 10px; border-radius:10px;">Diproses</span>
                                 @elseif($pesanan->status == 'diantar')
-                                    <span
-                                        style="background-color:#007bff; color:#fff; padding:5px 10px; border-radius:10px;">Diantar</span>
+                                    <span style="background-color:#007bff; color:#fff; padding:5px 10px; border-radius:10px;">Diantar</span>
                                 @elseif($pesanan->status == 'selesai')
-                                    <span
-                                        style="background-color:#28a745; color:#fff; padding:5px 10px; border-radius:10px;">Selesai</span>
+                                    <span style="background-color:#28a745; color:#fff; padding:5px 10px; border-radius:10px;">Selesai</span>
                                 @else
-                                    <span
-                                        style="background-color:#dc3545; color:#fff; padding:5px 10px; border-radius:10px;">Batal</span>
+                                    <span style="background-color:#dc3545; color:#fff; padding:5px 10px; border-radius:10px;">Batal</span>
                                 @endif
-
                             </p>
-
                         </div>
 
                         <hr class="my-3">
@@ -89,7 +82,6 @@
                             @endif
                         </div>
 
-
                         <hr class="my-3">
 
                         {{-- Upload Bukti Pembayaran --}}
@@ -100,28 +92,23 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="metode" value="{{ $pesanan->metode_pembayaran }}">
-
-                                    {{-- Input File --}}
                                     <div class="mb-3">
                                         <input type="file" name="bukti" class="form-control"
-                                            style="background-color:#101010; color:white; border:1px solid #fff; 
-           font-family:'Times New Roman', serif; 
-           padding:15px; height:55px; font-size:16px; 
-           border-radius:10px;"
-                                            required>
-
+                                            style="background-color:#101010; color:white; border:1px solid #fff;
+                                            font-family:'Times New Roman', serif; padding:15px; height:55px;
+                                            font-size:16px; border-radius:10px;" required>
                                     </div>
 
-                                    {{-- Tombol Bayar --}}
                                     <div class="text-center mt-3">
                                         <br>
                                         <button type="submit"
-                                            style="background-color:white; color:black; font-weight:bold; font-family:'Times New Roman', serif; padding:12px 40px; border:none; border-radius:10px; font-size:18px; cursor:pointer; transition:0.3s;">
+                                            style="background-color:white; color:black; font-weight:bold; 
+                                            font-family:'Times New Roman', serif; padding:12px 40px; 
+                                            border:none; border-radius:10px; font-size:18px; cursor:pointer; transition:0.3s;">
                                             Bayar
                                         </button>
                                     </div>
                                 </form>
-
                             </div>
                         @endif
 
@@ -151,7 +138,6 @@
                                 </a>
                             @endif
                         </div>
-
                     </div>
 
                 </div>
@@ -164,7 +150,52 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // success alert
+        // Notifikasi status pesanan otomatis
+        document.addEventListener("DOMContentLoaded", function() {
+            @if ($pesanan->status == 'pending')
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Pesanan Menunggu Diproses',
+                    text: 'Pesanan kamu sedang menunggu konfirmasi dari pihak restoran.',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+            @elseif ($pesanan->status == 'diproses')
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Pesanan Sedang Diproses',
+                    text: 'Pesanan kamu sedang disiapkan oleh tim dapur.',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+            @elseif ($pesanan->status == 'diantar')
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Pesanan Sedang Diantar',
+                    text: 'Pesanan kamu sedang dalam perjalanan menuju alamat tujuan.',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+            @elseif ($pesanan->status == 'selesai')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pesanan Selesai',
+                    text: 'Pesanan kamu telah selesai. Terima kasih telah memesan di Restoran ABC!',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+            @elseif ($pesanan->status == 'batal')
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Pesanan Dibatalkan',
+                    text: 'Pesanan kamu telah dibatalkan. Silakan buat pesanan baru jika ingin memesan kembali.',
+                    showConfirmButton: false,
+                    timer: 4000
+                });
+            @endif
+        });
+
+        // success alert (untuk upload bukti, dsb.)
         @if (session('success'))
             document.addEventListener("DOMContentLoaded", function() {
                 Swal.fire({
@@ -172,13 +203,7 @@
                     title: 'Berhasil',
                     text: @json(session('success')),
                     showConfirmButton: false,
-                    timer: 3000,
-                    customClass: {
-                        title: 'swal2-title-custom',
-                        popup: 'swal2-popup-custom',
-                        icon: 'swal2-icon-custom',
-                        htmlContainer: 'swal2-text-custom'
-                    }
+                    timer: 3000
                 });
             });
         @endif
@@ -186,7 +211,6 @@
         // exit button
         document.addEventListener("DOMContentLoaded", function() {
             const btnExit = document.getElementById("btn-exit");
-
             if (btnExit) {
                 btnExit.addEventListener("click", function(e) {
                     e.preventDefault();
@@ -199,15 +223,14 @@
                         showCancelButton: true,
                         confirmButtonColor: '#f97316',
                         cancelButtonColor: '#6c757d',
-                        confirmButtonText: '<span style="font-size:20px; padding:10px 25px; font-weight:700; display:inline-block;">Ya, keluar</span>',
-                        cancelButtonText: '<span style="font-size:20px; padding:10px 25px; font-weight:700; display:inline-block;">Batal</span>',
+                        confirmButtonText: '<span style="font-size:20px; padding:10px 25px; font-weight:700;">Ya, keluar</span>',
+                        cancelButtonText: '<span style="font-size:20px; padding:10px 25px; font-weight:700;">Batal</span>',
                         width: '600px'
                     }).then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = url;
                         }
                     });
-
                 });
             }
         });
