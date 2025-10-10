@@ -11,7 +11,7 @@
                     <p class="card-text">Halaman Untuk Mengubah Owner</p>
 
                     <form action="{{ route('ubah-profil.update') }}" method="POST">
-                    <form action="{{ route('owner.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('ubah-profil.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         

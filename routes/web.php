@@ -6,10 +6,8 @@ use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\FormPembayaranController;
-use App\Models\Pesanan;
 use App\Models\Menu;
+use App\Models\Pesanan;
 use Illuminate\Support\Facades\Route;
 
 // --- Halaman publik (tanpa login) ---
@@ -27,7 +25,6 @@ Route::get('/about', function () {
 Route::get('/reservation', [FormPesananController::class, 'index'])->name('reservation');
 Route::post('/reservation', [FormPesananController::class, 'store'])->name('formpesanan.store');
 
-
 Route::get('/contact', function () {
     return view('contact');
 });
@@ -38,7 +35,6 @@ Route::get('/gallery', function () {
 
 Route::get('/pesan', [HomeController::class, 'create'])->name('pesanan.create');
 Route::post('/pesan', [FormPesananController::class, 'store'])->name('formpesanan.store');
-
 
 Route::post('/pesan', [PesananController::class, 'store'])->name('pesanan.store');
 // Pembayaran
@@ -74,6 +70,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
 
     // Ubah profil owner
     Route::get('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'index'])->name('ubah-profil');

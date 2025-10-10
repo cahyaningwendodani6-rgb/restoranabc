@@ -119,14 +119,16 @@ class PembayaranController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required|in:dibayar,ditolak',
-        ]);
-
         $pembayaran = Pembayaran::findOrFail($id);
         $pembayaran->status = $request->status;
         $pembayaran->save();
 
-        return redirect()->back()->with('success', 'Status pembayaran berhasil diperbarui.');
+        // ubah status pesanan juga kalau dibayar
+        if ($request->status == 'dibayar') {
+            $pembayaran->pesanan->update(['status' => 'diproses']);
+        }
+
+        // kirim notifikasi ke pembeli via session
+        return redirect()->back()->with('success', 'Status pembayaran berhasil diperbarui!');
     }
 }
