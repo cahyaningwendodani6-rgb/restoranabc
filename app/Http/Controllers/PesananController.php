@@ -108,12 +108,6 @@ class PesananController extends Controller
                         ->with('success', 'Pesanan berhasil dibuat.');
     }
 
-    // Pelanggan lihat status pesanan
-    public function showStatus($id)
-    {
-        $pesanan = Pesanan::findOrFail($id);
-        return view('pesanan.status', compact('pesanan'));
-    }
 
     // Admin update status
     public function updateStatus(Request $request, $id)

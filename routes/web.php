@@ -58,8 +58,7 @@ Route::get('/pembayaran-terbaru', function () {
 
 // Struk & status pesanan
 Route::get('/pesanan/{id}/struk', [PesananController::class, 'struk'])->name('pesanan.struk');
-Route::get('/pesanan/{id}/status', [PesananController::class, 'showStatus'])->name('pesanan.status');
-Route::post('/pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
+Route::post('/pesanan/{id}/update-status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 
 // --- Login / Logout Admin ---
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

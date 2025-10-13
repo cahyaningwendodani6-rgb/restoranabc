@@ -165,12 +165,12 @@
                 </div>
             @endif
 
-            
+
         </div>
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     @if (session('success'))
         <script>
             Swal.fire({
@@ -184,4 +184,4 @@
             })
         </script>
     @endif
-@endsection
+@endpush
