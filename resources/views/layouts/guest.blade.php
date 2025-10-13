@@ -106,8 +106,7 @@
                         <ul class="fh5co-footer-links">
                             <li>Jl. Raya Selaganggeng, Dusun 1, Selaganggeng, Purbalingga, Jawa Tengah 53352</li>
                             <li><a href="tel://08123456789">+62 857-0076-3873</a></li>
-                            <li><a href="mailto:info@restoranabc.com">info@restoranabc.com</a></li>
-                            <li><a href="http://restoranabc.com">restoranabc.com</a></li>
+                            <li><a href="mailto:aprilianiw479@gmail.com">aprilianiw479@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>

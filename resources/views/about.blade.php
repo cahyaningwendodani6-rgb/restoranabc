@@ -45,7 +45,6 @@
                         <p>Restoran ABC menjadi pilihan tepat bagi mahasiswa, pekerja kantoran, hingga keluarga modern yang
                             ingin menikmati makanan enak, praktis, dan terjangkau. Kami percaya, makanan bukan hanya soal
                             rasa, tapi juga tentang pengalaman yang hangat dan menyenangkan.</p>
-                        <p><a href="{{ route('about') }}" class="btn btn-primary btn-outline">Tentang Kami</a></p>
                     </div>
                 </div>
             </div>

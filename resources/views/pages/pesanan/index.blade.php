@@ -12,7 +12,7 @@
                     <div class="col-md-5">
                         <form action="" method="GET" class="d-flex align-items-center gap-2">
                             <label for="filter">Filter:</label>
-                            <input type="date" name="tanggal" value="{{ request('tanggal') }}" class="form-control" />
+                            <input type="date" name="tanggal" value="{{ $tanggal }}" class="form-control" />
                             <button type="submit" class="btn btn-primary">Submit</button>
                             <br>
                         </form>

@@ -2,20 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pesanan;
 use App\Models\Menu;
-use App\Models\Pembayaran; 
+use App\Models\Pembayaran;
+use App\Models\Pesanan;
+use Illuminate\Http\Request;
 
 class PesananController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pesanan = Pesanan::with('menu')->orderBy('id', 'desc')->get();
-        return view('pages.pesanan.index', compact('pesanan'));
+        // Mulai query pesanan dengan relasi menu
+        $query = Pesanan::with('menu')->orderBy('id', 'desc');
+
+        // Jika user memilih tanggal di form filter
+        if ($request->filled('tanggal')) {
+            $tanggal = $request->tanggal;
+
+            // Filter data berdasarkan tanggal dibuatnya pesanan
+            $query->whereDate('created_at', $tanggal);
+        }
+
+        // Ambil hasil query
+        $pesanan = $query->get();
+
+        // Kirim ke view
+        return view('pages.pesanan.index', [
+            'pesanan' => $pesanan,
+            'tanggal' => $request->tanggal,
+        ]);
     }
 
     /**
@@ -64,12 +81,12 @@ class PesananController extends Controller
         // buat pembayaran default (pending)
         $pesanan->pembayaran()->create([
             'metode' => $request->metode_pembayaran,
-            'status' => 'pending'
+            'status' => 'pending',
         ]);
 
         // redirect ke struk
         return redirect()->route('pesanan.struk', $pesanan->id)
-                        ->with('success', 'Pesanan berhasil dibuat.');
+            ->with('success', 'Pesanan berhasil dibuat.');
     }
 
     /**
@@ -78,6 +95,7 @@ class PesananController extends Controller
     public function show(string $id)
     {
         $pesanan = Pesanan::with('menu')->findOrFail($id);
+
         return view('pages.pesanan.show', compact('pesanan'));
     }
 
@@ -88,6 +106,7 @@ class PesananController extends Controller
     {
         $pesanan = Pesanan::findOrFail($id);
         $pesanan->delete();
+
         return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dihapus');
     }
 
@@ -104,16 +123,16 @@ class PesananController extends Controller
 
         // Kirim ke view
         return view('pages.pesanan.struk', compact('pesanan', 'qrisString'));
-        return redirect()->route('pesanan.struk', $pesanan->id)
-                        ->with('success', 'Pesanan berhasil dibuat.');
-    }
 
+        return redirect()->route('pesanan.struk', $pesanan->id)
+            ->with('success', 'Pesanan berhasil dibuat.');
+    }
 
     // Admin update status
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,diproses,diantar,selesai,batal'
+            'status' => 'required|in:pending,diproses,diantar,selesai,batal',
         ]);
 
         $pesanan = Pesanan::findOrFail($id);
@@ -126,7 +145,7 @@ class PesananController extends Controller
     public function indexAdmin()
     {
         $pesanan = \App\Models\Pesanan::with('menu')->latest()->get();
+
         return view('admin.pesanan.index', compact('pesanan'));
     }
-
 }
