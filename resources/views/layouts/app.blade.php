@@ -115,7 +115,16 @@
     <script src="{{ asset('/js/main.js') }}"></script>
 
     
-    @stack('scripts')
+    <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Main JS -->
+<script src="{{ asset('/js/main.js') }}"></script>
+
+<!-- Tambahkan ini agar SweetAlert di halaman tampil -->
+@yield('scripts')
+@stack('scripts')
+
 </body>
 
 </html>

@@ -49,11 +49,6 @@
                                         <span class="ti ti-eye"></span>
                                     </a>
 
-                                    <a href="{{ route('pesanan.struk', $item->id) }}" class="btn btn-sm btn-success"
-                                        target="_blank">
-                                        <span class="ti ti-printer"></span>
-                                    </a>
-
                                     <a href="javascript:;"
                                         onclick="actionDelete('{{ route('pesanan.destroy', $item->id) }}')"
                                         class="btn btn-sm btn-danger">
