@@ -28,6 +28,7 @@ class LaporanController extends Controller
                     'jumlah_pesanan' => $pesananPerTanggal->count(),
                 ];
             })
+            ->sortByDesc('tanggal') // 🔹 urutkan berdasarkan tanggal terbaru
             ->values();
 
         return view('pages.laporan.index', compact('laporan'));
