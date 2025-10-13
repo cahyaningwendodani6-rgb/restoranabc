@@ -11,50 +11,72 @@
                     <p class="card-text">Halaman Untuk Mengubah Owner</p>
 
                     <form action="{{ route('ubah-profil.update') }}" method="POST">
-                    <form action="{{ route('ubah-profil.update') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        
-                        <div class="form-group mb-3">
-                            <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}">
-                            @error('name')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                        <form action="{{ route('ubah-profil.update') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
 
-                        <div class="form-group mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
-                            @error('email')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                            <div class="form-group mb-3">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="{{ $user->name }}">
+                                @error('name')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                        <div class="form-group mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" value="{{ $user->password }}">
-                            @error('password')
-                                <span class="invalid-feedback d-block" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                            <div class="form-group mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    value="{{ $user->email }}">
+                                @error('email')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                        <div class="form-group mb-3">
-                            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
-                        </div>
+                            <div class="form-group mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    value="{{ $user->password }}">
+                                @error('password')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
+                            <div class="form-group mb-3">
+                                <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                    name="password_confirmation">
+                            </div>
+
+                            <a href="{{ route('dashboard.index') }}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
 
                 </div>
             </div>
         </div>
     </div>
+
+    @if (session('success'))
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: @json(session('success')),
+                    showConfirmButton: false,
+                    timer: 2500
+                });
+            });
+        </script>
+    @endif
+
 @endsection
