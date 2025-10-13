@@ -39,7 +39,7 @@
 
                 {{-- contoh grid gallery --}}
                 <div class="col-md-3 col-sm-3 fh5co-gallery_item">
-                    <div class="fh5co-bg-img" style="background-image: url({{ asset('tpt/images/ramenn.jpeg') }});"
+                    <div class="fh5co-bg-img" style="background-image: url({{ asset('tpt/images/Ramen.jpg') }});"
                         data-trigger="zoomerang"></div>
                     <div class="fh5co-bg-img"
                         style="background-image: url({{ asset('tpt/images/Lasagna-Cheese-Melt.jpeg') }});"

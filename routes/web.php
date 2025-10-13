@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Ubah profil owner
     Route::get('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'index'])->name('ubah-profil');
-    Route::post('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'update'])->name('ubah-profil.update');
+    Route::put('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'update'])->name('ubah-profil.update');
 
     // Menu (CRUD)
     Route::resource('/menu', App\Http\Controllers\MenuController::class);

@@ -17,7 +17,7 @@ class OwnerController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required |email|unique:users,email,'. Auth::user()->id,
+            'email' => 'required|email|unique:users,email,'. Auth::user()->id,
             'password' => 'confirmed|min:8|nullable',
             'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,|max:2048'
         ]);
