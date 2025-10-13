@@ -53,6 +53,9 @@
                                 name="password_confirmation" placeholder="Ulangi password baru">
                         </div>
 
+                        <a href="{{ route('dashboard.index') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Kembali
+                        </a>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </form>
                 </div>
