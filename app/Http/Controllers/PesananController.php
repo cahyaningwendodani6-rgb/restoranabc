@@ -14,25 +14,23 @@ class PesananController extends Controller
      */
     public function index(Request $request)
     {
-        // Mulai query pesanan dengan relasi menu
-        $query = Pesanan::with('menu')->orderBy('id', 'desc');
+        // Ambil semua pesanan + relasi menu
+        $query = \App\Models\Pesanan::with('menu');
 
-        // Jika user memilih tanggal di form filter
+        // Filter berdasarkan tanggal (jika dipilih)
         if ($request->filled('tanggal')) {
-            $tanggal = $request->tanggal;
-
-            // Filter data berdasarkan tanggal dibuatnya pesanan
-            $query->whereDate('created_at', $tanggal);
+            $query->whereDate('created_at', $request->tanggal);
         }
 
-        // Ambil hasil query
-        $pesanan = $query->get();
+        // Filter berdasarkan status (jika dipilih)
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
 
-        // Kirim ke view
-        return view('pages.pesanan.index', [
-            'pesanan' => $pesanan,
-            'tanggal' => $request->tanggal,
-        ]);
+        // Urutkan dari terbaru ke lama
+        $pesanan = $query->orderBy('created_at', 'desc')->get();
+
+        return view('pages.pesanan.index', compact('pesanan'));
     }
 
     /**

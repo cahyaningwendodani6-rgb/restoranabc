@@ -8,16 +8,59 @@
             <h3>Daftar Riwayat Pesanan</h3>
 
             <div class="card card-body">
-                <div class="row">
-                    <div class="col-md-5">
-                        <form action="" method="GET" class="d-flex align-items-center gap-2">
-                            <label for="filter">Filter:</label>
-                            <input type="date" name="tanggal" value="{{ $tanggal }}" class="form-control" />
+                <div class="row align-items-center mb-3">
+                    {{-- Filter tanggal di kiri --}}
+                    <div class="col-md-6">
+                        <form id="filterForm" action="" method="GET" class="d-flex align-items-center gap-2">
+                            <label for="tanggal" class="fw-semibold">Filter:</label>
+                            <input type="date" name="tanggal" value="{{ request('tanggal') }}"
+                                class="form-control w-auto" />
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <br>
+                            <a href="{{ route('pesanan.index') }}" class="btn btn-secondary">Reset</a>
                         </form>
-                        <br>
                     </div>
+
+                    {{-- Filter status di kanan --}}
+                    <div class="col-md-6 text-end">
+                        <form id="statusForm" action="" method="GET" class="d-inline">
+                            {{-- Bawa juga tanggal agar filter gabung --}}
+                            <input type="hidden" name="tanggal" value="{{ request('tanggal') }}">
+
+                            <select name="status" id="statusFilter" class="form-select w-auto d-inline text-white fw-bold"
+                                style="
+                                    @if (request('status') == 'pending') background-color: #ffc107;
+                                    @elseif (request('status') == 'diproses') background-color: #0d6efd;
+                                    @elseif (request('status') == 'diantar') background-color: #20c997;
+                                    @elseif (request('status') == 'selesai') background-color: #198754;
+                                    @elseif (request('status') == 'batal') background-color: #dc3545;
+                                    @else background-color: #6c757d; @endif
+                                "
+                                onchange="this.form.submit()">
+                                <option value="">-- Semua Status --</option>
+                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}
+                                    style="background-color:#ffc107; color:#000;">
+                                    Pending
+                                </option>
+                                <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}
+                                    style="background-color:#0d6efd; color:#fff;">
+                                    Diproses
+                                </option>
+                                <option value="diantar" {{ request('status') == 'diantar' ? 'selected' : '' }}
+                                    style="background-color:#20c997; color:#fff;">
+                                    Diantar
+                                </option>
+                                <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}
+                                    style="background-color:#198754; color:#fff;">
+                                    Selesai
+                                </option>
+                                <option value="batal" {{ request('status') == 'batal' ? 'selected' : '' }}
+                                    style="background-color:#dc3545; color:#fff;">
+                                    Batal
+                                </option>
+                            </select>
+                        </form>
+                    </div>
+
                 </div>
                 <table class="table dataTable">
                     <thead>
@@ -27,6 +70,7 @@
                             <th>Telp</th>
                             <th>Pesanan</th>
                             <th>Tanggal</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -44,6 +88,43 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
+                                <td>
+                                    <form action="{{ route('pesanan.updateStatus', $item->id) }}" method="POST"
+                                        class="d-flex align-items-center gap-2">
+                                        @csrf
+                                        @method('PUT')
+                                        <select name="status" id="status" class="form-select w-auto text-white fw-bold"
+                                            style="
+                                                @if ($item->status == 'pending') background-color: #ffc107; 
+                                                @elseif ($item->status == 'diproses') background-color: #0d6efd;
+                                                @elseif ($item->status == 'diantar') background-color: #20c997;
+                                                @elseif ($item->status == 'selesai') background-color: #198754;
+                                                @elseif ($item->status == 'batal') background-color: #dc3545; @endif
+                                            "
+                                            onchange="this.form.submit()">
+                                            <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}
+                                                style="background-color: #ffc107; color: #000;">
+                                                Pending
+                                            </option>
+                                            <option value="diproses" {{ $item->status == 'diproses' ? 'selected' : '' }}
+                                                style="background-color: #0d6efd; color: #fff;">
+                                                Diproses
+                                            </option>
+                                            <option value="diantar" {{ $item->status == 'diantar' ? 'selected' : '' }}
+                                                style="background-color: #20c997; color: #fff;">
+                                                Diantar
+                                            </option>
+                                            <option value="selesai" {{ $item->status == 'selesai' ? 'selected' : '' }}
+                                                style="background-color: #198754; color: #fff;">
+                                                Selesai
+                                            </option>
+                                            <option value="batal" {{ $item->status == 'batal' ? 'selected' : '' }}
+                                                style="background-color: #dc3545; color: #fff;">
+                                                Batal
+                                            </option>
+                                        </select>
+                                    </form>
+                                </td>
                                 <td>
                                     <a href="{{ route('pesanan.show', $item->id) }}" class="btn btn-sm btn-info">
                                         <span class="ti ti-eye"></span>
