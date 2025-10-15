@@ -60,6 +60,8 @@ Route::get('/pembayaran-terbaru', function () {
 Route::get('/pesanan/{id}/struk', [PesananController::class, 'struk'])->name('pesanan.struk');
 Route::post('/pesanan/{id}/update-status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 Route::put('/pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
+Route::get('/pesanan/{id}/cetak', [PesananController::class, 'cetak'])->name('pesanan.cetak');
+
 
 // --- Login / Logout Admin ---
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -83,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/pesanan', App\Http\Controllers\PesananController::class)->only('index', 'show', 'destroy');
     Route::get('/admin/pesanan', [PesananController::class, 'indexAdmin'])->name('admin.pesanan.index');
     Route::post('/admin/pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('admin.pesanan.updateStatus');
+    Route::get('/admin/pesanan/{id}/cetak', [PesananController::class, 'cetakAdmin'])->name('admin.pesanan.cetak');
 
     // Form Pembayaran (Admin)
     Route::prefix('admin')->name('admin.')->group(function () {

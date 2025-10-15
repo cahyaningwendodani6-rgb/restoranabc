@@ -146,4 +146,18 @@ class PesananController extends Controller
 
         return view('admin.pesanan.index', compact('pesanan'));
     }
+
+    public function cetak($id)
+    {
+        $pesanan = Pesanan::with(['menu', 'pembayaran'])->findOrFail($id);
+
+        return view('pages.pesanan.struk', compact('pesanan'));
+    }
+
+    public function cetakAdmin($id)
+    {
+        $pesanan = Pesanan::with('menu')->findOrFail($id);
+
+        return view('pages.owner.struk', compact('pesanan'));
+    }
 }

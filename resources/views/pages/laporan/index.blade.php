@@ -5,8 +5,8 @@
 @section('content')
     <div class="container-fluid">
         <h3 class="mb-3">Laporan</h3>
-        <table class="table table-bordered table-striped">
-            <thead style="background-color: #ffffff; color: #000000;">
+        <table class="table dataTable align-middle">
+            <thead class="table-dark">
                 <tr>
                     <th>Tanggal</th>
                     <th>Pendapatan (Rp)</th>

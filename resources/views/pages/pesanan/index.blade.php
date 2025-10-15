@@ -60,10 +60,10 @@
                             </select>
                         </form>
                     </div>
-
                 </div>
-                <table class="table dataTable">
-                    <thead>
+
+                <table class="table dataTable align-middle">
+                    <thead class="table-dark">
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
@@ -71,7 +71,7 @@
                             <th>Pesanan</th>
                             <th>Tanggal</th>
                             <th>Status</th>
-                            <th>Aksi</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -82,9 +82,7 @@
                                 <td>{{ $item->telp }}</td>
                                 <td>
                                     @foreach ($item->menu as $menu)
-                                        {{ $menu->nama }} x {{ $menu->pivot->jumlah }}@if (!$loop->last)
-                                            ,
-                                        @endif
+                                        {{ $menu->nama }} x {{ $menu->pivot->jumlah }}@if (!$loop->last),@endif
                                     @endforeach
                                 </td>
                                 <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
@@ -125,14 +123,23 @@
                                         </select>
                                     </form>
                                 </td>
-                                <td>
-                                    <a href="{{ route('pesanan.show', $item->id) }}" class="btn btn-sm btn-info">
+                                <td class="text-center">
+                                    {{-- Lihat detail pesanan --}}
+                                    <a href="{{ route('pesanan.show', $item->id) }}" class="btn btn-sm btn-info me-1"
+                                        title="Lihat Detail">
                                         <span class="ti ti-eye"></span>
                                     </a>
 
-                                    <a href="javascript:;"
-                                        onclick="actionDelete('{{ route('pesanan.destroy', $item->id) }}')"
-                                        class="btn btn-sm btn-danger">
+                                    {{-- Cetak struk --}}
+                                    <a href="{{ route('admin.pesanan.cetak', $item->id) }}" target="_blank"
+                                        class="btn btn-sm text-white"
+                                        style="background-color:#f97316; font-weight:600;" title="Cetak Struk">
+                                        <span class="ti ti-printer"></span>
+                                    </a>
+
+                                    {{-- Hapus pesanan --}}
+                                    <a href="javascript:;" onclick="actionDelete('{{ route('pesanan.destroy', $item->id) }}')"
+                                        class="btn btn-sm btn-danger ms-1" title="Hapus Pesanan">
                                         <span class="ti ti-trash"></span>
                                     </a>
                                 </td>
@@ -143,6 +150,7 @@
             </div>
         </div>
     </div>
+
     <form action="" id="formDelete" method="POST" class="d-none">
         @csrf
         @method('DELETE')
@@ -160,8 +168,6 @@
     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
-        //penusisan java script internal
-
         function actionDelete(url) {
             Swal.fire({
                 title: "Apakah kamu yakin?",
