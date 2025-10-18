@@ -62,7 +62,6 @@ Route::post('/pesanan/{id}/update-status', [PesananController::class, 'updateSta
 Route::put('/pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 Route::get('/pesanan/{id}/cetak', [PesananController::class, 'cetak'])->name('pesanan.cetak');
 
-
 // --- Login / Logout Admin ---
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -72,7 +71,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-
 
     // Ubah profil owner
     Route::get('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'index'])->name('ubah-profil');
@@ -98,4 +96,13 @@ Route::middleware(['auth'])->group(function () {
     // Laporan
     Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/{tanggal}', [App\Http\Controllers\LaporanController::class, 'detail'])->name('laporan.detail');
+
+    Route::get('/notif-counts', [App\Http\Controllers\NotifikasiController::class, 'counts'])->name('notif.counts');
+    Route::get('/notif-counts', function () {
+        return response()->json([
+            'pesanan' => \App\Models\Pesanan::where('status', 'pending')->count(),
+            'pembayaran' => \App\Models\Pembayaran::where('status', 'pending', 'Menunggu Verifikasi')->count(),
+        ]);
+    })->name('notif.counts');
+
 });
