@@ -5,33 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Pesanan extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'pesanan';
 
     protected $fillable = [
-        'nama',
-        'telp',
-        'email',
-        'alamat',
-        'metode_pembayaran',
-        'catatan',
-        'total_harga'
+        'user_id', 'nama', 'telp', 'email', 'alamat', 'metode_pembayaran', 'total_harga', 'catatan',
     ];
 
     public function menu()
     {
         return $this->belongsToMany(Menu::class, 'pesanan_menu')
-                ->withPivot('jumlah')
-                ->withTimestamps();
+            ->withPivot('jumlah')
+            ->withTimestamps();
     }
 
     public function pembayaran()
     {
-         return $this->hasOne(Pembayaran::class, 'pesanan_id', 'id');
+        return $this->hasOne(Pembayaran::class, 'pesanan_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

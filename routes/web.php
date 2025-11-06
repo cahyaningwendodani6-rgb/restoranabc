@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\PelangganController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PelangganLoginController;
+use App\Http\Controllers\Auth\PelangganRegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\HomeController;
@@ -14,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('landing');
 
+Route::get('/login-pelanggan', [PelangganLoginController::class, 'showLoginForm'])->name('pelanggan.login');
+Route::post('/login-pelanggan', [PelangganLoginController::class, 'login'])->name('pelanggan.login.post');
+Route::post('/logout-pelanggan', [PelangganLoginController::class, 'logout'])->name('pelanggan.logout');
+
+Route::get('/register-pelanggan', [PelangganRegisterController::class, 'showRegistrationForm'])->name('pelanggan.register');
+Route::post('/register-pelanggan', [PelangganRegisterController::class, 'register'])->name('pelanggan.register.post');
+
 Route::get('/menunya', function () {
     return view('menunya');
 })->name('menunya');
@@ -22,8 +32,8 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/reservation', [FormPesananController::class, 'index'])->name('reservation');
-Route::post('/reservation', [FormPesananController::class, 'store'])->name('formpesanan.store');
+Route::get('/pemesanan', [FormPesananController::class, 'index'])->name('pemesanan');
+Route::post('/pemesanan', [FormPesananController::class, 'store'])->name('formpesanan.store');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -62,7 +72,6 @@ Route::post('/pesanan/{id}/update-status', [PesananController::class, 'updateSta
 Route::put('/pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 Route::get('/pesanan/{id}/cetak', [PesananController::class, 'cetak'])->name('pesanan.cetak');
 
-
 // --- Login / Logout Admin ---
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -72,7 +81,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-
 
     // Ubah profil owner
     Route::get('/ubah-profil', [App\Http\Controllers\OwnerController::class, 'index'])->name('ubah-profil');
@@ -94,6 +102,18 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/form-pembayaran/{id}/tolak', [PembayaranController::class, 'tolak'])->name('form-pembayaran.tolak');
         Route::post('/form-pembayaran/{id}/detail', [App\Http\Controllers\FormPembayaranController::class, 'show'])->name('form-pembayaran.show');
     });
+
+    Route::prefix('admin/pelanggan')->name('admin.pelanggan.')->group(function () {
+        Route::get('/{id}/detail', [App\Http\Controllers\Admin\PelangganController::class, 'detail'])->name('detail');
+        Route::delete('/{id}', [App\Http\Controllers\Admin\PelangganController::class, 'destroy'])->name('destroy');
+        Route::get('/admin/pelanggan/{id}/detail', [PelangganController::class, 'detail'])
+            ->name('admin.pelanggan.detail');
+
+    });
+
+    Route::get('/admin/pelanggan', [PelangganController::class, 'index'])->name('admin.pelanggan.index');
+
+    Route::get('/admin/pelanggan/pesanan/{id}', [App\Http\Controllers\Admin\PelangganController::class, 'detailPesanan'])->name('admin.pelanggan.pesanan.detail');
 
     // Laporan
     Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');

@@ -472,7 +472,7 @@
                     </p>
                     <p>Kami siap mengantarkan pesanan langsung ke rumah, kantor, atau tempat Anda bersantai.</p>
                     <p>
-                        <a href="{{ route('reservation') }}" class="btn btn-primary btn-lg btn-outline">
+                        <a href="{{ route('pemesanan') }}" class="btn btn-primary btn-lg btn-outline">
                             Pesan Sekarang
                         </a>
                     </p>

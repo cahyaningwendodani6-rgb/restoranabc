@@ -54,5 +54,12 @@
                 Laporan
             </a>
         </li>
+
+        <li class="menu-item">
+            <a class="menu-link" href="{{ route('admin.pelanggan.index') }}">
+                <i class="menu-icon tf-icons fa fa-users"></i> Pelanggan
+            </a>
+        </li>
+
     </ul>
 </aside>

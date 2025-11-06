@@ -1,12 +1,51 @@
 @extends('layouts.guest')
 
-@section('title', 'Reservation - Restoran ABC')
+@section('title', 'Pesanan - Restoran ABC')
+
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
 
 @section('content')
     <header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner"
         style="background-image: url({{ asset('tpt/images/hero_1.jpeg') }});" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
+            @if (session('success'))
+                <div id="toast-success"
+                    style="
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 200, 100, 0.9);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-size: 15px;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.5s ease;
+        ">
+                    ✅ {{ session('success') }}
+                </div>
+
+                <script>
+                    const toast = document.getElementById('toast-success');
+                    setTimeout(() => {
+                        toast.style.opacity = '1';
+                        toast.style.top = '50px';
+                    }, 100); // fade in
+                    setTimeout(() => {
+                        toast.style.opacity = '0';
+                        toast.style.top = '20px';
+                        setTimeout(() => toast.remove(), 500);
+                    }, 3000); // auto hide
+                </script>
+            @endif
+
+
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="display-t js-fullheight">
@@ -22,27 +61,42 @@
 
     <div id="fh5co-reservation-form" class="fh5co-section">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 fh5co-heading animate-box">
-                    <h2>Reservasi</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>
-                                Pilih menu favorit Anda dan lakukan pemesanan dengan cepat dan mudah.
-                                Restoran ABC siap menyajikan hidangan terbaik untuk menemani hari Anda.
-                            </p>
-                        </div>
+            @if (!Auth::guard('pelanggan')->check())
+                {{-- TAMPILAN UNTUK YANG BELUM LOGIN --}}
+                <div class="row text-center">
+                    <div class="col-md-12 fh5co-heading animate-box">
+                        <h2>Pesanan</h2>
+                        <p style="font-size:18px;">
+                            Untuk melakukan pemesanan, <strong>pelanggan harus login terlebih dahulu.</strong><br>
+                            Silakan klik tombol di bawah ini untuk menuju halaman login pelanggan.
+                        </p>
+                        <a href="{{ route('pelanggan.login') }}" class="btn btn-primary btn-outline btn-lg mt-3">
+                            Login Sekarang
+                        </a>
+                    </div>
+                </div>
+            @else
+                {{-- TAMPILAN UNTUK YANG SUDAH LOGIN --}}
+                <div class="text-end mb-4" style="text-align: right;">
+                    <form action="{{ route('pelanggan.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                    </form>
+                </div>
+
+                {{-- FORM PEMESANAN --}}
+                <div class="row">
+                    <div class="col-md-12 fh5co-heading animate-box">
+                        <h2>Form Pemesanan</h2>
+                        <p>Pilih menu favorit Anda dan lakukan pemesanan dengan cepat dan mudah.</p>
                     </div>
                 </div>
 
-                <div id="reservation" class="section pt-5 mb-5 pb-5" style="padding-top:170px;">
-
+                <div id="reservation" class="section pt-5 mb-5 pb-5" style="padding-top:50px;">
                     <div class="bg-image" style="background-image:url({{ asset('tpt/img/background03.jpg') }})"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6 col-md-push-6 col-sm-6 col-sm-push-6">
-
-                                {{-- Form Pesanan --}}
                                 <form action="{{ route('formpesanan.store') }}" method="POST" id="form-wrap">
                                     @csrf
 
@@ -52,7 +106,7 @@
                                             <label for="nama">Nama</label>
                                             <input type="text" id="nama" name="nama"
                                                 class="form-control @error('nama') is-invalid @enderror"
-                                                value="{{ old('nama') }}">
+                                                value="{{ old('nama', Auth::guard('pelanggan')->user()->name ?? '') }}">
                                             @error('nama')
                                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                                             @enderror
@@ -78,7 +132,7 @@
                                             <label for="email">Email</label>
                                             <input type="email" id="email" name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
-                                                value="{{ old('email') }}">
+                                                value="{{ old('email', Auth::guard('pelanggan')->user()->email ?? '') }}">
                                             @error('email')
                                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                                             @enderror
@@ -169,6 +223,7 @@
                                         </div>
                                     </div>
 
+
                                     {{-- Tombol --}}
                                     <div class="row form-group text-center">
                                         <div class="col-md-12">
@@ -176,15 +231,13 @@
                                                 value="Pesan Sekarang">
                                         </div>
                                     </div>
+
                                 </form>
-                                {{-- /Form Pesanan --}}
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <br>
-            </div>
+            @endif
         </div>
     </div>
     <div id="fh5co-started" class="fh5co-section animate-box">
@@ -228,7 +281,6 @@
                 if (!cb.checked) {
                     jumlahInput.disabled = true;
                 }
-
                 cb.addEventListener("change", function() {
                     if (cb.checked) {
                         jumlahInput.disabled = false;

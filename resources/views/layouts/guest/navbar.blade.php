@@ -1,58 +1,33 @@
- <header id="header">
-
-     <!-- Top nav -->
-     <div id="top-nav">
-         <div class="container">
-
-             <!-- logo -->
-             <div class="logo">
-                 <a href="{{ url('/') }}"><img src="{{ asset('tpt/img/logo0.jpg') }}" alt="logo"></a>
+ <nav class="fh5co-nav" role="navigation">
+     <div class="container">
+         <div class="row">
+             <div class="col-xs-12 text-center logo-wrap">
+                 <div id="fh5co-logo">
+                     <a href="{{ url('/') }}">RestoranABC<span>.</span></a>
+                 </div>
              </div>
-             <!-- logo -->
-
-             <!-- Mobile toggle -->
-             <button class="navbar-toggle">
-                 <span></span>
-             </button>
-             <!-- Mobile toggle -->
-
-             <!-- social links -->
-             <!-- /social links -->
-
+             <div class="col-xs-12 text-center menu-1 menu-wrap">
+                 <ul>
+                     <li class="{{ request()->is('/') ? 'active' : '' }}">
+                         <a href="{{ url('/') }}">Home</a>
+                     </li>
+                     <li class="{{ request()->is('menunya') ? 'active' : '' }}">
+                         <a href="{{ url('/menunya') }}">Menu</a>
+                     </li>
+                     <li class="{{ request()->is('gallery*') ? 'active' : '' }}">
+                         <a href="{{ url('/gallery') }}">Gallery</a>
+                     </li>
+                     <li class="{{ request()->is('pemesanan*') ? 'active' : '' }}">
+                         <a href="{{ url('/pemesanan') }}">Pemesanan</a>
+                     </li>
+                     <li class="{{ request()->is('about') ? 'active' : '' }}">
+                         <a href="{{ url('/about') }}">About</a>
+                     </li>
+                     <li class="{{ request()->is('contact') ? 'active' : '' }}">
+                         <a href="{{ url('/contact') }}">Contact</a>
+                     </li>
+                 </ul>
+             </div>
          </div>
      </div>
-     <!-- /Top nav -->
-
-     <!-- Bottom nav -->
-     <div id="bottom-nav">
-         <div class="container">
-             <nav id="nav">
-
-                 <!-- nav -->
-                 <ul class="main-nav nav navbar-nav">
-                     <li><a href="{{ route('landing') }}">Home</a></li>
-                     <li><a href="#about">About</a></li>
-                     <li><a href="#menu">Menu</a></li>
-                 </ul>
-                 <!-- /nav -->
-
-                 <!-- button nav -->
-                 <ul class="cta-nav">
-                     <li><a href="{{ route('pesanan') }}" class="main-button">Pesan</a></li>
-                 </ul>
-                 <!-- button nav -->
-
-                 <!-- contact nav -->
-                 <ul class="contact-nav nav navbar-nav">
-                     <li><a href="tel:0455481497"><i class="fa fa-phone"></i> 0822-3511-7203</a></li>
-                     <li><a href="#"><i class="fa fa-map-marker"></i> 3685 ABC Street</a></li>
-                 </ul>
-                 <!-- contact nav -->
-
-             </nav>
-         </div>
-     </div>
-     <!-- /Bottom nav -->
-
-
- </header>
+ </nav>

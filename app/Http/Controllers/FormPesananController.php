@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pesanan;
 use App\Models\Menu;
+use App\Models\Pesanan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FormPesananController extends Controller
 {
@@ -15,7 +16,7 @@ class FormPesananController extends Controller
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('reservation', compact('menu', 'pesanan'));
+        return view('pemesanan', compact('menu', 'pesanan'));
     }
 
     public function store(Request $request)
@@ -39,8 +40,13 @@ class FormPesananController extends Controller
             'total_harga.required' => 'Total harga belum muncul sebelum kamu memilih menu',
         ]);
 
+        // 🟢 Ambil user yang sedang login (pelanggan)
+        $user = Auth::guard('pelanggan')->user();
+
         // Simpan pesanan
         $pesanan = Pesanan::create([
+            'pelanggan_id' => Auth::guard('pelanggan')->id(),
+            // 🟢 kaitkan dengan pelanggan
             'nama' => $validated['nama'],
             'telp' => $validated['telp'],
             'email' => $validated['email'] ?? null,
@@ -50,7 +56,7 @@ class FormPesananController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        // Simpan detail menu (pakai attach langsung)
+        // Simpan detail menu
         foreach ($request->menu as $menuData) {
             $pesanan->menu()->attach($menuData['id'], [
                 'jumlah' => $menuData['jumlah'],
@@ -70,5 +76,4 @@ class FormPesananController extends Controller
 
         return view('pages.pesanan.struk', compact('pesanan', 'qrisString'));
     }
-
 }
