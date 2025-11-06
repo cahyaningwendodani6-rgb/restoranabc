@@ -118,4 +118,13 @@ Route::middleware(['auth'])->group(function () {
     // Laporan
     Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/{tanggal}', [App\Http\Controllers\LaporanController::class, 'detail'])->name('laporan.detail');
+
+    Route::get('/notif-counts', [App\Http\Controllers\NotifikasiController::class, 'counts'])->name('notif.counts');
+    Route::get('/notif-counts', function () {
+        return response()->json([
+            'pesanan' => \App\Models\Pesanan::where('status', 'pending')->count(),
+            'pembayaran' => \App\Models\Pembayaran::where('status', 'pending', 'Menunggu Verifikasi')->count(),
+        ]);
+    })->name('notif.counts');
+
 });

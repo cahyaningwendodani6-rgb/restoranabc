@@ -16,50 +16,60 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
             <a href="{{ route('dashboard.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 Dashboard
             </a>
         </li>
 
-        <li class="menu-item">
+        <li class="menu-item {{ request()->routeIs('menu.*') ? 'active' : '' }}">
             <a href="{{ route('menu.index') }}" class="menu-link">
-                <!-- Bootstrap Icons CSS -->
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-                <!-- Ikon garis tiga -->
                 <i class="menu-icon tf-icons bi bi-list me-2"></i>
                 Menu
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="{{ route('pesanan.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bi bi-clipboard-check-fill me-2"></i>
-                Pesanan
+        <li class="menu-item {{ request()->routeIs('pesanan.*') || request()->is('pesanan*') ? 'active' : '' }}">
+            <a href="{{ route('pesanan.index') }}" class="menu-link d-flex align-items-center justify-content-between">
+                <span>
+                    <i class="menu-icon tf-icons bi bi-clipboard-check-fill me-2"></i>
+                    Pesanan
+                </span>
+                <span id="notif-pesanan" class="badge bg-danger rounded-pill" style="display:none;">0</span>
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="{{ route('admin.form-pembayaran.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bi bi-currency-dollar me-2"></i>
-                Pembayaran
+
+        <li
+            class="menu-item {{ request()->routeIs('pembayaran.*') || request()->routeIs('admin.form-pembayaran.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.form-pembayaran.index') }}"
+                class="menu-link d-flex align-items-center justify-content-between">
+                <span>
+                    <i class="menu-icon tf-icons bi bi-currency-dollar me-2"></i>
+                    Pembayaran
+                </span>
+                <span id="notif-pembayaran" class="badge bg-warning text-dark rounded-pill"
+                    style="display:none;">0</span>
             </a>
         </li>
 
-        <li class="menu-item">
+
+        <li class="menu-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
             <a href="{{ route('laporan.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bi bi-bar-chart-fill me-2"></i>
                 Laporan
             </a>
         </li>
 
+<<<<<<< HEAD
         <li class="menu-item">
             <a class="menu-link" href="{{ route('admin.pelanggan.index') }}">
                 <i class="menu-icon tf-icons fa fa-users"></i> Pelanggan
             </a>
         </li>
 
+=======
+>>>>>>> 033eaffd214839dd163cf324963fd99b86b5ed13
     </ul>
 </aside>

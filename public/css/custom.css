@@ -1,0 +1,23 @@
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Efek hanya untuk badge notifikasi pesanan */
+#notif-pesanan {
+    animation: pulse 1.5s infinite;
+}
+
+/* Pembayaran tidak ikut gerak */
+#notif-pembayaran {
+    animation: pulse 1.5s infinite;
+}

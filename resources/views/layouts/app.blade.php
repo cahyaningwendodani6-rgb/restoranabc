@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/tabler-icons.css') }}" />
     <link rel="stylesheet" href="{{ asset('/vendor/fonts/flag-icons.css') }}" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
 
     <!-- Core CSS -->
 
@@ -109,22 +112,71 @@
     <!-- Main JS -->
     <script src="{{ asset('/js/main.js') }}"></script>
 
-
-
-    <!-- Main JS -->
-    <script src="{{ asset('/js/main.js') }}"></script>
-
-    
     <!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- Main JS -->
-<script src="{{ asset('/js/main.js') }}"></script>
+    <!-- Tambahkan ini agar SweetAlert di halaman tampil -->
+    @yield('scripts')
+    @stack('scripts')
 
-<!-- Tambahkan ini agar SweetAlert di halaman tampil -->
-@yield('scripts')
-@stack('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let lastPesanan = 0;
+            let lastPembayaran = 0;
 
+            function updateNotifikasi() {
+                fetch("{{ route('notif.counts') }}")
+                    .then(response => response.json())
+                    .then(data => {
+                        const pesananBadge = document.getElementById("notif-pesanan");
+                        const pembayaranBadge = document.getElementById("notif-pembayaran");
+
+                        // === Pesanan ===
+                        if (data.pesanan > 0) {
+                            pesananBadge.textContent = data.pesanan;
+                            pesananBadge.style.display = "inline-block";
+                        } else {
+                            pesananBadge.style.display = "none";
+                        }
+
+                        // === Pembayaran ===
+                        if (data.pembayaran > 0) {
+                            pembayaranBadge.textContent = data.pembayaran;
+                            pembayaranBadge.style.display = "inline-block";
+                        } else {
+                            pembayaranBadge.style.display = "none";
+                        }
+
+                        // === Tampilkan notifikasi jika bertambah ===
+                        if (data.pesanan > lastPesanan) {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Pesanan Baru!',
+                                text: 'Ada pesanan baru yang masuk.',
+                                timer: 3000,
+                                showConfirmButton: false
+                            });
+                        }
+                        if (data.pembayaran > lastPembayaran) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Pembayaran Baru!',
+                                text: 'Ada pembayaran baru yang menunggu konfirmasi.',
+                                timer: 3000,
+                                showConfirmButton: false
+                            });
+                        }
+
+                        lastPesanan = data.pesanan;
+                        lastPembayaran = data.pembayaran;
+                    })
+                    .catch(error => console.error('Error memuat notifikasi:', error));
+            }
+
+            updateNotifikasi(); // pertama kali
+            setInterval(updateNotifikasi, 5000); // setiap 5 detik
+        });
+    </script>
 </body>
 
 </html>
