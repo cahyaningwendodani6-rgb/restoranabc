@@ -62,14 +62,11 @@
             </a>
         </li>
 
-<<<<<<< HEAD
+        
         <li class="menu-item">
             <a class="menu-link" href="{{ route('admin.pelanggan.index') }}">
                 <i class="menu-icon tf-icons fa fa-users"></i> Pelanggan
             </a>
         </li>
-
-=======
->>>>>>> 033eaffd214839dd163cf324963fd99b86b5ed13
     </ul>
 </aside>

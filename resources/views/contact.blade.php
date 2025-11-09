@@ -46,7 +46,7 @@
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                     <p class="mt-3">
-                        📍 Alamat: Jl. Raya Selaganggeng, Dusun 1, Selaganggeng, Purbalingga, Jawa Tengah 53352
+                        📍 Alamat Tempat Produksi: Jl. Raya Selaganggeng, Dusun 1, Selaganggeng, Purbalingga, Jawa Tengah 53352
                     </p>
                 </div>
             </div>

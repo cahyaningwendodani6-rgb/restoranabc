@@ -147,8 +147,13 @@
                             pembayaranBadge.style.display = "none";
                         }
 
-                        // === Tampilkan notifikasi jika bertambah ===
-                        if (data.pesanan > lastPesanan) {
+                        // === Ambil path URL saat ini ===
+                        const currentPath = window.location.pathname;
+
+                        // === Notifikasi hanya di halaman tertentu ===
+
+                        // Jika ada pesanan baru DAN sedang di halaman /pesanan
+                        if (data.pesanan > lastPesanan && currentPath.startsWith('/pesanan')) {
                             Swal.fire({
                                 icon: 'info',
                                 title: 'Pesanan Baru!',
@@ -157,7 +162,9 @@
                                 showConfirmButton: false
                             });
                         }
-                        if (data.pembayaran > lastPembayaran) {
+
+                        // Jika ada pembayaran baru DAN sedang di halaman /pembayaran
+                        if (data.pembayaran > lastPembayaran && currentPath.includes('/pembayaran')) {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Pembayaran Baru!',
@@ -177,6 +184,8 @@
             setInterval(updateNotifikasi, 5000); // setiap 5 detik
         });
     </script>
+
+
 </body>
 
 </html>
