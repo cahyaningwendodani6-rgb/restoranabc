@@ -164,7 +164,7 @@
                         }
 
                         // Jika ada pembayaran baru DAN sedang di halaman /pembayaran
-                        if (data.pembayaran > lastPembayaran && currentPath.includes('/pembayaran')) {
+                        if (data.pembayaran > lastPembayaran && currentPath.includes('/admin/form-pembayaran')) {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Pembayaran Baru!',
