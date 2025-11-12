@@ -62,11 +62,12 @@
             </a>
         </li>
 
-        
-        <li class="menu-item">
+
+        <li class="menu-item {{ request()->routeIs('admin.pelanggan.*') ? 'active' : '' }}">
             <a class="menu-link" href="{{ route('admin.pelanggan.index') }}">
                 <i class="menu-icon tf-icons fa fa-users"></i> Pelanggan
             </a>
         </li>
+
     </ul>
 </aside>
