@@ -160,4 +160,26 @@ class PesananController extends Controller
 
         return view('pages.owner.struk', compact('pesanan'));
     }
+
+    public function riwayat(Request $request)
+    {
+        $status = $request->query('status'); // ambil filter status dari query
+
+        $query = Pesanan::with('menu')->orderBy('created_at', 'desc');
+
+        if ($status && in_array($status, ['pending', 'diproses', 'diantar', 'selesai', 'batal'])) {
+            $query->where('status', $status);
+        }
+
+        $pesanan = $query->get();
+
+        return view('pelanggan.pesanan.index', compact('pesanan','status'));
+    }
+
+    public function detail($id)
+    {
+        $pesanan = Pesanan::with(['menu', 'pembayaran'])->findOrFail($id);
+
+        return view('pelanggan.pesanan.detail', compact('pesanan'));
+    }
 }

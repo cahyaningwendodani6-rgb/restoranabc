@@ -31,4 +31,9 @@ class Pesanan extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function pelanggan()
+    {
+        return $this->belongsTo(\App\Models\Pelanggan::class, 'pelanggan_id');
+    }
 }

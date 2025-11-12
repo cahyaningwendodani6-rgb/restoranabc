@@ -59,12 +59,21 @@
                         required autofocus>
                 </div>
 
-                <div class="form-group mb-4 text-start">
+                <div class="form-group mb-4 text-start" style="position: relative;">
                     <label for="password" style="color:#fff; font-weight:500;">Password</label>
+
                     <input id="password" type="password" name="password" class="form-control"
-                        style="background: rgba(255,255,255,0.9); color:#000; border: none; border-radius: 10px; padding: 10px 15px;"
+                        style="background: rgba(255,255,255,0.9); color:#000; border: none; border-radius: 10px; padding: 10px 45px 10px 15px;"
                         required>
+
+                    <!-- Ikon mata -->
+                    <span id="togglePassword"
+                        style="position: absolute; right: 15px; top: 43px; cursor: pointer; color:#333; font-size:18px;">
+                        👁️
+                    </span>
+
                 </div>
+
 
                 <button type="submit"
                     style="width: 100%; padding: 12px; background: #ff3333; color: white; border: none; border-radius: 25px; font-size: 16px; transition: 0.3s;">
@@ -78,4 +87,16 @@
             </form>
         </div>
     </div>
+    <script>
+        const passwordInput = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", function() {
+            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            passwordInput.setAttribute("type", type);
+            // Ganti ikon agar lebih interaktif
+            this.textContent = type === "password" ? "👁️" : "🙈";
+        });
+    </script>
+
 @endsection

@@ -18,7 +18,7 @@ class PelangganController extends Controller
     public function detail($id)
     {
         $pelanggans = Pelanggan::findOrFail($id);
-        $riwayat = \App\Models\Pesanan::where('user_id', $id)->latest()->get();
+        $riwayat = \App\Models\Pesanan::where('pelanggan_id', $id)->latest()->get();
 
         return view('admin.pelanggan.detail', compact('pelanggans', 'riwayat'));
     }

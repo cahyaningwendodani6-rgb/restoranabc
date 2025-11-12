@@ -21,6 +21,11 @@ Route::get('/login-pelanggan', [PelangganLoginController::class, 'showLoginForm'
 Route::post('/login-pelanggan', [PelangganLoginController::class, 'login'])->name('pelanggan.login.post');
 Route::post('/logout-pelanggan', [PelangganLoginController::class, 'logout'])->name('pelanggan.logout');
 
+Route::middleware('auth:pelanggan')->group(function () {
+    Route::get('/pesanan-anda', [PesananController::class, 'riwayat'])->name('pesanan.riwayat');
+    Route::get('/pesanan/{id}', [PesananController::class, 'detail'])->name('pesanan.detail');
+});
+
 Route::get('/register-pelanggan', [PelangganRegisterController::class, 'showRegistrationForm'])->name('pelanggan.register');
 Route::post('/register-pelanggan', [PelangganRegisterController::class, 'register'])->name('pelanggan.register.post');
 

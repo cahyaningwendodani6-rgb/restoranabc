@@ -77,12 +77,17 @@
                 </div>
             @else
                 {{-- TAMPILAN UNTUK YANG SUDAH LOGIN --}}
-                <div class="text-end mb-4" style="text-align: right;">
+                <div class="text-end mb-4" style="text-align: right; display: flex; justify-content: flex-end; gap: 10px;">
+                    <a href="{{ route('pesanan.riwayat') }}" class="btn btn-info btn-sm">
+                        Pesanan Anda
+                    </a>
+
                     <form action="{{ route('pelanggan.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">Logout</button>
                     </form>
                 </div>
+
 
                 {{-- FORM PEMESANAN --}}
                 <div class="row">

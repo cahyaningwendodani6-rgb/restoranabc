@@ -16,4 +16,9 @@ class Pelanggan extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function pesanan()
+    {
+        return $this->hasMany(\App\Models\Pesanan::class, 'pelanggan_id');
+    }
 }
