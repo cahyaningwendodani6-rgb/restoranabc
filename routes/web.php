@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\PelangganRegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Models\Menu;
@@ -106,6 +107,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/form-pembayaran/{id}/verifikasi', [App\Http\Controllers\FormPembayaranController::class, 'verifikasi'])->name('form-pembayaran.verifikasi');
         Route::post('/form-pembayaran/{id}/tolak', [PembayaranController::class, 'tolak'])->name('form-pembayaran.tolak');
         Route::post('/form-pembayaran/{id}/detail', [App\Http\Controllers\FormPembayaranController::class, 'show'])->name('form-pembayaran.show');
+
+        Route::get('/halaman/{slug}', [PageController::class, 'edit'])->name('halaman.edit');
+        Route::put('/halaman/{slug}', [PageController::class, 'update'])->name('halaman.update');
+
     });
 
     Route::prefix('admin/pelanggan')->name('admin.pelanggan.')->group(function () {

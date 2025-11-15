@@ -69,5 +69,12 @@
             </a>
         </li>
 
+        <li class="menu-item {{ request()->routeIs('admin.halaman.*') ? 'active' : '' }}">
+            <a class="menu-link" href="{{ route('admin.halaman.edit', 'about') }}">
+                <i class="menu-icon tf-icons ti ti-file-description"></i>
+                Edit Halaman
+            </a>
+        </li>
+
     </ul>
 </aside>

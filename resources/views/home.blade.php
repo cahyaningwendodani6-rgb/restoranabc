@@ -29,20 +29,11 @@
                 </div>
                 <div class="col-md-5 col-md-push-1 animate-box">
                     <div class="section-heading">
-                        <h2>Tentang Restoran ABC</h2>
-                        <p>Restoran ABC, berdiri sejak 2025, hadir dengan konsep modern yang praktis dan kekinian. Kami
-                            menyajikan berbagai menu rice bowl, mie, pasta, camilan, hingga minuman segar yang mudah dipesan
-                            secara online dan siap dinikmati kapan saja, di mana saja.</p>
-                        <p>Restoran ABC adalah restoran modern yang menghadirkan beragam hidangan lezat dengan konsep
-                            praktis dan kekinian. Mengusung semangat “Good Food, Easy Life”, kami menyajikan menu favorit
-                            seperti rice bowl, mie, pasta, camilan, hingga minuman kekinian yang diracik dengan bahan segar
-                            dan berkualitas.</p>
-                        <p>Dengan layanan online dan delivery yang cepat, pelanggan dapat menikmati hidangan Restoran ABC
-                            kapan saja dan di mana saja, cukup dengan sekali klik. Setiap menu dikemas rapi dan higienis
-                            sehingga tetap nikmat meski dinikmati di rumah, kantor, atau saat perjalanan.</p>
-                        <p>Restoran ABC menjadi pilihan tepat bagi mahasiswa, pekerja kantoran, hingga keluarga modern yang
-                            ingin menikmati makanan enak, praktis, dan terjangkau. Kami percaya, makanan bukan hanya soal
-                            rasa, tapi juga tentang pengalaman yang hangat dan menyenangkan.</p>
+                        <section id="tentang">
+                            <h2>Tentang Kami</h2>
+                            {!! $page->content ?? '' !!}
+                        </section>
+
                         <p><a href="{{ route('about') }}" class="btn btn-primary btn-outline">Tentang Kami</a></p>
                     </div>
                 </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Page;
 use App\Models\Menu;
 
 class HomeController extends Controller
@@ -25,8 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $menu = Menu::all();
+        $page = Page::where('slug', 'about')->first();
 
-        return view('home', compact('menu'));
+        return view('home', compact('menu', 'page'));
     }
 
     public function create()
