@@ -466,7 +466,7 @@
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <h2>Reservasi Pesanan Anda</h2>
+                    <h2>Pesan Menu Anda</h2>
                     <p>Ingin makan enak tanpa ribet?
                         Pesan sekarang secara online dan nikmati hidangan favorit Anda dengan cepat, praktis, dan higienis.
                     </p>
