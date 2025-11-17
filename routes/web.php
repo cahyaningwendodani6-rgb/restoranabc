@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PelangganController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PelangganLoginController;
@@ -7,7 +8,6 @@ use App\Http\Controllers\Auth\PelangganRegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
 use App\Models\Menu;
@@ -51,6 +51,10 @@ Route::get('/gallery', function () {
 
 Route::get('/pesan', [HomeController::class, 'create'])->name('pesanan.create');
 Route::post('/pesan', [FormPesananController::class, 'store'])->name('formpesanan.store');
+
+Route::get('/admin/pesanan/{id}/detail',
+    [PesananController::class, 'show'])
+    ->name('admin.pesanan.detail');
 
 Route::post('/pesan', [PesananController::class, 'store'])->name('pesanan.store');
 // Pembayaran

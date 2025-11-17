@@ -37,7 +37,7 @@
                         <th width="10px">:</th>
                         <td colspan="2">
                             @if ($pembayaran->bukti)
-                                <img src="{{ asset('storage/' . $pembayaran->bukti) }}" width="300">
+                                <img src="{{ asset('storage/' . $pembayaran->bukti) }}" width="200">
                             @else
                                 <span class="text-muted">Belum ada bukti pembayaran</span>
                             @endif

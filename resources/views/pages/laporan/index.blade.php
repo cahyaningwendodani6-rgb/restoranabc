@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h3 class="mb-3">Laporan</h3>
+        <h3 class="mb-3">Laporan Pendapatan Harian</h3>
         <table class="table dataTable align-middle">
             <thead class="table-dark">
                 <tr>

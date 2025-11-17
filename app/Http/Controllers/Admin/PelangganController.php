@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\PelangganController;
 use App\Models\Pelanggan;
+use App\Http\Controllers\Controller;
+use App\Models\Menu;
+use App\Models\Pembayaran;
+use App\Models\Pesanan;
+use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
@@ -18,9 +23,23 @@ class PelangganController extends Controller
     public function detail($id)
     {
         $pelanggans = Pelanggan::findOrFail($id);
-        $riwayat = \App\Models\Pesanan::where('pelanggan_id', $id)->latest()->get();
 
-        return view('admin.pelanggan.detail', compact('pelanggans', 'riwayat'));
+        // === Tambahan filter status (TIDAK menghapus kode lama) ===
+        $status = request()->query('status'); // ambil filter status dari query
+
+        $query = \App\Models\Pesanan::with('menu')
+            ->where('pelanggan_id', $id)
+            ->orderBy('created_at', 'desc');
+
+        if ($status && in_array($status, ['pending', 'diproses', 'diantar', 'selesai', 'batal'])) {
+            $query->where('status', $status);
+        }
+
+        // hasil setelah difilter atau tidak
+        $riwayat = $query->get();
+        // === akhir tambahan ===
+
+        return view('admin.pelanggan.detail', compact('pelanggans', 'riwayat', 'status'));
     }
 
     public function destroy($id)

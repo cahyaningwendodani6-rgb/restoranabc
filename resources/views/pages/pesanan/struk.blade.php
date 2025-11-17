@@ -98,7 +98,7 @@
                                         <input type="file" name="bukti" class="form-control" required
                                             style="background-color:#101010; color:white; border:1px solid #fff; font-family:'Times New Roman', serif; padding:15px; height:55px; font-size:16px; border-radius:10px;">
                                     </div>
-
+                                    <br>
                                     <div class="text-center mt-3">
                                         <button type="submit"
                                             style="background-color:white; color:black; font-weight:bold; font-family:'Times New Roman', serif; padding:12px 40px; border:none; border-radius:10px; font-size:18px; cursor:pointer;">

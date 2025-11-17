@@ -82,7 +82,9 @@
                                 <td>{{ $item->telp }}</td>
                                 <td>
                                     @foreach ($item->menu as $menu)
-                                        {{ $menu->nama }} x {{ $menu->pivot->jumlah }}@if (!$loop->last),@endif
+                                        {{ $menu->nama }} x {{ $menu->pivot->jumlah }}@if (!$loop->last)
+                                            ,
+                                        @endif
                                     @endforeach
                                 </td>
                                 <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
@@ -125,20 +127,22 @@
                                 </td>
                                 <td class="text-center">
                                     {{-- Lihat detail pesanan --}}
-                                    <a href="{{ route('pesanan.show', $item->id) }}" class="btn btn-sm btn-info me-1"
-                                        title="Lihat Detail">
+                                    <a href="{{ route('admin.pesanan.detail', $item->id) }}"
+                                        class="btn btn-sm btn-info me-1" title="Lihat Detail">
                                         <span class="ti ti-eye"></span>
                                     </a>
 
+
                                     {{-- Cetak struk --}}
                                     <a href="{{ route('admin.pesanan.cetak', $item->id) }}" target="_blank"
-                                        class="btn btn-sm text-white"
-                                        style="background-color:#f97316; font-weight:600;" title="Cetak Struk">
+                                        class="btn btn-sm text-white" style="background-color:#f97316; font-weight:600;"
+                                        title="Cetak Struk">
                                         <span class="ti ti-printer"></span>
                                     </a>
 
                                     {{-- Hapus pesanan --}}
-                                    <a href="javascript:;" onclick="actionDelete('{{ route('pesanan.destroy', $item->id) }}')"
+                                    <a href="javascript:;"
+                                        onclick="actionDelete('{{ route('pesanan.destroy', $item->id) }}')"
                                         class="btn btn-sm btn-danger ms-1" title="Hapus Pesanan">
                                         <span class="ti ti-trash"></span>
                                     </a>
