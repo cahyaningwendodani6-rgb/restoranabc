@@ -61,6 +61,7 @@ class PesananController extends Controller
 
         // simpan pesanan
         $pesanan = Pesanan::create([
+            'pelanggan_id' => auth()->id(),
             'nama' => $request->nama,
             'telp' => $request->telp,
             'email' => $request->email,
@@ -165,7 +166,9 @@ class PesananController extends Controller
     {
         $status = $request->query('status'); // ambil filter status dari query
 
-        $query = Pesanan::with('menu')->orderBy('created_at', 'desc');
+        $query = Pesanan::with('menu')
+            ->where('pelanggan_id', auth()->id()) // ⬅ Hanya pesanan milik user login
+            ->orderBy('created_at', 'desc');
 
         if ($status && in_array($status, ['pending', 'diproses', 'diantar', 'selesai', 'batal'])) {
             $query->where('status', $status);
@@ -173,7 +176,7 @@ class PesananController extends Controller
 
         $pesanan = $query->get();
 
-        return view('pelanggan.pesanan.index', compact('pesanan','status'));
+        return view('pelanggan.pesanan.index', compact('pesanan', 'status'));
     }
 
     public function detail($id)

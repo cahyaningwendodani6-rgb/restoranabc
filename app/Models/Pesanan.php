@@ -12,7 +12,7 @@ class Pesanan extends Model
     protected $table = 'pesanan';
 
     protected $fillable = [
-        'user_id', 'nama', 'telp', 'email', 'alamat', 'metode_pembayaran', 'total_harga', 'catatan',
+        'pelanggan_id', 'nama', 'telp', 'email', 'alamat', 'metode_pembayaran', 'total_harga', 'catatan',
     ];
 
     public function menu()
