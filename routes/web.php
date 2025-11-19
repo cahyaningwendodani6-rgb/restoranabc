@@ -82,6 +82,10 @@ Route::post('/pesanan/{id}/update-status', [PesananController::class, 'updateSta
 Route::put('/pesanan/{id}/status', [PesananController::class, 'updateStatus'])->name('pesanan.updateStatus');
 Route::get('/pesanan/{id}/cetak', [PesananController::class, 'cetak'])->name('pesanan.cetak');
 
+Route::post('/pesanan/{id}/batal', [PesananController::class, 'batalkan'])
+    ->name('pesanan.batalkan')
+    ->middleware('auth'); // boleh pakai auth user, bukan admin
+
 // --- Login / Logout Admin ---
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);

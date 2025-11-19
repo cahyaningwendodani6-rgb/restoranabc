@@ -185,4 +185,25 @@ class PesananController extends Controller
 
         return view('pelanggan.pesanan.detail', compact('pesanan'));
     }
+
+    public function batalkan(Request $request, $id)
+    {
+        $request->validate([
+            'alasan' => 'required|string|max:255',
+        ]);
+
+        $pesanan = Pesanan::where('id', $id)
+            ->where('pelanggan_id', auth()->id())
+            ->firstOrFail();
+
+        if ($pesanan->status !== 'pending') {
+            return redirect()->back()->with('error', 'Pesanan tidak dapat dibatalkan.');
+        }
+
+        $pesanan->status = 'batal';
+        $pesanan->catatan = 'Alasan pembatalan: '.$request->alasan;
+        $pesanan->save();
+
+        return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
+    }
 }
