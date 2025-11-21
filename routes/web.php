@@ -84,7 +84,7 @@ Route::get('/pesanan/{id}/cetak', [PesananController::class, 'cetak'])->name('pe
 
 Route::post('/pesanan/{id}/batal', [PesananController::class, 'batalkan'])
     ->name('pesanan.batalkan')
-    ->middleware('auth'); // boleh pakai auth user, bukan admin
+    ->middleware('auth:pelanggan');
 
 // --- Login / Logout Admin ---
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

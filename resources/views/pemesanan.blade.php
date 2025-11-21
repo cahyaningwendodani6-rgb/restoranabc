@@ -249,7 +249,7 @@
         <div class="container">
             <div class="row animate-box">
                 <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-                    <h2>Pesan Menu</h2>
+                    <h2>Daftar Menu</h2>
                     <p>Pilih hidangan favorit Anda dan nikmati cita rasa spesial dari Restoran ABC.</p>
                     <p><a href="{{ route('menunya') }}" class="btn btn-primary btn-outline">Lihat Menu</a></p>
                 </div>

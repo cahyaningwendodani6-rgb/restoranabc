@@ -6,6 +6,17 @@
 
     {{-- CSS --}}
     <style>
+        /* Select SweetAlert2 warna hitam */
+        .swal2-select {
+            color: #000 !important;
+            background: #fff !important;
+        }
+
+        /* Placeholder dalam select juga hitam */
+        .swal2-select option {
+            color: #000 !important;
+        }
+
         .card-footer {
             position: relative;
             z-index: 10;
