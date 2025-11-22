@@ -111,6 +111,8 @@
     <script src="{{ asset('tpt/js/main.js') }}"></script>
 
     <!-- SweetAlert2 FIX -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('scripts')

@@ -204,6 +204,10 @@ class PesananController extends Controller
         $pesanan->catatan = 'Alasan pembatalan: '.$request->alasan;
         $pesanan->save();
 
-        return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
+        // === tambah session untuk notifikasi refund ===
+        $refund = number_format($pesanan->total_harga, 0, ',', '.');
+        $message = "Pengembalian uang senilai Rp $refund berhasil dikembalikan.";
+
+        return redirect()->back()->with('refund_success', $message);
     }
 }

@@ -6,6 +6,53 @@
 
     {{-- CSS --}}
     <style>
+        .my-popup {
+            font-size: 1.2rem;
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .my-title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .my-button {
+            font-size: 1.2rem;
+            padding: 12px 28px;
+        }
+
+        .swal2-popup.big-popup {
+            font-size: 1.8rem !important;
+            /* Ukuran teks isi */
+            padding: 3rem !important;
+            border-radius: 25px !important;
+            width: 50% !important;
+            /* Popup lebih besar */
+        }
+
+        .swal2-title.big-title {
+            font-size: 2.8rem !important;
+            /* Judul lebih besar */
+            font-weight: bold !important;
+            margin-bottom: 20px !important;
+        }
+
+        .swal2-select {
+            font-size: 1.6rem !important;
+            /* Dropdown lebih besar */
+            padding: 15px !important;
+            height: auto !important;
+        }
+
+        .swal2-confirm.big-btn,
+        .swal2-cancel.big-btn {
+            font-size: 1.6rem !important;
+            /* Tombol lebih besar */
+            padding: 14px 32px !important;
+            border-radius: 12px !important;
+        }
+
         /* Select SweetAlert2 warna hitam */
         .swal2-select {
             color: #000 !important;
@@ -39,6 +86,31 @@
             border-radius: 10px;
             margin-bottom: 25px;
             color: #fff;
+        }
+
+        .my-popup {
+            font-size: 1.5rem;
+            /* Ukuran teks isi */
+            border-radius: 22px;
+            padding: 2.5rem;
+        }
+
+        .my-title {
+            font-size: 2.4rem;
+            /* Judul lebih besar */
+            font-weight: bold;
+        }
+
+        .my-html {
+            font-size: 1.6rem !important;
+            /* Teks isi SweetAlert */
+            line-height: 1.6;
+        }
+
+        .my-button {
+            font-size: 1.4rem;
+            /* Tombol lebih besar */
+            padding: 14px 32px;
         }
 
         .card-header {
@@ -223,6 +295,15 @@
                 cancelButtonText: "Batal",
                 confirmButtonColor: "#dc3545",
                 cancelButtonColor: "#6c757d",
+
+                /* Tambahkan custom class di sini */
+                customClass: {
+                    popup: 'big-popup',
+                    title: 'big-title',
+                    confirmButton: 'big-btn',
+                    cancelButton: 'big-btn'
+                },
+
                 inputValidator: (value) => {
                     if (!value) {
                         return "Alasan harus dipilih.";
@@ -237,4 +318,50 @@
         }
     </script>
 
+
+
+
+@endsection
+@section('scripts')
+    @if (session('refund_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                html: '<span class="my-html">{{ session('refund_success') }}</span>',
+                width: '45%',
+                customClass: {
+                    popup: 'my-popup',
+                    title: 'my-title',
+                    htmlContainer: 'my-html',
+                    confirmButton: 'my-button'
+                },
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+
+
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Info',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#28a745'
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: "{{ session('error') }}",
+                confirmButtonColor: '#d9534f'
+            });
+        </script>
+    @endif
 @endsection
