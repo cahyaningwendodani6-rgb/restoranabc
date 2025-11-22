@@ -138,6 +138,17 @@ class PesananController extends Controller
         $pesanan->status = $request->status;
         $pesanan->save();
 
+        // 🔥 Tambahkan kode ini
+        if ($request->status == 'batal') {
+            $pembayaran = \App\Models\Pembayaran::where('pesanan_id', $pesanan->id)->first();
+
+            if ($pembayaran) {
+                $pembayaran->status = 'ditolak'; // atau 'batal'
+                $pembayaran->save();
+            }
+        }
+        // 🔥 Sampai sini
+
         return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui.');
     }
 
@@ -200,14 +211,27 @@ class PesananController extends Controller
             return redirect()->back()->with('error', 'Pesanan tidak dapat dibatalkan.');
         }
 
+        // Ubah status pesanan
         $pesanan->status = 'batal';
         $pesanan->catatan = 'Alasan pembatalan: '.$request->alasan;
         $pesanan->save();
 
-        // === tambah session untuk notifikasi refund ===
+        /** ============================================
+         * 🔥 BAGIAN TAMBAHAN: Pembayaran otomatis gagal
+         * ============================================ */
+        $pembayaran = \App\Models\Pembayaran::where('pesanan_id', $pesanan->id)->first();
+
+        if ($pembayaran) {
+            $pembayaran->status = 'gagal'; // bisa juga "ditolak"
+            $pembayaran->save();
+        }
+
+        /** ===== Notifikasi refund ===== */
         $refund = number_format($pesanan->total_harga, 0, ',', '.');
         $message = "Pengembalian uang senilai Rp $refund berhasil dikembalikan.";
 
-        return redirect()->back()->with('refund_success', $message);
+        return redirect()->route('pesanan.riwayat')
+            ->with('refund_success', $message);
+
     }
 }

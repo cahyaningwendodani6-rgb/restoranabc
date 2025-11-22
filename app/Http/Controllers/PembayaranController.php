@@ -51,12 +51,14 @@ class PembayaranController extends Controller
         // update atau buat pembayaran
         if ($pesanan->pembayaran) {
             $pesanan->pembayaran->update([
+                'pesanan_id' => $pesanan->id,
                 'metode' => strtolower($request->metode),
                 'bukti' => $buktiPath,
                 'status' => $buktiPath ? 'pending' : 'pending',
             ]);
         } else {
             $pesanan->pembayaran()->create([
+                'pesanan_id' => $pesanan->id,
                 'metode' => strtolower($request->metode),
                 'bukti' => $buktiPath,
                 'status' => $buktiPath ? 'pending' : 'pending',
@@ -78,6 +80,8 @@ class PembayaranController extends Controller
     public function uploadBukti(Request $request, $id)
     {
         $request->validate([
+            'pesanan_id' => $pesanan->id,
+
             'metode' => 'required|string',
             'bukti' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
