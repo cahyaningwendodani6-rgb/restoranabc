@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PelangganLoginController;
 use App\Http\Controllers\Auth\PelangganRegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
@@ -138,9 +139,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/pelanggan/pesanan/{id}', [App\Http\Controllers\Admin\PelangganController::class, 'detailPesanan'])->name('admin.pelanggan.pesanan.detail');
 
-    // Laporan
-    Route::get('/laporan', [App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
-    Route::get('/laporan/{tanggal}', [App\Http\Controllers\LaporanController::class, 'detail'])->name('laporan.detail');
+    Route::get('/laporan', function () {
+        return view('pages.laporan.index');
+    })->name('laporan.index');
+
+    Route::get('/laporan/harian', [LaporanController::class, 'harian'])->name('laporan.harian');
+    Route::get('/laporan/mingguan', [LaporanController::class, 'mingguan'])->name('laporan.mingguan');
+    Route::get('/laporan/bulanan', [LaporanController::class, 'bulanan'])->name('laporan.bulanan');
+    Route::get('/laporan/tahunan', [LaporanController::class, 'tahunan'])->name('laporan.tahunan');
+
+    Route::get('/laporan/detail/{tanggal}', [LaporanController::class, 'detail'])->name('laporan.detail');
 
     Route::get('/notif-counts', function () {
         return response()->json([

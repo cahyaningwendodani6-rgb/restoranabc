@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Session;
-
-
-use Illuminate\Http\Request;
 use App\Models\Menu;
+use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
@@ -16,6 +13,7 @@ class MenuController extends Controller
     public function index()
     {
         $menu = Menu::orderBy('id', 'desc')->get();
+
         return view('pages.menu.index', compact('menu'));
     }
 
@@ -33,18 +31,20 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|regex:/^[\pL\s]+$/u',
             'kategori' => 'required',
-            'harga' => 'required|numeric|min:0'
+            'harga' => 'required|numeric|min:0',
         ], [
             'nama.required' => 'Nama menu harus diisi',
+            'nama.regex' => 'Nama menu tidak boleh mengandung angka atau simbol',
             'kategori.required' => 'Kategori menu harus dipilih',
             'harga.required' => 'Harga menu harus diisi',
             'harga.numeric' => 'Harga menu harus berupa angka',
-            'harga.min' => 'Harga menu harus lebih besar dari 0'
+            'harga.min' => 'Harga menu harus lebih besar dari 0',
         ]);
 
         Menu::create($request->all());
+
         return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan');
     }
 
@@ -62,6 +62,7 @@ class MenuController extends Controller
     public function edit(string $id)
     {
         $menu = Menu::findOrFail($id);
+
         return view('pages.menu.edit', compact('menu'));
     }
 
@@ -71,24 +72,26 @@ class MenuController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama' => 'required|regex:/^[\pL\s]+$/u',
             'kategori' => 'required',
-            'harga' => 'required|numeric|min:0'
+            'harga' => 'required|numeric|min:0',
         ], [
             'nama.required' => 'Nama menu harus diisi',
+            'nama.regex' => 'Nama menu tidak boleh mengandung angka atau simbol',
             'kategori.required' => 'Kategori menu harus dipilih',
             'harga.required' => 'Harga menu harus diisi',
             'harga.numeric' => 'Harga menu harus berupa angka',
-            'harga.min' => 'Harga menu harus lebih besar dari 0'
+            'harga.min' => 'Harga menu harus lebih besar dari 0',
         ]);
 
         $menu = Menu::findOrFail($id);
         $menu->update($request->all());
+
         return redirect()->route('menu.index')->with('success', 'Menu berhasil diubah')->with('menu', [
             'id' => $menu->id,
             'nama' => $menu->nama,
             'kategori' => $menu->kategori,
-            'harga' => $menu->harga
+            'harga' => $menu->harga,
         ]);
     }
 
@@ -99,6 +102,7 @@ class MenuController extends Controller
     {
         $menu = Menu::findOrFail($id);
         $menu->delete();
+
         return redirect()->route('menu.index')->with('success', 'Menu berhasil dihapus');
     }
 }
