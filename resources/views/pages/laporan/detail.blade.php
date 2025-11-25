@@ -1,42 +1,36 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Laporan ' . $tanggal)
+@section('title', 'Detail Laporan')
 
 @section('content')
     <div class="container-fluid">
-        <h3 class="mb-3">Detail Laporan Tanggal {{ \Carbon\Carbon::parse($tanggal)->format('d M Y') }}</h3>
 
-        <table class="table table-bordered table-striped">
-            <thead style="background-color: #f8f9fa; color: #000;">
+        <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">
+            ← Kembali
+        </a>
+
+        <h3 class="mb-3">Detail Pendapatan - {{ $tanggal }}</h3>
+
+        <table class="table table-bordered">
+            <thead>
                 <tr>
                     <th>No</th>
                     <th>Nama Pelanggan</th>
-                    <th>Menu</th>
-                    <th>Total Harga</th>
-                    <th>Jam Pesanan</th>
+                    <th>Total Pembayaran</th>
+                    <th>Waktu</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($pesanan as $p)
+                @foreach ($data as $i => $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $p->nama }}</td>
-                        <td>
-                            @foreach ($p->menu as $m)
-                                - {{ $m->nama }} x {{ $m->pivot->jumlah }} <br>
-                            @endforeach
-                        </td>
-                        <td>Rp{{ number_format($p->menu->sum(fn($m) => $m->pivot->jumlah * $m->harga), 0, ',', '.') }}</td>
-                        <td>{{ $p->created_at->format('H:i') }}</td>
+                        <td>{{ $i + 1 }}</td>
+                        <td>{{ $item->pesanan->nama }}</td>
+                        <td>{{ number_format($item->pesanan->total_harga, 0, ',', '.') }}</td>
+                        <td>{{ $item->created_at }}</td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="text-center text-muted">Tidak ada pesanan di tanggal ini</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
 
-        <a href="{{ route('laporan.index') }}" class="btn btn-secondary mt-3">← Kembali ke Laporan</a>
     </div>
 @endsection
