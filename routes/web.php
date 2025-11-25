@@ -10,6 +10,7 @@ use App\Http\Controllers\FormPesananController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\PelangganPesananController;
 use App\Models\Menu;
 use App\Models\Pesanan;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,10 @@ Route::post('/logout-pelanggan', [PelangganLoginController::class, 'logout'])->n
 Route::middleware('auth:pelanggan')->group(function () {
     Route::get('/pesanan-anda', [PesananController::class, 'riwayat'])->name('pesanan.riwayat');
     Route::get('/pesanan/{id}', [PesananController::class, 'detail'])->name('pesanan.detail');
+
+    Route::put('/pelanggan/pesanan/{id}/selesai', [PelangganPesananController::class, 'konfirmasiSelesai'])
+    ->name('pelanggan.pesanan.selesai');
+
 });
 
 Route::get('/register-pelanggan', [PelangganRegisterController::class, 'showRegistrationForm'])->name('pelanggan.register');

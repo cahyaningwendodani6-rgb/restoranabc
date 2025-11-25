@@ -31,4 +31,20 @@ class PelangganPesananController extends Controller
 
         return view('pelanggan.pesanan.detail', compact('pesanan'));
     }
+
+    public function konfirmasiSelesai($id)
+    {
+        $pesanan = Pesanan::where('id', $id)
+            ->where('pelanggan_id', Auth::guard('pelanggan')->id())
+            ->firstOrFail();
+
+        if ($pesanan->status !== 'diantar') {
+            return back()->with('error', 'Pesanan belum diantar.');
+        }
+
+        $pesanan->status = 'selesai';
+        $pesanan->save();
+
+        return back()->with('success', 'Pesanan telah dikonfirmasi selesai.');
+    }
 }

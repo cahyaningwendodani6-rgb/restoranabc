@@ -249,19 +249,27 @@
                                         </button>
                                     @endif
 
+                                    {{-- TOMBOL KONFIRMASI SELESAI --}}
+                                    @if ($p->status === 'diantar')
+                                        <button class="btn btn-success" style="border-radius:20px;"
+                                            onclick="konfirmasiSelesai({{ $p->id }})">
+                                            Pesanan Selesai
+                                        </button>
+                                    @endif
+
                                     <a href="{{ route('pesanan.detail', $p->id) }}" class="btn btn-default"
                                         style="border-radius:20px;">
                                         Lihat Detail
                                     </a>
                                 </div>
 
-                                {{-- FORM PEMBATALAN (TERSEMBUNYI) --}}
-                                <form id="form-batal-{{ $p->id }}" action="{{ route('pesanan.batalkan', $p->id) }}"
-                                    method="POST" style="display:none;">
+                                {{-- FORM KONFIRMASI SELESAI (Hidden) --}}
+                                <form id="form-selesai-{{ $p->id }}"
+                                    action="{{ route('pelanggan.pesanan.selesai', $p->id) }}" method="POST"
+                                    style="display:none;">
                                     @csrf
-                                    <input type="hidden" name="alasan" id="alasan-input-{{ $p->id }}">
+                                    @method('PUT')
                                 </form>
-
                             </div>
                         @endforeach
                     @endif
@@ -316,8 +324,31 @@
                 }
             });
         }
-    </script>
 
+        function konfirmasiSelesai(id) {
+            Swal.fire({
+                title: "Konfirmasi Pesanan",
+                text: "Apakah pesanan sudah Anda terima dengan baik?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Ya, Selesai",
+                cancelButtonText: "Belum",
+                confirmButtonColor: "#28a745",
+                cancelButtonColor: "#6c757d",
+
+                customClass: {
+                    popup: 'big-popup',
+                    title: 'big-title',
+                    confirmButton: 'big-btn',
+                    cancelButton: 'big-btn'
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("form-selesai-" + id).submit();
+                }
+            });
+        }
+    </script>
 
 
 
