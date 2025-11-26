@@ -18,7 +18,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Pesanan</th>
+                    <th>Nama Pelanggan</th>
                     <th>Metode</th>
                     <th>Status</th>
                     <th>Aksi</th>

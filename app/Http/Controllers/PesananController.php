@@ -138,7 +138,7 @@ class PesananController extends Controller
         $pesanan->status = $request->status;
         $pesanan->save();
 
-        // 🔥 Tambahkan kode ini
+        // 🔥 KODE LAMA MILIKMU — TETAP ADA
         if ($request->status == 'batal') {
             $pembayaran = \App\Models\Pembayaran::where('pesanan_id', $pesanan->id)->first();
 
@@ -147,7 +147,20 @@ class PesananController extends Controller
                 $pembayaran->save();
             }
         }
-        // 🔥 Sampai sini
+
+        // 🔥 KODE TAMBAHAN — TANPA MENGHAPUS APAPUN
+        // Jika status pesanan BUKAN batal → pembayaran otomatis LUNAS
+        if ($request->status != 'batal') {
+
+            $pembayaran = \App\Models\Pembayaran::where('pesanan_id', $pesanan->id)->first();
+
+            if ($pembayaran) {
+                $pembayaran->status = 'dibayar';
+                $pembayaran->save();
+            }
+
+        }
+        // 🔥 SAMPAI SINI
 
         return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui.');
     }

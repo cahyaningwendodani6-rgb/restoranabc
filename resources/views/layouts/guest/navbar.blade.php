@@ -1,4 +1,6 @@
  <nav class="fh5co-nav" role="navigation">
+     <a href="/login" class="btn-login-admin">Login Admin</a>
+
      <div class="container">
          <div class="row">
              <div class="col-xs-12 text-center logo-wrap">
@@ -31,3 +33,21 @@
          </div>
      </div>
  </nav>
+
+ <style>
+     .btn-login-admin {
+         position: absolute;
+         right: 20px;
+         top: 20px;
+         border: 1px solid white;
+         padding: 8px 15px;
+         border-radius: 5px;
+         color: white;
+         z-index: 999;
+     }
+
+     .btn-login-admin:hover {
+         background: white;
+         color: black;
+     }
+ </style>
