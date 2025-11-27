@@ -75,7 +75,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pesanan as $item)
+                        @forelse ($pesanan as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->nama }}</td>
@@ -88,6 +88,7 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $item->created_at->isoFormat('DD MMM Y HH:mm') }}</td>
+
                                 <td>
                                     <form action="{{ route('pesanan.updateStatus', $item->id) }}" method="POST"
                                         class="d-flex align-items-center gap-2">
@@ -95,112 +96,106 @@
                                         @method('PUT')
                                         <select name="status" id="status" class="form-select w-auto text-white fw-bold"
                                             style="
-                                                @if ($item->status == 'pending') background-color: #ffc107; 
-                                                @elseif ($item->status == 'diproses') background-color: #0d6efd;
-                                                @elseif ($item->status == 'diantar') background-color: #20c997;
-                                                @elseif ($item->status == 'selesai') background-color: #198754;
-                                                @elseif ($item->status == 'batal') background-color: #dc3545; @endif
-                                            "
+                            @if ($item->status == 'pending') background-color: #ffc107; 
+                            @elseif ($item->status == 'diproses') background-color: #0d6efd;
+                            @elseif ($item->status == 'diantar') background-color: #20c997;
+                            @elseif ($item->status == 'selesai') background-color: #198754;
+                            @elseif ($item->status == 'batal') background-color: #dc3545; @endif
+                        "
                                             onchange="this.form.submit()">
-                                            <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}
-                                                style="background-color: #ffc107; color: #000;">
-                                                Pending
-                                            </option>
-                                            <option value="diproses" {{ $item->status == 'diproses' ? 'selected' : '' }}
-                                                style="background-color: #0d6efd; color: #fff;">
-                                                Diproses
-                                            </option>
-                                            <option value="diantar" {{ $item->status == 'diantar' ? 'selected' : '' }}
-                                                style="background-color: #20c997; color: #fff;">
-                                                Diantar
-                                            </option>
-                                            <option value="selesai" {{ $item->status == 'selesai' ? 'selected' : '' }}
-                                                style="background-color: #198754; color: #fff;">
-                                                Selesai
-                                            </option>
-                                            <option value="batal" {{ $item->status == 'batal' ? 'selected' : '' }}
-                                                style="background-color: #dc3545; color: #fff;">
-                                                Batal
+                                            <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>
+                                                Pending</option>
+                                            <option value="diproses" {{ $item->status == 'diproses' ? 'selected' : '' }}>
+                                                Diproses</option>
+                                            <option value="diantar" {{ $item->status == 'diantar' ? 'selected' : '' }}>
+                                                Diantar</option>
+                                            <option value="selesai" {{ $item->status == 'selesai' ? 'selected' : '' }}>
+                                                Selesai</option>
+                                            <option value="batal" {{ $item->status == 'batal' ? 'selected' : '' }}>Batal
                                             </option>
                                         </select>
                                     </form>
                                 </td>
+
                                 <td class="text-center">
-                                    {{-- Lihat detail pesanan --}}
                                     <a href="{{ route('admin.pesanan.detail', $item->id) }}"
-                                        class="btn btn-sm btn-info me-1" title="Lihat Detail">
+                                        class="btn btn-sm btn-info me-1">
                                         <span class="ti ti-eye"></span>
                                     </a>
 
-
-                                    {{-- Cetak struk --}}
                                     <a href="{{ route('admin.pesanan.cetak', $item->id) }}" target="_blank"
-                                        class="btn btn-sm text-white" style="background-color:#f97316; font-weight:600;"
-                                        title="Cetak Struk">
+                                        class="btn btn-sm text-white" style="background-color:#f97316; font-weight:600;">
                                         <span class="ti ti-printer"></span>
                                     </a>
 
-                                    {{-- Hapus pesanan --}}
                                     <a href="javascript:;"
                                         onclick="actionDelete('{{ route('pesanan.destroy', $item->id) }}')"
-                                        class="btn btn-sm btn-danger ms-1" title="Hapus Pesanan">
+                                        class="btn btn-sm btn-danger ms-1">
                                         <span class="ti ti-trash"></span>
                                     </a>
                                 </td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-4">
+                                        Belum ada pesanan dari pelanggan.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
 
-    <form action="" id="formDelete" method="POST" class="d-none">
-        @csrf
-        @method('DELETE')
-    </form>
-@endsection
+        <form action="" id="formDelete" method="POST" class="d-none">
+            @csrf
+            @method('DELETE')
+        </form>
+    @endsection
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/datables-resposive-bs5/responsive.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
-@endpush
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+        <link rel="stylesheet" href="{{ asset('/vendor/libs/datables-resposive-bs5/responsive.bootstrap5.css') }}">
+        <link rel="stylesheet" href="{{ asset('/vendor/libs/sweetalert2/sweetalert2.css') }}">
+    @endpush
 
-@push('scripts')
-    <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        function actionDelete(url) {
-            Swal.fire({
-                title: "Apakah kamu yakin?",
-                text: "Data yang dihapus tidak bisa dikembalikan.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#dc3545",
-                cancelButtonColor: "#343a40",
-                confirmButtonText: "Ya, Hapus!",
-                cancelButtonText: "Batal"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var form = document.getElementById('formDelete');
-                    form.action = url;
-                    form.submit();
-                }
-            });
-        }
-    </script>
-
-    @if (session()->has('success'))
+    @push('scripts')
+        <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+        <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="text/javascript">
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: '{{ session('success') }}',
-                showConfirmButton: false,
-                timer: 3000
-            });
+            function actionDelete(url) {
+                Swal.fire({
+                    title: "Apakah kamu yakin?",
+                    text: "Data yang dihapus tidak bisa dikembalikan.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#343a40",
+                    confirmButtonText: "Ya, Hapus!",
+                    cancelButtonText: "Batal"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = document.getElementById('formDelete');
+                        form.action = url;
+                        form.submit();
+                    }
+                });
+            }
         </script>
-    @endif
-@endpush
+
+        @if (session()->has('success'))
+            <script type="text/javascript">
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            </script>
+        @endif
+    @endpush

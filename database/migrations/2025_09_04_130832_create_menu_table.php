@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('menu', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 100);
-            $table->enum('kategori', ['Makanan', 'Minuman', 'Camilan']);
+            $table->string('kategori', 50);
             $table->decimal('harga', 10, 2);
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('menu');
+        Schema::dropIfExists('menu');
     }
 };

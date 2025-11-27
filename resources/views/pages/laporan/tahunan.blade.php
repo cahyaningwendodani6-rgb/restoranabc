@@ -21,14 +21,20 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($laporan as $item)
+                @forelse ($laporan as $item)
                     <tr>
                         <td>{{ $item['tahun'] }}</td>
                         <td>{{ number_format($item['pendapatan'], 0, ',', '.') }}</td>
                         <td>{{ $item['jumlah_pesanan'] }}</td>
                         <td>{{ $item['dari'] }} s/d {{ $item['sampai'] }}</td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">
+                            Belum ada laporan pendapatan tahunan.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
 

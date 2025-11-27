@@ -58,30 +58,39 @@
         <div class="card">
             <div class="card-header">Pesanan Terbaru</div>
             <div class="card-body">
-                <table class="table table-striped">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Menu</th>
-                        <th>Total</th>
-                        <th>Tanggal</th>
-                    </tr>
-                    @foreach ($pesananTerbaru as $p)
+
+                @if ($pesananTerbaru->isEmpty())
+                    <p class="text-center text-muted">Tidak ada pesanan terbaru selama ini.</p>
+                @else
+                    <table class="table table-striped">
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->nama }}</td>
-                            <td>
-                                @foreach ($p->menu as $m)
-                                    - {{ $m->nama }} ({{ $m->pivot->jumlah }}) <br>
-                                @endforeach
-                            </td>
-                            <td>Rp{{ number_format($p->total_harga) }}</td>
-                            <td>{{ $p->created_at->format('d M Y') }}</td>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Menu</th>
+                            <th>Total</th>
+                            <th>Tanggal</th>
                         </tr>
-                    @endforeach
-                </table>
+
+                        @foreach ($pesananTerbaru as $p)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $p->nama }}</td>
+                                <td>
+                                    @foreach ($p->menu as $m)
+                                        - {{ $m->nama }} ({{ $m->pivot->jumlah }}) <br>
+                                    @endforeach
+                                </td>
+                                <td>Rp{{ number_format($p->total_harga) }}</td>
+                                <td>{{ $p->created_at->format('d M Y') }}</td>
+                            </tr>
+                        @endforeach
+
+                    </table>
+                @endif
+
             </div>
         </div>
+
     </div>
 @endsection
 

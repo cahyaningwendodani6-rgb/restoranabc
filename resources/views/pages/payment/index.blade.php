@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pembayaran as $p)
+                @forelse ($pembayaran as $p)
                     <tr>
                         <td>{{ $p->id }}</td>
                         <td>#{{ $p->pesanan->id }} - {{ $p->pesanan->nama }}</td>
@@ -52,8 +52,6 @@
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
                                 </form>
-                            @else
-                                <span class="text-muted"></span>
                             @endif
 
                             <form action="{{ route('admin.form-pembayaran.show', $p->id) }}" method="POST"
@@ -63,8 +61,17 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-muted">
+                            <i class="bi bi-wallet-x fs-3 d-block mb-2"></i>
+                            <span class="fw-semibold">Belum ada pembayaran dari pelanggan.</span>
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
+
         </table>
     </div>
 @endsection

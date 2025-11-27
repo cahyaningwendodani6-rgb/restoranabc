@@ -7,7 +7,7 @@
         <h1 class="mb-4 fw-bold">Menu</h1>
 
         <!-- Form -->
-        <form action="{{ route('menu.store') }}" method="POST" class="row g-3" novalidate>
+        <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data" class="row g-3" novalidate>
             @csrf
             <div class="col-md-6">
                 <label class="form-label">Nama Menu</label>
@@ -43,6 +43,16 @@
                 </div>
             </div>
 
+            <!-- 🔥 INPUT FOTO DITAMBAHKAN DI SINI -->
+            <div class="col-md-6">
+                <label class="form-label">Foto Menu</label>
+                <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror">
+
+                @error('foto')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="col-12 d-flex justify-content-end">
                 <button type="submit" class="btn bg-black text-white">Simpan</button>
             </div>
@@ -54,6 +64,7 @@
                 <table class="table mb-0">
                     <thead class="table-light">
                         <tr>
+                            <th>Foto</th>
                             <th>Nama Menu</th>
                             <th>Kategori</th>
                             <th class="text-end">Harga</th>
@@ -61,36 +72,55 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($menu as $item)
+                        @if ($menu->isEmpty())
                             <tr>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->kategori }}</td>
-                                <td class="text-end">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('menu.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                    <a href="javascript:;" onclick="confirmDelete('{{ $item->id }}')"
-                                        class="btn btn-sm btn-danger">Hapus</a>
-
+                                <td colspan="5" class="text-center py-4 text-muted">
+                                    <strong>Menu tidak ada.</strong><br>
+                                    Silakan tambahkan menu baru.
                                 </td>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('menu.destroy', $item->id) }}"
-                                    method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
                             </tr>
-                            <form id="delete-form-{{ $item->id }}" action="{{ route('menu.destroy', $item->id) }}"
-                                method="POST" style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                            </form>
-                        @endforeach
+                        @else
+                            @foreach ($menu as $item)
+                                <tr>
+                                    <td>
+                                        @if ($item->foto)
+                                            <img src="{{ asset('storage/' . $item->foto) }}" alt="Foto Menu" width="60"
+                                                class="rounded">
+                                        @else
+                                            <span class="text-muted">Tidak ada</span>
+                                        @endif
+                                    </td>
+
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->kategori }}</td>
+                                    <td class="text-end">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+
+                                    <td class="text-center">
+                                        <a href="{{ route('menu.edit', $item->id) }}"
+                                            class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="javascript:;" onclick="confirmDelete('{{ $item->id }}')"
+                                            class="btn btn-sm btn-danger">Hapus</a>
+
+                                        <!-- 🔥 WAJIB ADA INI -->
+                                        <form id="delete-form-{{ $item->id }}"
+                                            action="{{ route('menu.destroy', $item->id) }}" method="POST"
+                                            style="display:none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                        <!-- 🔥 TANPA INI TOMBOL HAPUS TIDAK BISA -->
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        @endif
                     </tbody>
+
+
                 </table>
             </div>
         </div>
     </div>
-
-
 @endsection
 
 @push('styles')
@@ -103,9 +133,8 @@
     <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
-        //penusisan java script internal
 
+    <script type="text/javascript">
         function confirmDelete(id) {
             Swal.fire({
                 title: "Apakah kamu yakin?",

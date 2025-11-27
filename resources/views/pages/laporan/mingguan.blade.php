@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($laporan as $item)
+                @forelse ($laporan as $item)
                     @php
                         // Hitung Minggu ke-berapa dalam bulan
                         $weekOfMonth = \Carbon\Carbon::parse($item['dari'])->weekOfMonth;
@@ -32,7 +32,13 @@
                         <td>{{ number_format($item['pendapatan'], 0, ',', '.') }}</td>
                         <td>{{ $item['jumlah_pesanan'] }}</td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">
+                            Belum ada laporan pendapatan mingguan.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
 

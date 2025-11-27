@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\Page;
 use App\Models\Menu;
+use App\Models\Page;
 
 class HomeController extends Controller
 {
@@ -26,10 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $menu = Menu::all();
+        $menus = Menu::all();
         $page = Page::where('slug', 'about')->first();
 
-        return view('home', compact('menu', 'page'));
+        // pisahkan kategori
+        $makanan = $menus->where('kategori', 'Makanan');
+        $minuman = $menus->where('kategori', 'Minuman');
+        $camilan = $menus->where('kategori', 'Camilan');
+
+        return view('home', compact('makanan', 'minuman', 'camilan', 'page'));
     }
 
     public function create()
@@ -37,5 +41,16 @@ class HomeController extends Controller
         $menu = Menu::all(); // ambil semua data menu dari database
 
         return view('pesanan', compact('menu'));
+    }
+
+    public function menu()
+    {
+        $menus = Menu::with('kategori')->get();
+
+        $makanan = $menus->where('kategori', 'Makanan');
+        $minuman = $menus->where('kategori', 'Minuman');
+        $camilan = $menus->where('kategori', 'Camilan');
+
+        return view('pelanggan.menu', compact('makanan', 'minuman', 'camilan'));
     }
 }

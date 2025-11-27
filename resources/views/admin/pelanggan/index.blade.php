@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pelanggans as $index => $p)
+                @forelse ($pelanggans as $index => $p)
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $p->name }}</td>
@@ -55,19 +55,23 @@
                             {{ $p->last_login_at ? \Carbon\Carbon::parse($p->last_login_at)->format('d M Y H:i') : '-' }}
                         </td>
                         <td>
-                            {{-- Tombol Detail --}}
                             <a href="{{ route('admin.pelanggan.detail', $p->id) }}" class="btn btn-sm btn-info text-white">
                                 <i class="bi bi-eye"></i> Detail
                             </a>
 
-                            {{-- Tombol Hapus pakai SweetAlert2 --}}
                             <button type="button" class="btn btn-sm btn-danger"
                                 onclick="actionDelete('{{ route('admin.pelanggan.destroy', $p->id) }}')">
                                 <i class="bi bi-trash"></i> Hapus
                             </button>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">
+                            Belum ada data pelanggan.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
 
@@ -83,7 +87,8 @@
     <script src="{{ asset('/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="text/javascript">
+
+    <script>
         function actionDelete(url) {
             Swal.fire({
                 title: "Apakah kamu yakin?",

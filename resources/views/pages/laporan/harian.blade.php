@@ -21,7 +21,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($laporan as $item)
+
+                @forelse ($laporan as $item)
                     <tr>
                         <td>{{ $item->tanggal }}</td>
                         <td>{{ number_format($item->pendapatan, 0, ',', '.') }}</td>
@@ -32,7 +33,14 @@
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            Belum ada laporan pendapatan harian.
+                        </td>
+                    </tr>
+                @endforelse
+
             </tbody>
         </table>
 

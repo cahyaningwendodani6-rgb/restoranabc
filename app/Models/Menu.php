@@ -4,23 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Menu extends Model
 {
     protected $table = 'menu';
 
     protected $fillable = [
-        'id',
         'nama',
         'kategori',
         'harga',
+        'foto',
     ];
 
     public function pesanan()
     {
-            return $this->belongsToMany(Pesanan::class, 'pesanan_menu')
-                ->withPivot('jumlah')
-                ->withTimestamps();
+        return $this->belongsToMany(Pesanan::class, 'pesanan_menu')
+            ->withPivot('jumlah')
+            ->withTimestamps();
 
     }
 }
